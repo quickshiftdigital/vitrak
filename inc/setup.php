@@ -38,6 +38,9 @@ function blankslate_enqueue()
     wp_enqueue_script('jquery');
     wp_enqueue_style('font-awesome', 'https://use.fontawesome.com/releases/v5.0.13/css/all.css');
     wp_enqueue_style('style-main', get_template_directory_uri() . '/assets/css/style.css');
+    wp_enqueue_style('style-bootstrap', get_template_directory_uri() . '/assets/css/bootstrap.css');
+    wp_enqueue_style('style-min', get_template_directory_uri() . '/assets/css/bootstrap.min.css');
+    
 }
 
 add_action('wp_footer', 'blankslate_footer_scripts');

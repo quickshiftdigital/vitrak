@@ -13,7 +13,8 @@ function get_ajaxUrl() {
 const ajax_url = get_ajaxUrl();
 
 function regForm() {
-    jQuery('.regFrom-submit').click(function (e) {
+    jQuery('#register').click(function (e) {
+        console.log("Test");
         e.preventDefault();
         jQuery('.vn_form-err').slideUp(); //Errors slideUp
 
