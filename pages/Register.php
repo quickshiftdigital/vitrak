@@ -51,4 +51,42 @@ if (!is_user_logged_in()) : ?>
 		</div>
 <?php endwhile;
 endif; ?>
+<?php
+$message = "The quick brown fox jumps over the lazy dog";
+$n = 3;
+$P = array();
+$S = array();
+for ($x = 0; $x < $n; $x++) {
+	array_push($S, rand(1, 9));
+	array_push($P, rand(1, 9));
+}
+
+function solution($P, $S)
+{
+	$arr = array();
+	$response = 0;
+
+	$totalS = array_sum($S);
+	$totalP = array_sum($P);
+
+	$balance_seats = $totalS - $totalP;
+	rsort($S);
+	$something = 0;
+
+	print_r($S);
+
+	for ($x = 0; $x < count($P); $x++) {
+		if ($something <= $totalP - 1) {
+			$response = $response + 1;
+			$something = $something + $S[$x];
+		}
+	}
+
+	return $something;
+}
+
+$sol = solution($P, $S);
+echo '<pre>';
+print_r($sol);
+?>
 <?php get_footer(); ?>
