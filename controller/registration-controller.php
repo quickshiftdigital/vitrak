@@ -19,14 +19,22 @@ $password = sanitize_text_field($form_data['password']);
 
 //Create the user
 $user_pass = wp_generate_password(); //Why are we using this? The user will already have a password.
+$firstname = sanitize_text_field($form_data['firstname']);
+$lastname = sanitize_text_field($form_data['lastname']);
+$phonenumber = sanitize_text_field($form_data['phonenumber']);
+$email = sanitize_text_field($form_data['email']);
+$password = sanitize_text_field($form_data['password']);
+
+//Create the usersword();
 $user = array(
-    'user_login' => $username,
-    'user_pass' => $user_pass,
+    'user_login' => $phonenumber,
+    'user_pass' => $password,
     'first_name' => $firstname,
     'last_name' => $lastname,
     'user_email' => $email,
     'phone_number' => $phonenumber,
-    'password' => $password
+    'password' => $password,
+    'role' => 'customer'
 );
 $user_id = wp_insert_user($user);
 

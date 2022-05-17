@@ -1,7 +1,7 @@
 <?php /* Template Name: Registeration Form */ ?>
 <?php get_header(); ?>
 <?php
-if (!is_user_logged_in()) : ?>
+if (is_user_logged_in()) : ?>
 	<p>You're already logged in and have no need to create a user profile.</p>
 	<?php else :
 	while (have_posts()) : the_post(); ?>
@@ -48,20 +48,36 @@ if (!is_user_logged_in()) : ?>
 							I agree all statements in <a href="#!" class="text-body"><u>Terms of service</u></a>
 						</label>
 						</div>-->
-											<div class="d-flex justify-content-center">
+											<<<<<<< HEAD <div class="d-flex justify-content-center">
 												<button type="button" class="btn btn-success btn-block btn-lg gradient-custom-4 text-body" id="register">Register</button>
-											</div>
-											<p class="text-center text-muted mt-5 mb-0">Have already an account? <a href="#!" class="fw-bold text-body"><u>Login here</u></a>
-											</p>
-
-										</form>
 									</div>
+									<p class="text-center text-muted mt-5 mb-0">Have already an account? <a href="#!" class="fw-bold text-body"><u>Login here</u></a>
+									</p>
+
+									</form>
 								</div>
 							</div>
 						</div>
 					</div>
 				</div>
-			</section>
+		</div>
+		</section>
+		=======
+		<div class="d-flex justify-content-center">
+			<button type="button" class="btn btn-success btn-block btn-lg gradient-custom-4 text-body" id="register">Register</button>
+		</div>
+		<p class="text-center text-muted mt-5 mb-0">Have already an account? <a href="#!" class="fw-bold text-body"><u>Login here</u></a>
+		</p>
+
+		</form>
+		</div>
+		</div>
+		</div>
+		</div>
+		</div>
+		>>>>>>> be726eb503587224e3a9d7281a1ea538035d5b2e
+		</div>
+		</section>
 		</div>
 <?php endwhile;
 endif; ?>
