@@ -9,4 +9,5 @@
 <?php get_template_part( 'entry' ); ?>
 <?php endwhile; ?>
 <?php get_template_part( 'nav', 'below' ); ?>
-<?php get_footer(); ?>
+<?php get_footer(); 
+?>
