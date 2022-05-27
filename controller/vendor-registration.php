@@ -4,10 +4,14 @@
     the_post();
 
     $phone = esc_html($_POST['vn_phone']);
-    $first_name = esc_html($_POST['vn_first_name']);
-    $last_name = esc_html($_POST['vn_last_name']);
-    $password = esc_html($_POST['vn_password']);
-    $email = esc_html($_POST['vn_email']);
+    $reg_username = esc_html($_POST['reg_username']);
+    $reg_email = esc_html($_POST['reg_email']);
+    $reg_phone = esc_html($_POST['reg_phone']);
+    $reg_password = esc_html($_POST['reg_password']);
+    $reg_password = esc_html($_POST['business_name']);
+    $reg_password = esc_html($_POST['business_address']);
+    $reg_password = esc_html($_POST['business_type']);
+
     $phone_verify = esc_html($_POST['vn_phone_verify']);
 
     if(!empty($phone_verify) && $phone_verify == 'true') {
