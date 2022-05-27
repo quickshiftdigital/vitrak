@@ -6,25 +6,26 @@
     $phone = esc_html($_POST['vn_phone']);
     $reg_username = esc_html($_POST['reg_username']);
     $reg_email = esc_html($_POST['reg_email']);
-    $reg_phone = esc_html($_POST['reg_phone']);
     $reg_password = esc_html($_POST['reg_password']);
-    $reg_password = esc_html($_POST['business_name']);
-    $reg_password = esc_html($_POST['business_address']);
-    $reg_password = esc_html($_POST['business_type']);
+    $business_name = esc_html($_POST['business_name']);
+    $business_address = esc_html($_POST['business_address']);
+    $business_type = esc_html($_POST['business_type']);
 
-    $phone_verify = esc_html($_POST['vn_phone_verify']);
-
-    if(!empty($phone_verify) && $phone_verify == 'true') {
-        if(!empty($phone) && !empty($first_name) && !empty($last_name) && !empty($password) && !empty($email)) {
-            if(is_email($email)) {
+    if(!empty($phone) && $phone == 'true') {
+        if(!empty($phone) && !empty($reg_username) && !empty($reg_email) && !empty($reg_password) && !empty($business_name)  && !empty($business_address) && !empty($business_type)) {
+            if(is_email($reg_email)) {
                 if(!username_exists($phone)) {                    
-                    $user_id = wp_create_user( $phone, $password, $email );
+                    $user_id = wp_create_user( $phone, $reg_password, $reg_email );
                     if ( ! is_wp_error( $user_id ) ) {
                         $user = new WP_User( $user_id );
                         $user->set_role( 'pending_vendor' );
-                        update_user_meta( $user_id, 'first_name', $first_name );
-                        update_user_meta( $user_id, 'last_name', $last_name );
-                        update_user_meta( $user_id, '_wcv_store_phone', $phone );
+                        update_user_meta( $user_id, 'phone', $phone );
+                        update_user_meta( $user_id, 'username', $reg_username );
+                        update_user_meta( $user_id, 'reg_email', $reg_email );
+                        update_user_meta( $user_id, 'reg_password', $reg_password );
+                        update_user_meta( $user_id, 'business_name', $business_name );
+                        update_user_meta( $user_id, 'business_address', $business_address );
+                        update_user_meta( $user_id, 'business_type', $business_type );
                         $user->save();
 
                         //Log the User In
