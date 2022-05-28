@@ -40,7 +40,7 @@
 
                         //Send an Email
                         $to = $email;
-                        $subject = 'Welcome to Lo Faro Shop';
+                        $subject = 'Welcome to Vitrak';
                         $message = '<div style="max-width: 560px; padding: 20px; background: #ffffff; border-radius: 5px; margin: 40px auto; font-family: Open Sans,Helvetica,Arial; font-size: 15px; color: #666;">
                         <div style="color: #444444; font-weight: normal;">
                         <div style="text-align: center; font-weight: 600; font-size: 26px; padding: 10px 0; border-bottom: solid 3px #eeeeee;"><a href="'. home_url() . '"><img src="https://lofaroshop.com/wp-content/uploads/2020/12/black-lofaro-1.png"></div>

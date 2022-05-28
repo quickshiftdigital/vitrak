@@ -51,37 +51,37 @@ if (is_user_logged_in()) : ?>
                            <p class="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">
                               <label for="reg_username">Username&nbsp;<span class="required">*</span></label>
                               <input type="text" class="woocommerce-Input woocommerce-Input--text input-text" name="reg_username" id="reg_username" autocomplete="username" value="">
-                              <span class="vn_form-err">Please Enter Valid Username</span>				
+                              <span class="vn_form-err reg_username_err"></span>				
                            </p>
                            <p class="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">
                               <label for="reg_email">Email address&nbsp;<span class="required">*</span></label>
                               <input type="email" class="woocommerce-Input woocommerce-Input--text input-text" name="reg_email" id="reg_email" autocomplete="email" value="">			
-                              <span class="vn_form-err">Please Enter Email Address</span>	
+                              <span class="vn_form-err reg_email_err"></span>	
                            </p>
                            <p class="form-row form-group form-row-wide">
                                        <label for="shop-phone">Phone Number<span class="required">*</span></label>
                                        <input type="text" class="input-text form-control" name="reg_phone" id="reg_phone" value="" required="required">
-                                       <span class="vn_form-err">Please Enter Valid Username</span>
+                                       <span class="vn_form-err reg_phone_err"></span>
                             </p>
                            <p class="form-row form-group">
                                           <label for="business-name">Business Name <span class="required">*</span></label>
                                           <input type="text" class="input-text form-control" name="business_name" id="business_name" value="" required="required">
-                                          <span class="vn_form-err">Please Enter Business Name</span>
+                                          <span class="vn_form-err business_name_err"></span>
                            </p>
                            <p class="form-row form-group">
                                           <label for="business-address">Business Address <span class="required">*</span></label>
                                           <input type="text" class="input-text form-control" name="business_address" id="business_address" value="" required="required">
-                                          <span class="vn_form-err">Please Enter Business Address</span>
+                                          <span class="vn_form-err"></span>
                            </p>
 							      <p class="form-row form-group">
                                     <label for="business-type">Business Type <span class="required">*</span></label>
                                     <input type="text" class="input-text form-control" name="business_address" id="business_type" value="" required="required">
-                                    <span class="vn_form-err">Please Enter Business Type</span>
+                                    <span class="vn_form-err business_type_err"></span>
                        		</p>
 							   <p class="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">
                               <label for="reg_password">Password&nbsp;<span class="required">*</span></label>
                               <span class="password-input"><input type="password" class="woocommerce-Input woocommerce-Input--text input-text" name="reg_password" id="reg_password" autocomplete="new-password"><span class="show-password-input"></span></span>
-                              <span class="vn_form-err">Please Enter Required password</span>
+                              <span class="vn_form-err reg_password_err"></span>
                            </p>	
                         <div class="woocommerce-privacy-policy-text">
 							   <br>
