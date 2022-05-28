@@ -1,7 +1,7 @@
 <?php /* Template Name: Registeration Form */ ?>
 <?php get_header(); ?>
 <?php
-if (!is_user_logged_in()) : ?>
+if (is_user_logged_in()) : ?>
 	<p>You're already logged in and have no need to create a user profile.</p>
 	<?php else :
 	while (have_posts()) : the_post(); ?>
