@@ -1,6 +1,72 @@
+
+/*------------------ Master ------------------*/
+
+.relative {
+    position: relative;
+}
+
+
+/*--------------------- Other ---------------------*/
+
 a.link-cart { 
     display: none; 
 }
 .logged-in a.link-cart { 
     display: block; 
 }
+
+/*--------------------- Registration Form ---------------------*/
+
+.form-row {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+.form-column {
+    display: block;
+    flex: 1;
+}
+
+p.form-row {
+    display: block;
+}
+
+.form-column:first-child {
+    padding-right: 20px;
+}
+
+.woocommerce form .form-row label, .woocommerce-page form .form-row label, .woocommerce-form-login .woocommerce-LostPassword {
+    font-size: 15px;
+}
+
+span.form-tip {
+    font-size: 12px;
+    padding: 0 0 10px;
+    display: block;
+}
+
+.woocommerce-form-register .woocommerce-privacy-policy-text p:last-child {
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.country_code {
+    content: "";
+    position: absolute;
+    width: 50px;
+    height: 30px;
+    left: 0;
+    display: block;
+    border-right: 1px solid #ccc;
+    top: 5px;
+    line-height: 30px;
+    text-align: center;
+    font-size: 14px;
+}
+
+input#reg_phone {
+    padding-left: 70px;
+}
+

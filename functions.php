@@ -269,6 +269,15 @@ if (!function_exists('ecotech_body_open')) {
         }
     }
 }
+/* Page Redirect */
+add_action( 'template_redirect', 'wc_redirect_non_logged_to_login_access');
+function wc_redirect_non_logged_to_login_access() {
+    if ( !is_user_logged_in() && ( is_woocommerce() || is_shop() || is_cart() || is_checkout() ) ) {
+        $my_account_page_id = 4652;
+        wp_redirect( get_page_link( $my_account_page_id )  );
+        exit();
+    }
+}
 /**
  * Functions theme helper.
  */
@@ -322,3 +331,14 @@ if (class_exists('WooCommerce')) {
     require get_theme_file_path('framework/widgets/widget-product-filter.php');
     require get_theme_file_path('framework/widgets/widget-price-filter.php');
 }
+
+/**
+ * Textlocal API.
+ */
+require get_theme_file_path('inc/textlocal-includes.php');
+
+
+/**
+ * Enqueue scripts and styles.
+ */
+wp_enqueue_script('main-js', get_template_directory_uri() . '/assets/js/main.js', array(), '1.0.0', true);

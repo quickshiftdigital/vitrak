@@ -1,7 +1,7 @@
 <?php /* Template Name: Registeration Form */ ?>
 <?php get_header(); ?>
 <?php
-if (is_user_logged_in()) : ?>
+if (!is_user_logged_in()) : ?>
 	<p>You're already logged in and have no need to create a user profile.</p>
 	<?php else :
 	while (have_posts()) : the_post(); ?>
@@ -75,7 +75,10 @@ if (is_user_logged_in()) : ?>
                            </p>
 							      <p class="form-row form-group">
                                     <label for="business-type">Business Type <span class="required">*</span></label>
-                                    <input type="text" class="input-text form-control" name="business_address" id="business_type" value="" required="required">
+                                    <select name="business_address" id="business_address">
+                                       <option value="Vendor">Vendor</option>
+                                       <option value="Distributor">Distributor</option>
+                                    </select>
                                     <span class="vn_form-err business_type_err"></span>
                        		</p>
 							   <p class="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">
