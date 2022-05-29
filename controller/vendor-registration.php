@@ -3,13 +3,13 @@
 	require_once('../../../../wp-load.php');
     the_post();
 
-    $phone = esc_html($_POST['vn_phone']);
+    $phone = esc_html($_POST['reg_phone']);
     $reg_username = esc_html($_POST['reg_username']);
     $reg_email = esc_html($_POST['reg_email']);
     $reg_password = esc_html($_POST['reg_password']);
     $business_name = esc_html($_POST['business_name']);
     $business_address = esc_html($_POST['business_address']);
-    $business_type = esc_html($_POST['business_type']);
+    //$business_type = esc_html($_POST['business_type']);
 
     if(!empty($phone) && $phone == 'true') {
         if(!empty($phone) && !empty($reg_username) && !empty($reg_email) && !empty($reg_password) && !empty($business_name)  && !empty($business_address) && !empty($business_type)) {
@@ -25,7 +25,7 @@
                         update_user_meta( $user_id, 'reg_password', $reg_password );
                         update_user_meta( $user_id, 'business_name', $business_name );
                         update_user_meta( $user_id, 'business_address', $business_address );
-                        update_user_meta( $user_id, 'business_type', $business_type );
+                        //update_user_meta( $user_id, 'business_type', $business_type );
                         $user->save();
 
                         //Log the User In
