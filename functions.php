@@ -278,6 +278,11 @@ function wc_redirect_non_logged_to_login_access() {
         exit();
     }
 }
+add_action('template_redirect','check_if_logged_in');
+function check_if_logged_in() {
+    if(!is_user_logged_in() && is_checkout())
+        wp_redirect( get_permalink( get_option('woocommerce_myaccount_page_id') ) );
+}
 /**
  * Functions theme helper.
  */
