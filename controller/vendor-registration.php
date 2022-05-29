@@ -39,7 +39,12 @@ if ($stage == 'GET OTP') {
                 $user_id = wp_create_user($phone, $reg_password, $reg_email);
                 if (!is_wp_error($user_id)) {
                     $user = new WP_User($user_id);
-                    $user->set_role('pending_vendor');
+                    $roles = array( 
+                        'vendor', 
+                        'distributor'
+                    );
+                    $role = $roles($business_type);
+                    $user->set_role($roles);
                     update_user_meta($user_id, 'phone', $phone);
                     update_user_meta($user_id, 'username', $reg_username);
                     update_user_meta($user_id, 'reg_email', $reg_email);
