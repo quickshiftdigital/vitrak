@@ -3,7 +3,6 @@
 require_once('../../../../wp-load.php');
 the_post();
 
-<<<<<<< HEAD
 $stage = sanitize_text_field($_POST['stage']);
 $response = array();
 
@@ -27,17 +26,13 @@ if ($stage == 'GET OTP') {
     $phone = sanitize_text_field($_POST['reg_phone']);
 } else if ($stage == 'Second') {
     $reg_phone = sanitize_text_field($_POST['reg_phone']);
-=======
-    $phone = esc_html($_POST['reg_phone']);
->>>>>>> f90e5ca9ec76dbb8379976995c1546a33ec97568
     $reg_username = esc_html($_POST['reg_username']);
     $reg_email = esc_html($_POST['reg_email']);
     $reg_password = esc_html($_POST['reg_password']);
     $business_name = esc_html($_POST['business_name']);
     $business_address = esc_html($_POST['business_address']);
-    //$business_type = esc_html($_POST['business_type']);
+    $business_type = esc_html($_POST['business_type']);
 
-<<<<<<< HEAD
     if (!empty($reg_phone) && !empty($reg_username) && !empty($reg_email) && !empty($reg_password) && !empty($business_name)  && !empty($business_address) && !empty($business_type)) {
         if (is_email($reg_email)) {
             if (!username_exists($phone)) {
@@ -53,24 +48,6 @@ if ($stage == 'GET OTP') {
                     update_user_meta($user_id, 'business_address', $business_address);
                     update_user_meta($user_id, 'business_type', $business_type);
                     $user->save();
-=======
-    if(!empty($phone) && $phone == 'true') {
-        if(!empty($phone) && !empty($reg_username) && !empty($reg_email) && !empty($reg_password) && !empty($business_name)  && !empty($business_address) && !empty($business_type)) {
-            if(is_email($reg_email)) {
-                if(!username_exists($phone)) {                    
-                    $user_id = wp_create_user( $phone, $reg_password, $reg_email );
-                    if ( ! is_wp_error( $user_id ) ) {
-                        $user = new WP_User( $user_id );
-                        $user->set_role( 'pending_vendor' );
-                        update_user_meta( $user_id, 'phone', $phone );
-                        update_user_meta( $user_id, 'username', $reg_username );
-                        update_user_meta( $user_id, 'reg_email', $reg_email );
-                        update_user_meta( $user_id, 'reg_password', $reg_password );
-                        update_user_meta( $user_id, 'business_name', $business_name );
-                        update_user_meta( $user_id, 'business_address', $business_address );
-                        //update_user_meta( $user_id, 'business_type', $business_type );
-                        $user->save();
->>>>>>> f90e5ca9ec76dbb8379976995c1546a33ec97568
 
                     //Log the User In
                     $user = get_user_by('id', $user_id);
@@ -91,12 +68,12 @@ if ($stage == 'GET OTP') {
                             <div style="clear: both;"> </div>
                             </div>
                             <div style="padding: 0 30px 30px 30px; border-bottom: 3px solid #eeeeee;">
-                            <div style="padding: 30px 0; font-size: 24px; text-align: center; line-height: 40px;">Thank you for your interest in Lo Faro Shop. We are currently reviewing your application.<span style="display: block;"> Somebody from our team will contact you shortly.</span></div>
-                            <div style="padding: 15px; background: #eee; border-radius: 3px; text-align: center;">Need help? <a style="color: #3ba1da; text-decoration: none;" href="mailto:support@lofaroshop.com">Contact Us</a> today.</div>
+                            <div style="padding: 30px 0; font-size: 24px; text-align: center; line-height: 40px;">Thank you for your interest in Vitrak online. We are currently reviewing your Store Information.<span style="display: block;"> Somebody from our team will contact you shortly.</span></div>
+                            <div style="padding: 15px; background: #eee; border-radius: 3px; text-align: center;">Need help? <a style="color: #3ba1da; text-decoration: none;" href="mailto:support@vitrakonline.com">Contact Us</a> today.</div>
                             </div>
                             <div style="color: #999; padding: 20px 30px;">
                             <div>Thank You!</div>
-                            <div>The <a style="color: #3ba1da; text-decoration: none;" href="' . home_url() . '">Lo Faro Shop</a> Team</div>
+                            <div>The <a style="color: #3ba1da; text-decoration: none;" href="' . home_url() . '">Vitrak Shop</a> Team</div>
                             </div>
                             </div>';
                     $headers['Content-Type'] = 'text/html; charset=UTF-8';

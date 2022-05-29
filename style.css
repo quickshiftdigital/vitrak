@@ -289,3 +289,10 @@ section {
     clip: rect(1px, 1px, 1px, 1px);
     white-space: nowrap;
 }
+p.business-list {
+    display: flex;
+}
+ul.business-list li {
+    display: inline-flex;
+    padding: 0 28px 0 0;
+}

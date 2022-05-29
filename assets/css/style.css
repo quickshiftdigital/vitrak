@@ -14506,7 +14506,7 @@ body.elementor-editor-active .header .box-nav-vertical:not(.open) .block-content
 .header.style-08 .box-header-nav .main-menu > .menu-item > a,
 .header.style-04 .box-header-nav .block-menu-bar > a,
 .header.style-04 .box-header-nav .main-menu > .menu-item > a{
-    font-size: 16px;
+    font-size: 13px;
     text-transform: uppercase;
     font-weight: 600;
 }

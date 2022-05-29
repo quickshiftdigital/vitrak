@@ -1,7 +1,7 @@
 <?php /* Template Name: Registration Form */ ?>
 <?php get_header(); ?>
 <?php
-if (!is_user_logged_in()) : ?>
+if (is_user_logged_in()) : ?>
 	<p>You're already logged in and have no need to create a user profile.</p>
 <?php else : ?>
 	<div id="content" class="container site-content sidebar-full">
@@ -111,10 +111,12 @@ if (!is_user_logged_in()) : ?>
 											</p>
 											<div class="form-row">
 												<div class="form-column form-radio">
-													<p class="form-row form-group">
+													<p class="form-row form-group business-list">
 														<label for="business-type">Business Type</label>
-														<input type="radio" name="reg_businesstype" id="Vendor" value="Vendor"> <label for="Vendor">Vendor</label>
-														<input type="radio" name="reg_businesstype" id="Distributor" value="Distributor"> <label for="Distributor">Distributor</label>
+														<ul class="business-list">
+															<li><label for="Vendor" class="radio-inline"><input type="radio" name="reg_businesstype" id="Vendor" value="Vendor">Vendor </label></li>
+															<li><label for="Distributor" class="radio-inline"><input type="radio" name="reg_businesstype" id="Distributor" value="Distributor">Distributor</label></li>
+														</ul>
 													</p>
 												</div>
 											</div>
