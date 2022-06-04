@@ -7,20 +7,42 @@ $stage = sanitize_text_field($_POST['stage']);
 $response = array();
 
 if ($stage == 'GET OTP') {
-    $phone = sanitize_text_field($_POST['phone']);
+    $phone = sanitize_text_field($_POST['reg_phone']);
+
     if (!empty($phone)) {
         $user = get_user_by('login', $phone);
+
         if ($user) {
             $response['status'] = 'error';
             $response['message'] = 'Phone number already exists';
         } else {
+            sendSMS($phone, '', '');
+
             $response['phone'] = $phone;
-            $response['status'] = 'success';
+            $response['status'] = 'Success';
             $response['message'] = 'Phone number is valid';
         }
     } else {
         $response['status'] = 'error';
         $response['message'] = 'Phone number is required';
+    }
+} else if ($stage == 'VERIFY OTP') {
+    $phone = sanitize_text_field($_POST['reg_phone']);
+
+    if (!empty($phone)) {
+        $otp_verify = OTP('Verify', $phone, sanitize_text_field($_POST['reg_otp']));
+
+        if ($otp_verify['status'] == 'Success') {
+            $response['phone'] = $phone;
+            $response['status'] = 'Success';
+            $response['message'] = 'Phone number is valid';
+        } else {
+            $response['status'] = 'Error';
+            $response['message'] = 'Invalid OTP';
+        }
+    } else {
+        $response['status'] = 'error';
+        $response['message'] = 'Phone number is blank';
     }
 } else if ($stage == 'First') {
     $phone = sanitize_text_field($_POST['reg_phone']);
@@ -39,8 +61,8 @@ if ($stage == 'GET OTP') {
                 $user_id = wp_create_user($phone, $reg_password, $reg_email);
                 if (!is_wp_error($user_id)) {
                     $user = new WP_User($user_id);
-                    $roles = array( 
-                        'vendor', 
+                    $roles = array(
+                        'vendor',
                         'distributor'
                     );
                     $role = $roles($business_type);
@@ -68,19 +90,19 @@ if ($stage == 'GET OTP') {
                     $to = $email;
                     $subject = 'Welcome to Vitrak';
                     $message = '<div style="max-width: 560px; padding: 20px; background: #ffffff; border-radius: 5px; margin: 40px auto; font-family: Open Sans,Helvetica,Arial; font-size: 15px; color: #666;">
-                            <div style="color: #444444; font-weight: normal;">
-                            <div style="text-align: center; font-weight: 600; font-size: 26px; padding: 10px 0; border-bottom: solid 3px #eeeeee;"><a href="' . home_url() . '"><img src="https://lofaroshop.com/wp-content/uploads/2020/12/black-lofaro-1.png"></div>
-                            <div style="clear: both;"> </div>
-                            </div>
-                            <div style="padding: 0 30px 30px 30px; border-bottom: 3px solid #eeeeee;">
-                            <div style="padding: 30px 0; font-size: 24px; text-align: center; line-height: 40px;">Thank you for your interest in Vitrak online. We are currently reviewing your Store Information.<span style="display: block;"> Somebody from our team will contact you shortly.</span></div>
-                            <div style="padding: 15px; background: #eee; border-radius: 3px; text-align: center;">Need help? <a style="color: #3ba1da; text-decoration: none;" href="mailto:support@vitrakonline.com">Contact Us</a> today.</div>
-                            </div>
-                            <div style="color: #999; padding: 20px 30px;">
-                            <div>Thank You!</div>
-                            <div>The <a style="color: #3ba1da; text-decoration: none;" href="' . home_url() . '">Vitrak Shop</a> Team</div>
-                            </div>
-                            </div>';
+                                <div style="color: #444444; font-weight: normal;">
+                                <div style="text-align: center; font-weight: 600; font-size: 26px; padding: 10px 0; border-bottom: solid 3px #eeeeee;"><a href="' . home_url() . '"><img src="https://lofaroshop.com/wp-content/uploads/2020/12/black-lofaro-1.png"></div>
+                                <div style="clear: both;"> </div>
+                                </div>
+                                <div style="padding: 0 30px 30px 30px; border-bottom: 3px solid #eeeeee;">
+                                <div style="padding: 30px 0; font-size: 24px; text-align: center; line-height: 40px;">Thank you for your interest in Vitrak online. We are currently reviewing your Store Information.<span style="display: block;"> Somebody from our team will contact you shortly.</span></div>
+                                <div style="padding: 15px; background: #eee; border-radius: 3px; text-align: center;">Need help? <a style="color: #3ba1da; text-decoration: none;" href="mailto:support@vitrakonline.com">Contact Us</a> today.</div>
+                                </div>
+                                <div style="color: #999; padding: 20px 30px;">
+                                <div>Thank You!</div>
+                                <div>The <a style="color: #3ba1da; text-decoration: none;" href="' . home_url() . '">Vitrak Shop</a> Team</div>
+                                </div>
+                                </div>';
                     $headers['Content-Type'] = 'text/html; charset=UTF-8';
                     $headers['Bcc'] = 'info@vitrak.in, juzer@quickshiftdigital.com';
                     $mail = wp_mail($to, $subject, $message, $headers);

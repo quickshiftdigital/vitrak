@@ -56,7 +56,7 @@ if (is_user_logged_in()) : ?>
 														<span class="country_code">+91</span>
 														<input type="text" class="input-text form-control" name="reg_phone" id="reg_phone" value="" required="required">
 													</div>
-													<div class="otp_div hidden">
+													<div class="otp_div hiddenV">
 														<label for="shop-phone">OTP</label>
 														<input type="text" class="input-text form-control" name="verify_otp" id="verify_otp" value="">
 													</div>
@@ -68,7 +68,7 @@ if (is_user_logged_in()) : ?>
 												<p>Your personal data will be used to support your experience throughout this website, to manage access to your account, and for other purposes described in our <a href="<?php echo home_url(); ?>/privacy-policy/" class="woocommerce-privacy-policy-link" target="_blank">privacy policy</a>.</p>
 											</div>
 											<p class="woocommerce-form-row form-row">
-												<input type="hidden" name="stage" value="first">
+												<input type="hidden" name="stage" class="otp_stage" value="GET OTP">
 												<input type="hidden" id="woocommerce-register-nonce" name="woocommerce-register-nonce" value="c0f477cf55">
 												<input type="hidden" name="_wp_http_referer" value="/vitrak/my-account/">
 												<button type="submit" class="woocommerce-Button woocommerce-button button woocommerce-form-register__submit" id="get_otp">Get OTP</button>
@@ -113,10 +113,10 @@ if (is_user_logged_in()) : ?>
 												<div class="form-column form-radio">
 													<p class="form-row form-group business-list">
 														<label for="business-type">Business Type</label>
-														<ul class="business-list">
-															<li><label for="Vendor" class="radio-inline"><input type="radio" name="reg_businesstype" id="Vendor" value="Vendor">Vendor </label></li>
-															<li><label for="Distributor" class="radio-inline"><input type="radio" name="reg_businesstype" id="Distributor" value="Distributor">Distributor</label></li>
-														</ul>
+													<ul class="business-list">
+														<li><label for="Vendor" class="radio-inline"><input type="radio" name="reg_businesstype" id="Vendor" value="Vendor">Vendor </label></li>
+														<li><label for="Distributor" class="radio-inline"><input type="radio" name="reg_businesstype" id="Distributor" value="Distributor">Distributor</label></li>
+													</ul>
 													</p>
 												</div>
 											</div>

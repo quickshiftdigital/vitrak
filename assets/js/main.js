@@ -13,6 +13,7 @@ function get_ajaxUrl() {
 const ajax_url = get_ajaxUrl();
 
 function regForm() {
+    //GET OTP
     jQuery('#get_otp').click(function (e) {
         e.preventDefault();
         jQuery('.vn_form-err').slideUp(); //Errors slideUp
@@ -25,14 +26,44 @@ function regForm() {
             dataType: "json",
             success: function (response) {
                 console.log(response);
-                // if (response.state == 'Success') {
-                //     jQuery('#reg_phone').attr('value', response.phone).val(response.phone);
-                //     jQuery('.form-first_view').slideUp();
-                //     jQuery('.form-second_view').slideDown();
-                // }
-                // else if (response.state == 'Error') {
-                //     jQuery('.vn_form-err').html(response.message).slideDown();
-                // }
+                if (response.status == 'Success') {
+                    jQuery('#reg_phone').attr('value', response.phone).val(response.phone);
+                    jQuery('.otp_div').slideDown();
+                    jQuery('#get_otp').hide();
+                    jQuery('button#verify_otp').removeClass('hidden').show();
+                    jQuery('.otp_stage').attr('value', 'VERIFY OTP');
+                }
+                else if (response.state == 'Error') {
+                    jQuery('.vn_form-err').html(response.message).slideDown();
+                }
+            },
+            error: function (response) {
+                console.log(response);
+            }
+        });
+    });
+
+    //VERIFY OTP
+    jQuery('#verify_otp').click(function (e) {
+        e.preventDefault();
+        jQuery('.vn_form-err').slideUp(); //Errors slideUp
+
+        formData = jQuery('#phone_number-verification').serializeArray(); //Serialize data
+        jQuery.ajax({
+            method: "POST",
+            data: formData,
+            url: get_ajaxUrl() + '/wp-content/themes/vitrak/controller/vendor-registration.php',
+            dataType: "json",
+            success: function (response) {
+                console.log(response);
+                if (response.status == 'Success') {
+                    jQuery('#reg_phone').attr('value', response.phone).val(response.phone);
+                    jQuery('.form-first_view').slideUp();
+                    jQuery('.form-second_view').slideDown();
+                }
+                else if (response.state == 'Error' || response.state == 'error') {
+                    jQuery('.vn_form-err').html(response.message).slideDown();
+                }
             },
             error: function (response) {
                 console.log(response);

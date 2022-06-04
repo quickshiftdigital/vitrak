@@ -270,16 +270,51 @@ if (!function_exists('ecotech_body_open')) {
     }
 }
 /* Page Redirect */
-add_action( 'template_redirect', 'wc_redirect_non_logged_to_login_access');
-function wc_redirect_non_logged_to_login_access() {
-    if ( !is_user_logged_in() && ( is_woocommerce() || is_shop() || is_cart() || is_checkout() || is_product()) ) {
+add_action('template_redirect', 'wc_redirect_non_logged_to_login_access');
+function wc_redirect_non_logged_to_login_access()
+{
+    if (!is_user_logged_in() && (is_woocommerce() || is_shop() || is_cart() || is_checkout() || is_product())) {
         $my_account_page_id = 4652;
-        wp_redirect( get_page_link( $my_account_page_id ));
+        wp_redirect(get_page_link($my_account_page_id));
         exit();
     }
 }
 
+add_filter( 'woocommerce_product_tabs', 'woo_remove_product_tabs', 98 );
 
+function woo_remove_product_tabs( $tabs ) {
+    unset( $tabs['description'] );          // Remove the description tab
+    unset( $tabs['dokan-vendor-info-wrap'] );          // Remove the reviews tab
+    unset( $tabs['more_seller_product'] );   // Remove the additional information tab
+    return $tabs;
+}
+add_filter( 'woocommerce_product_tabs', 'wcs_woo_remove_reviews_tab', 98 );
+    function wcs_woo_remove_reviews_tab($tabs) {
+    unset($tabs['reviews']);
+    return $tabs;
+}
+// Remove the Product SKU from Product Single Page
+add_filter( 'wc_product_sku_enabled', 'woocustomizer_remove_product_sku' );
+
+function woocustomizer_remove_product_sku( $sku ) {
+     // Remove only if NOT admin and is product single page
+     if ( ! is_admin() && is_product() ) {
+         return false;
+     }
+     return $sku;
+ }
+remove_action( 'woocommerce_after_single_product_summary', 'woocommerce_output_related_products', 20 );
+/**
+ * Disable reviews.
+ */
+/**
+ * Disable reviews.
+ */
+function iconic_disable_reviews() {
+	remove_post_type_support( 'product', 'comments' );
+}
+
+add_action( 'init', 'iconic_disable_reviews' );
 /**
  * Functions theme helper.
  */
@@ -337,10 +372,5 @@ if (class_exists('WooCommerce')) {
 /**
  * Textlocal API.
  */
-require get_theme_file_path('inc/textlocal-includes.php');
-
-
-/**
- * Enqueue scripts and styles.
- */
-wp_enqueue_script('main-js', get_template_directory_uri() . '/assets/js/main.js', array(), '1.0.0', true);
+require get_theme_file_path('inc/sms-includes.php');
+require get_theme_file_path('inc/setup.php');

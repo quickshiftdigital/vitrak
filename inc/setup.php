@@ -12,25 +12,6 @@
  */
 
 
-add_action('after_setup_theme', 'blankslate_setup');
-function blankslate_setup()
-{
-    load_theme_textdomain('blankslate', get_template_directory() . '/languages');
-    add_theme_support('title-tag');
-    add_theme_support('post-thumbnails');
-    add_theme_support('responsive-embeds');
-    add_theme_support('html5', array('search-form', 'navigation-widgets'));
-    add_theme_support('woocommerce');
-    add_theme_support('custom-logo');
-
-    global $content_width;
-    if (!isset($content_width)) {
-        $content_width = 1920;
-    }
-
-    register_nav_menus(array('main-menu' => esc_html__('Main Menu', 'blankslate')));
-}
-
 add_action('wp_enqueue_scripts', 'blankslate_enqueue');
 function blankslate_enqueue()
 {
@@ -38,9 +19,6 @@ function blankslate_enqueue()
     wp_enqueue_script('jquery');
     wp_enqueue_style('font-awesome', 'https://use.fontawesome.com/releases/v5.0.13/css/all.css');
     wp_enqueue_style('style-main', get_template_directory_uri() . '/assets/css/style.css');
-    wp_enqueue_style('style-bootstrap', get_template_directory_uri() . '/assets/css/bootstrap.css');
-    wp_enqueue_style('style-min', get_template_directory_uri() . '/assets/css/bootstrap.min.css');
-    
 }
 
 add_action('wp_footer', 'blankslate_footer_scripts');
@@ -72,30 +50,21 @@ function blankslate_footer_scripts()
 <?php
 }
 
-add_filter('document_title_separator', 'blankslate_document_title_separator');
-function blankslate_document_title_separator($sep)
-{
-    $sep = esc_html('|');
-    return $sep;
-}
 
-add_filter('the_title', 'blankslate_title');
-function blankslate_title($title)
-{
-    if ($title == '') {
-        return esc_html('...');
-    } else {
-        return wp_kses_post($title);
-    }
-}
+//Options Pages for the Theme
+if (function_exists('acf_add_options_page')) {
 
+    acf_add_options_page(array(
+        'page_title'     => 'Theme General Settings',
+        'menu_title'    => 'Theme Settings',
+        'menu_slug'     => 'theme-moola-settings',
+        'capability'    => 'edit_posts',
+        'redirect'        => false
+    ));
 
-add_filter('big_image_size_threshold', '__return_false');
-add_filter('intermediate_image_sizes_advanced', 'blankslate_image_insert_override');
-function blankslate_image_insert_override($sizes)
-{
-    unset($sizes['medium_large']);
-    unset($sizes['1536x1536']);
-    unset($sizes['2048x2048']);
-    return $sizes;
+    acf_add_options_sub_page(array(
+        'page_title'     => 'OTP Settings',
+        'menu_title'    => 'OTP',
+        'parent_slug'    => 'theme-moola-settings',
+    ));
 }

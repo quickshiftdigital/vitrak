@@ -1,4 +1,5 @@
 <?php
+
 /**
  * The template for displaying product content in the single-product.php template
  *
@@ -14,6 +15,11 @@
  * @package WooCommerce/Templates
  * @version 3.6.0
  */
+
+if (!is_user_logged_in(get_current_user())) {
+    header('location: ' . get_home_url() . '/vendor/register');
+}
+
 
 defined('ABSPATH') || exit;
 
@@ -75,8 +81,7 @@ if (post_password_required()) {
 ?>
 <div id="product-<?php the_ID(); ?>" <?php wc_product_class('', $product); ?>>
 
-    <div class="<?php echo esc_attr(implode(' ', $class_wrapper)); ?>"
-         data-slick="<?php echo esc_attr($data_slide); ?>">
+    <div class="<?php echo esc_attr(implode(' ', $class_wrapper)); ?>" data-slick="<?php echo esc_attr($data_slide); ?>">
         <?php
         /**
          * Hook: woocommerce_before_single_product_summary.
