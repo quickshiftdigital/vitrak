@@ -29,8 +29,8 @@ if (is_user_logged_in()) : ?>
                                             <div class="form-row">
                                                 <div class="form-column">
                                                     <p class="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">
-                                                        <label for="reg_firstname">GST Number<span class="required">*</span></label>
-                                                        <input type="text" class="woocommerce-Input woocommerce-Input--text input-text" name="reg_firstname" id="reg_firstname" autocomplete="reg_firstname" value="">
+                                                        <label for="distributor_gst">GST Number<span class="required">*</span></label>
+                                                        <input type="text" class="woocommerce-Input woocommerce-Input--text input-text" name="distributor_gst" id="distributor_gst" value="">
                                                     </p>
                                                     <div class="side_btn text-right" id="verify_gst"><button>Verify</button></div>
                                                     <span class="vn_form-err reg_firstname_err"></span>

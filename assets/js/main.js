@@ -124,6 +124,58 @@ function regForm() {
             }
         });
     });
+
+    jQuery('#distributor_form').click(function (e) {
+        e.preventDefault();
+        //jQuery('.vn_form-err').slideUp(); //Errors slideUp
+
+        formData = jQuery('#distributor_form').serializeArray(); //Serialize data
+        console.log(formData);
+        jQuery.ajax({
+            method: "POST",
+            data: formData,
+            url: get_ajaxUrl() + '/wp-content/themes/vitrak/controller/distributor-form.php',
+            dataType: "json",
+            success: function (response) {
+                console.log(response)
+                /*if (response.state == 'Success') {
+                    window.location.href = get_ajaxUrl() + '/vendor/register/business-details/';
+                }
+                else if (response.state == 'Error') {
+                    jQuery('.vn_form-err').html(response.message).slideDown();
+                }*/
+            },
+            error: function (response) {
+                console.log(response);
+            }
+        });
+    });
+
+    jQuery('#vendor_details').click(function (e) {
+        e.preventDefault();
+        //jQuery('.vn_form-err').slideUp(); //Errors slideUp
+
+        formData = jQuery('#vendor_details').serializeArray(); //Serialize data
+        console.log(formData);
+        jQuery.ajax({
+            method: "POST",
+            data: formData,
+            url: get_ajaxUrl() + '/wp-content/themes/vitrak/controller/vendor-form.php',
+            dataType: "json",
+            success: function (response) {
+                console.log(response)
+                /*if (response.state == 'Success') {
+                    window.location.href = get_ajaxUrl() + '/vendor/register/business-details/';
+                }
+                else if (response.state == 'Error') {
+                    jQuery('.vn_form-err').html(response.message).slideDown();
+                }*/
+            },
+            error: function (response) {
+                console.log(response);
+            }
+        });
+    });
 }
 
 
