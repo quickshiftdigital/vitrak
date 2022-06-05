@@ -25,7 +25,7 @@ if (is_user_logged_in()) : ?>
                             <div class="u-columns col1-set" id="customer_login">
                                 <div class="u-column2 col-2 mid-size-column">
                                     <div class="form_view">
-                                        <form method="post" class="woocommerce-form woocommerce-form-register vendor_details">
+                                        <form method="post" class="woocommerce-form woocommerce-form-register vendor_details" name="vendor_details">
                                             <div class="form-row">
                                                 <div class="form-column">
                                                     <p class="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">

@@ -25,7 +25,7 @@ if (is_user_logged_in()) : ?>
                             <div class="u-columns col1-set" id="customer_login">
                                 <div class="u-column2 col-2 mid-size-column">
                                     <div class="form_view">
-                                        <form method="post" class="woocommerce-form woocommerce-form-register distributor_details">
+                                        <form method="post" class="woocommerce-form woocommerce-form-register distributor_details" name="distributor_details">
                                             <div class="form-row">
                                                 <div class="form-column">
                                                     <p class="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">
@@ -181,11 +181,11 @@ if (is_user_logged_in()) : ?>
                                                         <select name="distributor_shops" id="distributor_shops">
                                                             <option value="">Choose Shops</option>
                                                             <option value="less10">Less than 10 Shops </option>
-                                                            <option value="10-20lakh">10 Lakh - 20 Lakh </option>
-                                                            <option value="20-40lakh">20 Lakh - 40 Lakh</option>
-                                                            <option value="40-60lakh">40 Lakh - 60 Lakh</option>
-                                                            <option value="60-80Lakh">60 Lakh - 80 Lakh</option>
-                                                            <option value="80Lakh+">80 Lakh +</option>
+                                                            <option value="10-20Shops">10 Shops - 20 Shops </option>
+                                                            <option value="20-40Shops">20 Shops - 40 Shops</option>
+                                                            <option value="40-60Shops">40 Shops - 60 Shops</option>
+                                                            <option value="60-80Shops">60 Shops - 80 Shops</option>
+                                                            <option value="80Shops+">80 Shops +</option>
                                                             <option value="NA">Not Applicable</option>
                                                         </select>
                                                         <span class="vn_form-err reg_lastname_err"></span>

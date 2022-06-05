@@ -374,3 +374,41 @@ if (class_exists('WooCommerce')) {
  */
 require get_theme_file_path('inc/sms-includes.php');
 require get_theme_file_path('inc/setup.php');
+
+// function verifyGST() {
+//     if (is_page('register')) {
+//         jQuery('.verify_gst').click(function () {
+//             jQuery('.otp_message').removeClass('err').slideUp();
+//             gst = jQuery('#vn_gst').val();
+
+//             if (gst.length !== 0) {
+//                 jQuery.ajax({
+//                     method: "POST",
+//                     data: {
+//                         gst: gst
+//                     },
+//                     url: get_ajaxUrl() + '/wp-content/themes/vitrak/controller/verify_gst.php',
+//                     success: function (response) {
+//                         response = JSON.parse(response);
+//                         console.log(response);
+
+//                         if (response.status == 'Success') {
+//                             jQuery('.otp_message').html(response.message).removeClass('err').addClass('done').slideDown();
+//                             jQuery('.verify_gst').html('<i class="fa fa-check-circle"></i>').addClass('done');
+//                             jQuery('#vn_gst').attr('disabled', 'disabled');
+//                             jQuery('#vn_gst_verify').attr('disabled', 'disabled');
+//                             jQuery('.vn-submit button').removeAttr('disabled');
+//                             jQuery('#vn_gst_verify').attr('value', 'true');
+//                         }
+//                         else if (response.status == 'Error') {
+//                             jQuery('.otp_message').addClass('err').html(response.message).slideDown();
+//                         }
+//                     },
+//                     error: function (response) {
+//                         console.log(response);
+//                     }
+//                 });
+//             }
+//         });
+//     }
+// }

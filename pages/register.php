@@ -105,8 +105,8 @@ if (is_user_logged_in()) : ?>
 												<span class="vn_form-err business_name_err"></span>
 											</p>
 											<p class="form-row form-group">
-												<label for="business-address">Business Address <span class="required">*</span></label>
-												<input type="text" class="input-text form-control" name="business_address" id="business_address" value="" required="required">
+												<label for="pincode">Pincode<span class="required">*</span></label>
+												<input type="text" class="input-text form-control" name="pincode" id="pincode" value="" required="required">
 												<span class="vn_form-err"></span>
 											</p>
 											<div class="form-row">

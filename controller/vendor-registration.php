@@ -52,13 +52,13 @@ if ($stage == 'GET OTP') {
     $reg_email = esc_html($_POST['reg_email']);
     $reg_password = esc_html($_POST['reg_password']);
     $business_name = esc_html($_POST['business_name']);
-    $business_address = esc_html($_POST['business_address']);
+    $pincode = esc_html($_POST['pincode']);
     $business_type = esc_html($_POST['business_type']);
 
-    if (!empty($reg_phone) && !empty($reg_username) && !empty($reg_email) && !empty($reg_password) && !empty($business_name)  && !empty($business_address) && !empty($business_type)) {
+    if (!empty($reg_phone) && !empty($reg_username) && !empty($reg_email) && !empty($reg_password) && !empty($business_name)  && !empty($pincode) && !empty($business_type)) {
         if (is_email($reg_email)) {
             if (!username_exists($phone)) {
-                $user_id = wp_create_user($phone, $reg_password, $reg_email);
+                $user_id = wp_create_user($reg_phone, $reg_password, $reg_email,$reg_username,$business_name,$pincode, $business_type );
                 if (!is_wp_error($user_id)) {
                     $user = new WP_User($user_id);
                     $roles = array(
@@ -67,12 +67,12 @@ if ($stage == 'GET OTP') {
                     );
                     $role = $roles($business_type);
                     $user->set_role($roles);
-                    update_user_meta($user_id, 'phone', $phone);
+                    update_user_meta($user_id, 'phone', $reg_phone);
                     update_user_meta($user_id, 'username', $reg_username);
                     update_user_meta($user_id, 'reg_email', $reg_email);
                     update_user_meta($user_id, 'reg_password', $reg_password);
                     update_user_meta($user_id, 'business_name', $business_name);
-                    update_user_meta($user_id, 'business_address', $business_address);
+                    update_user_meta($user_id, 'pincodes', $pincode);
                     update_user_meta($user_id, 'business_type', $business_type);
                     $user->save();
 
