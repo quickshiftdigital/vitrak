@@ -19,7 +19,7 @@
                 if(!username_exists($phone)) {                    
                     $user_id = wp_create_user( $phone);
                     $user = new WP_User( $user_id );
-                    update_user_meta( $user_id, 'gst', $GST );
+                    update_user_meta( $user_id, 'gst', $GST ); //update_field
                     update_user_meta( $user_id, 'business_address', $business_address );
                     update_user_meta( $user_id, 'company_type', $vendor_ctype );
                     update_user_meta( $user_id, 'annual_turnover', $vendor_turnover );

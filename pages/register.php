@@ -47,7 +47,7 @@ if (is_user_logged_in()) : ?>
 								<div class="u-column2 col-2">
 									<h2>Register</h2>
 									<div class="form-first_view form_view" data-status="Active" data-stage="first">
-										<form id="phone_number-verification" class="woocommerce-form woocommerce-form-register register_form">
+										<form id="phone_number-verification" class="woocommerce-form woocommerce-form-register" method="post">
 											<div class="form-row">
 												<div class="form-column">
 													<label for="shop-phone">Phone Number<span class="required">*</span></label>
@@ -56,7 +56,7 @@ if (is_user_logged_in()) : ?>
 														<span class="country_code">+91</span>
 														<input type="text" class="input-text form-control" name="reg_phone" id="reg_phone" value="" required="required">
 													</div>
-													<div class="otp_div hiddenV">
+													<div class="otp_div hidden">
 														<label for="shop-phone">OTP</label>
 														<input type="text" class="input-text form-control" name="verify_otp" id="verify_otp" value="">
 													</div>
@@ -76,8 +76,8 @@ if (is_user_logged_in()) : ?>
 											</p>
 										</form>
 									</div>
-									<div class="form-second_view form_view hidden" data-status="Inactive" data-stage="second">
-										<form method="post" class="woocommerce-form woocommerce-form-register register_form">
+									<div class="form-second_view form_view" data-status="Inactive" data-stage="second">
+										<form method="post" class="woocommerce-form woocommerce-form-register register_form" id="vicode_registeration_form" >
 											<div class="form-row">
 												<div class="form-column">
 													<p class="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">

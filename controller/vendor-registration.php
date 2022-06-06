@@ -47,15 +47,14 @@ if ($stage == 'GET OTP') {
 } else if ($stage == 'First') {
     $phone = sanitize_text_field($_POST['reg_phone']);
 } else if ($stage == 'Second') {
+
     $reg_phone = sanitize_text_field($_POST['reg_phone']);
-    $reg_username = esc_html($_POST['reg_username']);
     $reg_email = esc_html($_POST['reg_email']);
     $reg_password = esc_html($_POST['reg_password']);
     $business_name = esc_html($_POST['business_name']);
     $pincode = esc_html($_POST['pincode']);
     $business_type = esc_html($_POST['business_type']);
-
-    if (!empty($reg_phone) && !empty($reg_username) && !empty($reg_email) && !empty($reg_password) && !empty($business_name)  && !empty($pincode) && !empty($business_type)) {
+    if (!empty($reg_phone)  && !empty($reg_email) && !empty($reg_password) && !empty($business_name)  && !empty($pincode) && !empty($business_type)) {
         if (is_email($reg_email)) {
             if (!username_exists($phone)) {
                 $user_id = wp_create_user($reg_phone, $reg_password, $reg_email,$reg_username,$business_name,$pincode, $business_type );
@@ -67,24 +66,23 @@ if ($stage == 'GET OTP') {
                     );
                     $role = $roles($business_type);
                     $user->set_role($roles);
-                    update_user_meta($user_id, 'phone', $reg_phone);
-                    update_user_meta($user_id, 'username', $reg_username);
+                    update_user_meta($user_id, 'user_login', $reg_phone);
                     update_user_meta($user_id, 'reg_email', $reg_email);
                     update_user_meta($user_id, 'reg_password', $reg_password);
                     update_user_meta($user_id, 'business_name', $business_name);
-                    update_user_meta($user_id, 'pincodes', $pincode);
+                    update_user_meta($user_id, 'billing_postcode', $pincode);
                     update_user_meta($user_id, 'business_type', $business_type);
                     $user->save();
 
-                    //Log the User In
-                    $user = get_user_by('id', $user_id);
-                    if ($user) {
-                        clean_user_cache($user->ID);
-                        wp_clear_auth_cookie();
-                        wp_set_current_user($user->ID);
-                        wp_set_auth_cookie($user->ID, true, false);
-                        update_user_caches($user);
-                    }
+                    // //Log the User In
+                    // $user = get_user_by('id', $user_id);
+                    // if ($user) {
+                    //     clean_user_cache($user->ID);
+                    //     wp_clear_auth_cookie();
+                    //     wp_set_current_user($user->ID);
+                    //     wp_set_auth_cookie($user->ID, true, false);
+                    //     update_user_caches($user);
+                    // }
 
                     //Send an Email
                     $to = $email;

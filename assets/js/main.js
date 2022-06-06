@@ -17,8 +17,8 @@ function regForm() {
     jQuery('#get_otp').click(function (e) {
         e.preventDefault();
         jQuery('.vn_form-err').slideUp(); //Errors slideUp
-
         formData = jQuery('#phone_number-verification').serializeArray(); //Serialize data
+        console.log('check otp');
         jQuery.ajax({
             method: "POST",
             data: formData,
@@ -31,6 +31,7 @@ function regForm() {
                     jQuery('.otp_div').slideDown();
                     jQuery('#get_otp').hide();
                     jQuery('button#verify_otp').removeClass('hidden').show();
+                    console.log('remove class');
                     jQuery('.otp_stage').attr('value', 'VERIFY OTP');
                 }
                 else if (response.state == 'Error') {
@@ -100,10 +101,11 @@ function regForm() {
 
     jQuery('#register_form').click(function (e) {
         e.preventDefault();
-        jQuery('.vn_form-err').slideUp(); //Errors slideUp
+        //console.log('button')
+        jQuery('.vn_form-err').slideUp(); //Errors slideUp btn id
 
-        formData = jQuery('#vicode_registeration_form').serializeArray(); //Serialize data
-        formData['stage'] = jQuery(this).attr('data-stage'); //Add stage to data
+        formData = jQuery('#vicode_registeration_form').serializeArray(); //Serialize data - frm id
+        // formData['stage'] = jQuery(this).attr('data-stage'); //Add stage to data
         console.log(formData);
         jQuery.ajax({
             method: "POST",
@@ -113,10 +115,37 @@ function regForm() {
             success: function (response) {
                 console.log(response)
                 if (response.state == 'Success') {
-                    window.location.href = get_ajaxUrl() + '/vendor/register/business-details/';
+                    window.location.href = get_ajaxUrl() + '/shop/';
                 }
                 else if (response.state == 'Error') {
                     jQuery('.vn_form-err').html(response.message).slideDown();
+                    console.log("success failed");
+                }
+            },
+            error: function (response) {
+                console.log(response);
+            }
+        });
+    });
+
+
+    jQuery('#vendor_form').click(function (e) {
+        e.preventDefault();
+        formData = jQuery('#vendor_details').serializeArray(); //Serialize data - frm id
+        console.log(formData);
+        jQuery.ajax({
+            method: "POST",
+            data: formData,
+            url: get_ajaxUrl() + '/wp-content/themes/vitrak/controller/vendorform-submit.php',
+            dataType: "json",
+            success: function (response) {
+                console.log(response)
+                if (response.state == 'Success') {
+                    window.location.href = get_ajaxUrl() + '/shop/';
+                }
+                else if (response.state == 'Error') {
+                    jQuery('.vn_form-err').html(response.message).slideDown();
+                    console.log("success failed");
                 }
             },
             error: function (response) {
@@ -127,49 +156,22 @@ function regForm() {
 
     jQuery('#distributor_form').click(function (e) {
         e.preventDefault();
-        //jQuery('.vn_form-err').slideUp(); //Errors slideUp
-
-        formData = jQuery('#distributor_form').serializeArray(); //Serialize data
+        formData = jQuery('#distributor_details').serializeArray(); //Serialize data - frm id
         console.log(formData);
         jQuery.ajax({
             method: "POST",
             data: formData,
-            url: get_ajaxUrl() + '/wp-content/themes/vitrak/controller/distributor-form.php',
+            url: get_ajaxUrl() + '/wp-content/themes/vitrak/controller/distributorsubmit-form.php',
             dataType: "json",
             success: function (response) {
                 console.log(response)
-                /*if (response.state == 'Success') {
-                    window.location.href = get_ajaxUrl() + '/vendor/register/business-details/';
+                if (response.state == 'Success') {
+                    window.location.href = get_ajaxUrl() + '/shop/';
                 }
                 else if (response.state == 'Error') {
                     jQuery('.vn_form-err').html(response.message).slideDown();
-                }*/
-            },
-            error: function (response) {
-                console.log(response);
-            }
-        });
-    });
-
-    jQuery('#vendor_details').click(function (e) {
-        e.preventDefault();
-        //jQuery('.vn_form-err').slideUp(); //Errors slideUp
-
-        formData = jQuery('#vendor_details').serializeArray(); //Serialize data
-        console.log(formData);
-        jQuery.ajax({
-            method: "POST",
-            data: formData,
-            url: get_ajaxUrl() + '/wp-content/themes/vitrak/controller/vendor-form.php',
-            dataType: "json",
-            success: function (response) {
-                console.log(response)
-                /*if (response.state == 'Success') {
-                    window.location.href = get_ajaxUrl() + '/vendor/register/business-details/';
+                    console.log("success failed");
                 }
-                else if (response.state == 'Error') {
-                    jQuery('.vn_form-err').html(response.message).slideDown();
-                }*/
             },
             error: function (response) {
                 console.log(response);
@@ -178,6 +180,39 @@ function regForm() {
     });
 }
 
+    jQuery('.verify_gst').click(function () {
+        jQuery('.otp_message').removeClass('err').slideUp();
+        gst = jQuery('#distributor_gst').val();
+
+        if (gst.length !== 0) {
+            jQuery.ajax({
+                method: "POST",
+                data: {
+                    gst: gst
+                },
+                url: get_ajaxUrl() + '/wp-content/themes/vitrak/controller/verify_gst.php',
+                success: function (response) {
+                    response = JSON.parse(response);
+                    console.log(response);
+
+                    if (response.status == 'Success') {
+                        jQuery('.otp_message').html(response.message).removeClass('err').addClass('done').slideDown();
+                        jQuery('.verify_gst').html('<i class="fa fa-check-circle"></i>').addClass('done');
+                        jQuery('#vn_gst').attr('disabled', 'disabled');
+                        jQuery('#vn_gst_verify').attr('disabled', 'disabled');
+                        jQuery('.vn-submit button').removeAttr('disabled');
+                        jQuery('#vn_gst_verify').attr('value', 'true');
+                    }
+                    else if (response.status == 'Error') {
+                        jQuery('.otp_message').addClass('err').html(response.message).slideDown();
+                    }
+                },
+                error: function (response) {
+                    console.log(response);
+                }
+            });
+        }
+    });
 
 jQuery(document).ready(function () {
     regForm();
