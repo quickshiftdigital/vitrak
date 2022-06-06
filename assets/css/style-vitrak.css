@@ -109,3 +109,8 @@ form.woocommerce-form h4 {
 .upsells {
 	display: none;
   }
+  .reg_lastname_err {
+    color: red;
+    position: relative;
+    top: 7px;
+}

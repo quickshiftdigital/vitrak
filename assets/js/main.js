@@ -16,26 +16,36 @@ function regForm() {
     //GET OTP
     jQuery('#get_otp').click(function (e) {
         e.preventDefault();
-        jQuery('.vn_form-err').slideUp(); //Errors slideUp
+        //jQuery('.vn_form-err').slideUp(); //Errors slideUp
         formData = jQuery('#phone_number-verification').serializeArray(); //Serialize data
-        console.log('check otp');
+        console.log(formData);
+        var reg_phone = jQuery("#reg_phone").val();
+        console.log(reg_phone);
         jQuery.ajax({
             method: "POST",
-            data: formData,
+            data: {"reg_phone" : reg_phone,"stage" : "GET OTP"},
             url: get_ajaxUrl() + '/wp-content/themes/vitrak/controller/vendor-registration.php',
             dataType: "json",
             success: function (response) {
                 console.log(response);
-                if (response.status == 'Success') {
+                console.log(response.phone);
+                console.log(response.LogID);
+                console.log(response.status);
+                if (response.status == "Success") {
+
                     jQuery('#reg_phone').attr('value', response.phone).val(response.phone);
+                    jQuery('#LogID').attr('value', response.LogID).val(response.LogID);
                     jQuery('.otp_div').slideDown();
                     jQuery('#get_otp').hide();
                     jQuery('button#verify_otp').removeClass('hidden').show();
                     console.log('remove class');
                     jQuery('.otp_stage').attr('value', 'VERIFY OTP');
+                    jQuery(".otp_div").removeClass("hidden")
                 }
                 else if (response.state == 'Error') {
                     jQuery('.vn_form-err').html(response.message).slideDown();
+                    alert('456');
+                    
                 }
             },
             error: function (response) {

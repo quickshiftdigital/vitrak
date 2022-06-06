@@ -13,9 +13,11 @@
     $vendor_mobile = esc_html($_POST['vendor_mobile']);
     $vendor_email = esc_html($_POST['vendor_email']);
     $vendor_designation = esc_html($_POST['vendor_designation']);
-
-    if(!empty($vendor_ctype) && $vendor_ctype == 'true') {
+    
+    if(isset($vendor_ctype) && $vendor_ctype!= "") {
+        echo "inside";
         if(!empty($GST) && !empty($business_address) && !emptyZz($vendor_ctype) && !empty($vendor_turnover) && !empty($vendor_category) && !empty($vendor_subcategory) && !empty($vendor_yearbusiness) && !empty($vendor_name) && !empty($vendor_mobile) && !empty($vendor_email) && !empty($vendor_designation)) {
+            echo "query";
                 if(!username_exists($phone)) {                    
                     $user_id = wp_create_user( $phone);
                     $user = new WP_User( $user_id );
@@ -40,7 +42,7 @@
     }
     else {
         $response['state'] = 'Error';
-        $response['message'] = 'Please verify your company type';
+        $response['message'] = 'Please verify your All Details';
     }
     $response = json_encode($response, true);
     print_r($response);

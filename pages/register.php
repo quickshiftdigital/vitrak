@@ -52,13 +52,14 @@ if (is_user_logged_in()) : ?>
 												<div class="form-column">
 													<label for="shop-phone">Phone Number<span class="required">*</span></label>
 													<span class="form-tip">Enter Mobile Number without country code*</span>
-													<div class="relative">
+													<div class="relative send_otp">
 														<span class="country_code">+91</span>
 														<input type="text" class="input-text form-control" name="reg_phone" id="reg_phone" value="" required="required">
 													</div>
 													<div class="otp_div hidden">
 														<label for="shop-phone">OTP</label>
 														<input type="text" class="input-text form-control" name="verify_otp" id="verify_otp" value="">
+														<input type="text" class="input-text form-control hidden" name="LogID" id="LogID" value="">
 													</div>
 													<span class="vn_form-err reg_phone_err"></span>
 												</div>

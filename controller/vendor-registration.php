@@ -5,9 +5,12 @@ the_post();
 
 $stage = sanitize_text_field($_POST['stage']);
 $response = array();
+//print_r($stage);
+//echo "phomr_no - ". $phone; die;
 
 if ($stage == 'GET OTP') {
     $phone = sanitize_text_field($_POST['reg_phone']);
+    //echo "phone_no - ". $phone; die;
 
     if (!empty($phone)) {
         $user = get_user_by('login', $phone);
@@ -16,11 +19,21 @@ if ($stage == 'GET OTP') {
             $response['status'] = 'error';
             $response['message'] = 'Phone number already exists';
         } else {
-            sendSMS($phone, '', '');
-
+          $get_opt_response =   sendSMS($phone, '', '');
+          //echo gettype($get_opt_response);
+          $otp_data = json_decode($get_opt_response, TRUE);
+          //print_r($data);die;
+          if(!empty($otp_data)){
+            $LogID = $otp_data["LogID"];
+            $response['LogID'] = $LogID;
             $response['phone'] = $phone;
             $response['status'] = 'Success';
             $response['message'] = 'Phone number is valid';
+          }else {
+            $response['status'] = 'error';
+            $response['message'] = 'Phone number is required';
+        }
+            
         }
     } else {
         $response['status'] = 'error';
@@ -130,9 +143,10 @@ if ($stage == 'GET OTP') {
     }
 }
 
-$response = json_encode($response, true);
-print_r($response);
-
+//$response = json_encode($response, true);
+//print_r($response);
+//echo $response;
+echo json_encode($response);exit();
 ?>
 <?php
 if ( ! is_user_logged_in() ) { // Display WordPress login form:

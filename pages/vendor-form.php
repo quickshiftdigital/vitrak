@@ -33,7 +33,7 @@ if (is_user_logged_in()) : ?>
                                                         <input type="text" class="woocommerce-Input woocommerce-Input--text input-text" name="vendor_gst" id="vendor_gst">
                                                     </p>
                                                     <div class="side_btn text-right" id="verify_gst"><button>Verify</button></div>
-                                                    <span class="vn_form-err reg_firstname_err"></span>
+                                                    <span class="vn_form-err reg_lastname_err"></span>
                                                 </div>
                                             </div>
                                             
@@ -42,7 +42,7 @@ if (is_user_logged_in()) : ?>
                                                     <p class="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">
                                                         <label for="business_address">Business Address<span class="required">*</span></label>
                                                         <input type="text" class="woocommerce-Input woocommerce-Input--text input-text" name="business_address" id="business_address" autocomplete="reg_firstname" value="">
-                                                        <span class="vn_form-err reg_firstname_err"></span>
+                                                        <span class="vn_form-err reg_lastname_err"></span>
                                                     </p>
                                                 </div>
                                             </div>
