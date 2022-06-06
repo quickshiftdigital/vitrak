@@ -76,7 +76,7 @@ if (is_user_logged_in()) : ?>
 											</p>
 										</form>
 									</div>
-									<div class="form-second_view form_view" data-status="Inactive" data-stage="second">
+									<div class="form-second_view form_view hidden" data-status="Inactive" data-stage="second">
 										<form method="post" class="woocommerce-form woocommerce-form-register register_form" id="vicode_registeration_form" >
 											<div class="form-row">
 												<div class="form-column">

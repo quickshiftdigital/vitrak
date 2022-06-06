@@ -19,9 +19,10 @@ function sendSMS($to, $message = "", $otp = "", $user_id = "")
 
     $response = file_get_contents('https://api.authkey.io/request?authkey=' . $apiKey . '&mobile=' . $to . '&country_code=91&sender=AUTHKY&otp=' . $otp . '&company=Vitrak&sid=4614');
 
+    //$response = file_get_contents('https://authkey.io/api/2fa_verify.php?authkey=' . $apiKey . '&channel=sms&otp=' . $otp . '&country_code=91&sender=AUTHKY&otp=' . $otp . '&logid=' .<Logid generated on request api>.);
+
     return $response;
 }
-
 
 function OTP($status, $phone, $otp = "")
 {

@@ -66,6 +66,7 @@ if ($stage == 'GET OTP') {
                     );
                     $role = $roles($business_type);
                     $user->set_role($roles);
+                    update_user_meta($user_id, 'billing_phone', $reg_phone);
                     update_user_meta($user_id, 'user_login', $reg_phone);
                     update_user_meta($user_id, 'reg_email', $reg_email);
                     update_user_meta($user_id, 'reg_password', $reg_password);
