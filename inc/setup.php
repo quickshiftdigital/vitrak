@@ -68,3 +68,24 @@ if (function_exists('acf_add_options_page')) {
         'parent_slug'    => 'theme-moola-settings',
     ));
 }
+
+
+//All kind of Redirects
+add_action( 'template_redirect', 'redirect_traffic' );
+
+function redirect_traffic() {
+    if ( !is_user_logged_in() && is_page('my-account')) {
+        wp_redirect( get_home_url() . '/vendor/register/' ); 
+        exit;
+    }
+
+    if( is_user_logged_in() && !is_page('register-next') && checkRole('seller') && !get_field('gst', 'user_' . get_current_user_id())) {
+        wp_redirect( get_home_url() . '/vendor/register-next/' ); 
+        exit;
+    }
+
+    if(is_user_logged_in() && is_page('my-account') && checkRole('seller')) {
+        wp_redirect( get_home_url() . '/vendor/dashboard/' ); 
+        exit;
+    }
+}

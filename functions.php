@@ -304,6 +304,16 @@ function woocustomizer_remove_product_sku( $sku ) {
      return $sku;
  }
 remove_action( 'woocommerce_after_single_product_summary', 'woocommerce_output_related_products', 20 );
+
+add_action( 'template_redirect', 'quadlayers_add_to_cart_programmatically' );
+function quadlayers_add_to_cart_programmatically() {
+   $product_id = 4780;
+   $product_cart_id = WC()->cart->generate_cart_id( $product_id );
+   if(!WC()->cart->find_product_in_cart( $product_cart_id )) {      
+       WC()->cart->add_to_cart( $product_id);
+   }
+}
+
 /**
  * Disable reviews.
  */
@@ -374,3 +384,4 @@ if (class_exists('WooCommerce')) {
  */
 require get_theme_file_path('inc/sms-includes.php');
 require get_theme_file_path('inc/setup.php');
+require get_theme_file_path('inc/bem.php');

@@ -5,12 +5,9 @@ the_post();
 
 $stage = sanitize_text_field($_POST['stage']);
 $response = array();
-//print_r($stage);
-//echo "phomr_no - ". $phone; die;
 
 if ($stage == 'GET OTP') {
     $phone = sanitize_text_field($_POST['reg_phone']);
-    //echo "phone_no - ". $phone; die;
 
     if (!empty($phone)) {
         $user = get_user_by('login', $phone);
@@ -18,149 +15,161 @@ if ($stage == 'GET OTP') {
         if ($user) {
             $response['status'] = 'error';
             $response['message'] = 'Phone number already exists';
-        } else {
-          $get_opt_response =   sendSMS($phone, '', '');
-          //echo gettype($get_opt_response);
-          $otp_data = json_decode($get_opt_response, TRUE);
-          //print_r($data);die;
-          if(!empty($otp_data)){
-            $LogID = $otp_data["LogID"];
-            $response['LogID'] = $LogID;
+        } 
+        else {
+            $sms = sendSMS($phone, 'OTP', '');
+
+            $response['sms'] = $sms;
             $response['phone'] = $phone;
             $response['status'] = 'Success';
             $response['message'] = 'Phone number is valid';
-          }else {
-            $response['status'] = 'error';
-            $response['message'] = 'Phone number is required';
         }
-            
-        }
-    } else {
+    } 
+    else {
         $response['status'] = 'error';
         $response['message'] = 'Phone number is required';
     }
-} else if ($stage == 'VERIFY OTP') {
+} 
+else if ($stage == 'VERIFY OTP') {
     $phone = sanitize_text_field($_POST['reg_phone']);
+    $otp = sanitize_text_field($_POST['reg_otp']);
+    $logID = sanitize_text_field($_POST['reg_logID']);
 
-    if (!empty($phone)) {
-        $otp_verify = OTP('Verify', $phone, sanitize_text_field($_POST['reg_otp']));
+    if (!empty($otp) && !empty($logID)) {
+        $otp_verify = checkOTP($logID, $otp);
 
-        if ($otp_verify['status'] == 'Success') {
+        if ($otp_verify['status']) {
             $response['phone'] = $phone;
             $response['status'] = 'Success';
             $response['message'] = 'Phone number is valid';
-        } else {
+        } 
+        else {
+            $response['result'] = $otp_verify;
+            $response['data'] = $_POST;
+            $response['logID'] = $logID;
             $response['status'] = 'Error';
-            $response['message'] = 'Invalid OTP';
+            $response['message'] = 'Please Enter the Correct OTPs';
         }
-    } else {
+    } 
+    else {
+        $response['data'] = $_POST;
+        $response['logID'] = $logID;
         $response['status'] = 'error';
-        $response['message'] = 'Phone number is blank';
+        $response['message'] = 'Please Enter the Correct OTP';
     }
-} else if ($stage == 'First') {
+} 
+else if ($stage == 'First') {
     $phone = sanitize_text_field($_POST['reg_phone']);
-} else if ($stage == 'Second') {
-
-    $reg_phone = sanitize_text_field($_POST['reg_phone']);
+} 
+else if ($stage == 'Second') {
+    $reg_phone = sanitize_text_field($_POST['sc_reg_phone']);
+    $reg_firstname = sanitize_text_field($_POST['reg_first_name']);
+    $reg_lastname = sanitize_text_field($_POST['reg_last_name']);
+    $reg_username = esc_html($_POST['sc_reg_phone']);
     $reg_email = esc_html($_POST['reg_email']);
     $reg_password = esc_html($_POST['reg_password']);
+    $reg_cpassword = esc_html($_POST['reg_cpassword']);
     $business_name = esc_html($_POST['business_name']);
-    $pincode = esc_html($_POST['pincode']);
-    $business_type = esc_html($_POST['business_type']);
-    if (!empty($reg_phone)  && !empty($reg_email) && !empty($reg_password) && !empty($business_name)  && !empty($pincode) && !empty($business_type)) {
+    $pincode = esc_html($_POST['business_pincode']);
+    $business_type = esc_html($_POST['reg_businesstype']);
+
+    if (!empty($reg_phone) && !empty($reg_email) && !empty($reg_firstname) && !empty($reg_lastname) && !empty($reg_password) && !empty($business_name)  && !empty($pincode) && !empty($business_type)) {
         if (is_email($reg_email)) {
-            if (!username_exists($phone)) {
-                $user_id = wp_create_user($reg_phone, $reg_password, $reg_email,$reg_username,$business_name,$pincode, $business_type );
-                if (!is_wp_error($user_id)) {
-                    $user = new WP_User($user_id);
-                    $roles = array(
-                        'vendor',
-                        'distributor'
-                    );
-                    $role = $roles($business_type);
-                    $user->set_role($roles);
-                    update_user_meta($user_id, 'billing_phone', $reg_phone);
-                    update_user_meta($user_id, 'user_login', $reg_phone);
-                    update_user_meta($user_id, 'reg_email', $reg_email);
-                    update_user_meta($user_id, 'reg_password', $reg_password);
-                    update_user_meta($user_id, 'business_name', $business_name);
-                    update_user_meta($user_id, 'billing_postcode', $pincode);
-                    update_user_meta($user_id, 'business_type', $business_type);
-                    $user->save();
+            if(strpos($reg_phone, '+') == false && strlen($reg_phone) == 10) {
+                if (!username_exists($phone)) {
+                    if(!email_exists($reg_email)) {
+                        if($reg_password == $reg_cpassword) {
 
-                    // //Log the User In
-                    // $user = get_user_by('id', $user_id);
-                    // if ($user) {
-                    //     clean_user_cache($user->ID);
-                    //     wp_clear_auth_cookie();
-                    //     wp_set_current_user($user->ID);
-                    //     wp_set_auth_cookie($user->ID, true, false);
-                    //     update_user_caches($user);
-                    // }
+                            $user_id = wp_create_user($reg_username, $reg_password, $reg_email);
+                            if (!is_wp_error($user_id)) {
+                                $user = new WP_User($user_id);
 
-                    //Send an Email
-                    $to = $email;
-                    $subject = 'Welcome to Vitrak';
-                    $message = '<div style="max-width: 560px; padding: 20px; background: #ffffff; border-radius: 5px; margin: 40px auto; font-family: Open Sans,Helvetica,Arial; font-size: 15px; color: #666;">
-                                <div style="color: #444444; font-weight: normal;">
-                                <div style="text-align: center; font-weight: 600; font-size: 26px; padding: 10px 0; border-bottom: solid 3px #eeeeee;"><a href="' . home_url() . '"><img src="https://lofaroshop.com/wp-content/uploads/2020/12/black-lofaro-1.png"></div>
-                                <div style="clear: both;"> </div>
-                                </div>
-                                <div style="padding: 0 30px 30px 30px; border-bottom: 3px solid #eeeeee;">
-                                <div style="padding: 30px 0; font-size: 24px; text-align: center; line-height: 40px;">Thank you for your interest in Vitrak online. We are currently reviewing your Store Information.<span style="display: block;"> Somebody from our team will contact you shortly.</span></div>
-                                <div style="padding: 15px; background: #eee; border-radius: 3px; text-align: center;">Need help? <a style="color: #3ba1da; text-decoration: none;" href="mailto:support@vitrakonline.com">Contact Us</a> today.</div>
-                                </div>
-                                <div style="color: #999; padding: 20px 30px;">
-                                <div>Thank You!</div>
-                                <div>The <a style="color: #3ba1da; text-decoration: none;" href="' . home_url() . '">Vitrak Shop</a> Team</div>
-                                </div>
-                                </div>';
-                    $headers['Content-Type'] = 'text/html; charset=UTF-8';
-                    $headers['Bcc'] = 'info@vitrak.in, juzer@quickshiftdigital.com';
-                    $mail = wp_mail($to, $subject, $message, $headers);
+                                //User Role
+                                if($business_type == 'Vendor') {
+                                    $role = 'seller'; 
+                                }
+                                else {
+                                    $role = strtolower($business_type);
+                                }
+                                $user->set_role($role);
 
-                    $response['state'] = 'Success';
-                    $response['message'] = 'Vendor registered successfully';
-                    $response['user_id'] = $user_id;
-                    $response['login'] = $phone;
+                                //User Meta
+                                $user_meta = array(
+                                    'first_name' => $reg_firstname,
+                                    'last_name' => $reg_lastname,
+                                    'phone' => $reg_phone,
+                                    'business_name' => $business_name,
+                                    'business_pincode' => $pincode,
+                                    'business_type' => $business_type,
+                                    'billing_phone' => $reg_phone,
+                                    'billing_email' => $reg_email,
+                                    'billing_first_name' => $reg_firstname,
+                                    'billing_last_name' => $reg_lastname,
+                                    'billing_company' => $business_name,
+                                    'billing_postcode' => $pincode,
+                                    'billing_country' => 'IN'
+                                );
+                                foreach ($user_meta as $key => $value) {
+                                    update_user_meta($user_id, $key, $value);
+                                }
 
-                    if ($mail) {
-                        $response['email_state'] = 'Error';
-                        $response['email_message'] = 'Error in sending email';
+                                update_field('pincode', $pincode, 'user_' . $user_id); // update pincode field
+            
+                                //Log the User In
+                                $user = get_user_by('id', $user_id);
+                                if ($user) {
+                                    clean_user_cache($user->ID);
+                                    wp_clear_auth_cookie();
+                                    wp_set_current_user($user->ID);
+                                    wp_set_auth_cookie($user->ID, true, false);
+                                    update_user_caches($user);
+                                }
+
+                                //Send Email
+            
+                                //Response
+                                $response['state'] = 'Success';
+                                $response['message'] = 'Vendor registered successfully';
+                                $response['business_type'] = $business_type;
+                                $response['user_id'] = $user_id;
+                                $response['login'] = $phone;
+            
+                                if ($mail) {
+                                    $response['email_state'] = 'Error';
+                                    $response['email_message'] = 'Error in sending email';
+                                }
+                            }
+                        }
+                        else {
+                            $response['state'] = 'Error';
+                            $response['message'] = 'Passwords do not match';
+                        }
                     }
+                    else {
+                        $response['state'] = 'Error';
+                        $response['message'] = 'Email already exists';
+                    }
+                } 
+                else {
+                    $response['state'] = 'Error';
+                    $response['message'] = 'User with this phone number exists';
                 }
-            } else {
-                $response['state'] = 'Error';
-                $response['message'] = 'User with this phone number exists';
             }
-        } else {
+            else {
+                $response['state'] = 'Error';
+                $response['message'] = 'Phone number is not valid';
+            }
+        } 
+        else {
             $response['state'] = 'Error';
             $response['message'] = 'Enter a valid email address';
         }
-    } else {
+    } 
+    else {
         $response['state'] = 'Error';
         $response['message'] = 'Please fill all the fields';
     }
 }
 
-//$response = json_encode($response, true);
-//print_r($response);
-//echo $response;
-echo json_encode($response);exit();
-?>
-<?php
-if ( ! is_user_logged_in() ) { // Display WordPress login form:
-    $args = array(
-        'form_id' => 'login_form',
-        'label_username' => __( 'Username custom text' ),
-        'label_password' => __( 'Password custom text' ),
-        'label_remember' => __( 'Remember Me custom text' ),
-        'label_log_in' => __( 'Log In custom text' ),
-        'remember' => true
-    );
-    wp_login_form( $args );
-} else { // If logged in:
-    wp_loginout( home_url() ); // Display "Log Out" link.
-    echo " | ";
-    wp_register('', ''); // Display "Site Admin" link.
-}
+$response = json_encode($response, true);
+print_r($response);

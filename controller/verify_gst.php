@@ -3,31 +3,37 @@
      * Verify GST with the appyflow API
      */
 
+    // define('WP_USE_THEMES', false);  
     require_once('../../../../wp-load.php');
-    the_post();
+    // the_post();
 
     //Curl Function
     function verify_gst($data) {
-        $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, "https://appyflow.in/api/verifyGST");
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-        curl_setopt($ch, CURLOPT_POST, 1);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, "gstNo=" . $data['gst'] . "&key_secret=rUlXRRRlelOApcRECdNh8SY4mbt1");
-        
-        $result = curl_exec($ch);
-        curl_close($ch);
 
+        $postdata = http_build_query(
+            array(
+                'gstNo' => $data['gst'],
+                'key_secret' => 'rUlXRRRlelOApcRECdNh8SY4mbt1'
+            )
+        );
+            
+        $opts = array('http' =>
+        array(
+            'method'  => 'POST',
+            'header'  => 'Content-Type: application/x-www-form-urlencoded',
+            'content' => $postdata
+            )
+        );
+        
+        $context  = stream_context_create($opts);        
+        $result = file_get_contents('https://appyflow.in/api/verifyGST', false, $context);
         return $result;
     }
 
     $response = array();
     $gst = json_decode(verify_gst($_POST), true);
 
-    if($gst['error'] == 1 && !empty($gst['error'])) {
-        $response['status'] = 'Error';
-        $response['message'] = $gst['message'];
-    }
-    else {
+    if($gst['taxpayerInfo']) {
         $response['status'] = 'Success';
         $response['message'] = 'GST Successfully Verified';
         $response['data'] = $gst;
@@ -36,6 +42,10 @@
         $response['panNo'] = $gst['taxpayerInfo']['panNo'];
         $response['registration_date'] = $gst['taxpayerInfo']['rgdt'];
         $response['GSTIN'] = $gst['taxpayerInfo']['gstin'];
+    }
+    else {
+        $response['status'] = 'Error';
+        $response['message'] = $gst['message'];
     }
 
     $response = json_encode($response, true);

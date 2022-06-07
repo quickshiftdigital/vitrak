@@ -35,8 +35,8 @@ p.form-row {
 	display: block;
 }
 
-.form-column:first-child {
-	padding-right: 20px;
+.form-column:nth-child(2) {
+	padding-left: 20px;
 }
 
 .woocommerce form .form-row label,
@@ -90,6 +90,58 @@ form.woocommerce-form h4 {
 	font-size: 18px;
 }
 
+span.vn_form-err,
+.master_login-err,
+.vn_gst-err {
+	padding: 15px 45px;
+	display: inline-block;
+	background: #cf000f;
+	color: #fff;
+	border-radius: 5px;
+	margin: 25px 0 0;
+}
+
+span.vn_form-err,
+.master_login-err,
+.vn_gst-err {
+	display: none;
+}
+
+.form-row span.required {
+	color: #f05127;
+}
+
+.reg_gst {
+	margin: -10px 0 10px;
+}
+
+.reg_gst.verified {
+	position: relative;
+}
+
+.reg_gst.verified:before {
+	content: "";
+	background: rgba(0, 0, 0, 0.5);
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	top: 0;
+	right: 0;
+}
+
+.reg_gst.verified:after {
+	content: "";
+	background-image: url("../../../../uploads/2022/06/check-mark.png");
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	top: 0;
+	right: 0;
+	background-repeat: no-repeat;
+	background-size: 27px;
+	background-position: calc(100% - 5px) 50%;
+}
+
 /*------------------ Dashboard ------------------*/
 
 .mt-50.mb-50 {
@@ -98,19 +150,27 @@ form.woocommerce-form h4 {
 
 /*------------------ Woocommerce Single Page ------------------*/
 .dokan-vendor-info-wrap {
-    display: none;
+	display: none;
 }
 .entry-summary-end {
-	display:none;
+	display: none;
 }
 .share {
 	display: none;
 }
 .upsells {
 	display: none;
-  }
-  .reg_lastname_err {
-    color: red;
-    position: relative;
-    top: 7px;
+}
+.reg_lastname_err {
+	color: red;
+	position: relative;
+	top: 7px;
+}
+
+.page-id-4759 .header {
+    display: none;
+}
+
+.page-id-4759 .footer {
+    display: none;
 }
