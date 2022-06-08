@@ -28,6 +28,17 @@ function getUserRole() {
     else if(checkRole('distributor')) {
         $response = 'distributor';
     }
-
     return $response;
 }
+
+add_action( 'template_redirect', 'quadlayers_add_to_cart_programmatically' );
+function quadlayers_add_to_cart_programmatically() {
+    $product_id = 4780;
+    $product_cart_id = WC()->cart->generate_cart_id( $product_id );
+        if(!WC()->cart->find_product_in_cart( $product_cart_id )) {  
+            if(checkRole('seller')){
+                WC()->cart->add_to_cart($product_id);
+            }    
+        }
+}
+

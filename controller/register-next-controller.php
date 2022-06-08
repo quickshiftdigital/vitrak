@@ -22,9 +22,9 @@
         $no_of_years_in_business = sanitize_text_field($_POST['reg_business_years']);
         $user_id = sanitize_text_field($_POST['user_id']);
         // $email = sanitize_text_field($_POST['email']);
-        $designation = sanitize_text_field($_POST['reg_designation']);
+        //$designation = sanitize_text_field($_POST['reg_designation']);
 
-        if (!empty($gst) && !empty($billing_address_1) && !empty($billing_address_2) && !empty($billing_city) && !empty($billing_state) && !empty($billing_postcode)  && !empty($company_type)  && !empty($billing_country) && !empty($annual_turnover) && !empty($category) && !empty($sub_category)  && !empty($no_of_years_in_business) && !empty($designation) ) {
+        if (!empty($gst) && !empty($billing_address_1) && !empty($billing_address_2) && !empty($billing_city) && !empty($billing_state) && !empty($billing_postcode)  && !empty($company_type)  && !empty($billing_country) && !empty($annual_turnover) && !empty($category) && !empty($sub_category)  && !empty($no_of_years_in_business)) {
             if (($user_id)) {
                 $user = get_user_by('id', $user_id);
                 //User Meta
@@ -45,7 +45,7 @@
                     'no_of_years_in_business' => $no_of_years_in_business
                     // 'name' => $name,
                     // 'email' => $email,
-                    'designation' => $designation,
+                    //'designation' => $designation,
                 );
                 foreach ($user_meta as $key => $value) {
                     update_user_meta($user_id, $key, $value);
@@ -82,7 +82,7 @@
                 //Response
                 $response['state'] = 'Success';
                 $response['message'] = 'Vendor registered successfully';
-                $response['business_type'] = $business_type;
+                $response['business_type'] = $user_role;
                 $response['user_id'] = $user_id;
                 $response['login'] = $phone;
 
@@ -168,7 +168,7 @@
                 //Response
                 $response['state'] = 'Success';
                 $response['message'] = 'Distributor registered successfully';
-                $response['business_type'] = $business_type;
+                $response['business_type'] = $user_role;
                 $response['user_id'] = $user_id;
                 $response['login'] = $phone;
 

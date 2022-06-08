@@ -84,6 +84,11 @@ function redirect_traffic() {
         exit;
     }
 
+    if( is_user_logged_in() && !is_page('register-next') && checkRole('distributor') && !get_field('gst', 'user_' . get_current_user_id())) {
+        wp_redirect( get_home_url() . '/vendor/register-next/' ); 
+        exit;
+    }
+
     if(is_user_logged_in() && is_page('my-account') && checkRole('seller')) {
         wp_redirect( get_home_url() . '/vendor/dashboard/' ); 
         exit;
