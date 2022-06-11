@@ -14,20 +14,20 @@ $header_message = ecotech_theme_option_meta(
 if (!empty($header_message)) $header_top .= ' has-center';
 ?>
 <header id="header" class="header style-09 style-04">
-    <div class="<?php echo esc_attr($header_top); ?>">
+    <!-- <div class="<?php //echo esc_attr($header_top); ?>">
         <div class="container">
             <div class="header-inner">
                 <div class="header-box header-start">
-                    <?php ecotech_header_social(); ?>
-                    <?php ecotech_header_submenu('header_topmenu'); ?>
+                    <?php //ecotech_header_social(); ?>
+                    <?php //ecotech_header_submenu('header_topmenu'); ?>
                 </div>
-                <?php ecotech_header_message(); ?>
+                <?php //ecotech_header_message(); ?>
                 <div class="header-box header-end">
-                    <?php ecotech_header_submenu('header_topmenu_2'); ?>
+                    <?php //ecotech_header_submenu('header_topmenu_2'); ?>
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
     <div class="header-mid header-sticky">
         <div class="container">
             <div class="header-inner megamenu-wrap">
@@ -38,12 +38,20 @@ if (!empty($header_message)) $header_top .= ' has-center';
                 <div class="header-control">
                     <div class="inner-control">
                         <?php ecotech_header_menu_bar(); ?>
-                        <?php if (is_user_logged_in()) : ?>
-                            <?php //if (function_exists('ecotech_header_wishlist')) ecotech_header_wishlist(); 
+                        <?php //if (function_exists('ecotech_header_wishlist')) ecotech_header_wishlist(); ?>
+                        <?php if(is_user_logged_in()): ?>
+                            <?php 
+                                if(checkRole('distributor') && get_field('gst', 'user_' . get_current_user_id())) {
+                                    if (function_exists('ecotech_header_mini_cart')) ecotech_header_mini_cart('popup');
+                                }
+                                echo '<div class="block-username">' . get_field('business_name', 'user_' . get_current_user_id()) . '</div>';
                             ?>
-                            <?php if (function_exists('ecotech_header_mini_cart')) ecotech_header_mini_cart('popup'); ?>
+                            <?php ecotech_header_user(); ?>
+                        <?php else: ?>
+                            <div classs="block-username lgReg_button">
+                                <a href="<?php echo home_url('/my-account/'); ?>">Login / Register</a>
+                            </div>
                         <?php endif; ?>
-                        <?php ecotech_header_user(); ?>
                     </div>
                 </div>
             </div>

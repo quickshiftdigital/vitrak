@@ -24,7 +24,7 @@
         // $email = sanitize_text_field($_POST['email']);
         //$designation = sanitize_text_field($_POST['reg_designation']);
 
-        if (!empty($gst) && !empty($billing_address_1) && !empty($billing_address_2) && !empty($billing_city) && !empty($billing_state) && !empty($billing_postcode)  && !empty($company_type)  && !empty($billing_country) && !empty($annual_turnover) && !empty($category) && !empty($sub_category)  && !empty($no_of_years_in_business)) {
+        if (!empty($gst) && !empty($billing_address_1) && !empty($billing_city) && !empty($billing_state) && !empty($billing_postcode)  && !empty($company_type)  && !empty($billing_country) && !empty($annual_turnover) && !empty($category) && !empty($sub_category)  && !empty($no_of_years_in_business)) {
             if (($user_id)) {
                 $user = get_user_by('id', $user_id);
                 //User Meta
@@ -122,7 +122,9 @@
                     'billing_address_1' => $billing_address_1,
                     'billing_address_2' => $billing_address_2,
                     'distributor_city' => $billing_city,
+                    'billing_city' => $billing_city,
                     'distributor_state' => $billing_state,
+                    'billing_state' => $billing_state,
                     'distributor_pincode' => $billing_postcode,
                     'distributor_country' => $billing_country,
                     'shop_type' => $reg_shop_type,

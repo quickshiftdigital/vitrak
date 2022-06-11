@@ -9,7 +9,7 @@ if (is_user_logged_in()) : ?>
 			<div class="container">
 				<div class="inner">
 					<h1 class="page-title entry-title">
-						<span>Vendor Registration</span>
+						<span>Registration</span>
 					</h1>
 
 				</div>
@@ -26,12 +26,12 @@ if (is_user_logged_in()) : ?>
 									<h2>Login</h2>
 									<form class="woocommerce-form woocommerce-form-login login_form" id="master-login_form" method="post">
 										<p class="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">
-											<label for="username">Phone Number or email address&nbsp;<span class="required">*</span></label>
-											<input type="text" class="woocommerce-Input woocommerce-Input--text input-text" name="username" id="username" autocomplete="username" value="">
+											<label for="username">Phone Number or Email Address&nbsp;<span class="required">*</span></label>
+											<input type="text" class="woocommerce-Input woocommerce-Input--text input-text" name="username" id="username" autocomplete="phone-number" value="">
 										</p>
 										<p class="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">
 											<label for="password">Password&nbsp;<span class="required">*</span></label>
-											<span class="password-input"><input class="woocommerce-Input woocommerce-Input--text input-text" type="password" name="password" id="password" autocomplete="current-password"><span class="show-password-input"></span></span>
+											<input class="woocommerce-Input woocommerce-Input--text input-text" type="password" name="password" id="password" autocomplete="current-password">
 										</p>
 										<div class="master_login-err"></div>
 										<p class="form-row">
@@ -54,18 +54,23 @@ if (is_user_logged_in()) : ?>
 											<div class="form-row">
 												<div class="form-column">
 													<label for="shop-phone">Phone Number<span class="required">*</span></label>
-													<span class="form-tip">Enter Mobile Number without country code*</span>
+													<span class="form-tip">Enter an Indian Mobile Number without country code*</span>
 													<div class="relative send_otp">
 														<span class="country_code">+91</span>
-														<input type="text" class="input-text form-control" name="reg_phone" id="reg_phone" value="" required="required">
+														<input type="text" class="input-text form-control" name="reg_phone" id="reg_phone" value="" required="required" autocomplete="phone-number">
 													</div>
 													<div class="otp_div hidden">
 														<label for="shop-phone">OTP</label>
 														<input type="text" class="input-text form-control" name="reg_otp" id="reg_otp" value="">
+														<div class="resend_otp text-right" data-pending="30" data-state="Off">
+															<span class="resend_otp-text">Haven't received the OTP? You can resend an OTP in </span>
+															<span class="resend_otp-balance_time">30s</span>
+															<span class="resend_otp-link hiddenV">Resend OTP</span>
+														</div>
 													</div>
-													<span class="vn_form-err reg_phone_err"></span>
 												</div>
 											</div>
+											<div class="vn_form-err reg_phone_err"></div>
 											<div class="woocommerce-privacy-policy-text">
 												<br>
 												<p>Your personal data will be used to support your experience throughout this website, to manage access to your account, and for other purposes described in our <a href="<?php echo home_url(); ?>/privacy-policy/" class="woocommerce-privacy-policy-link" target="_blank">privacy policy</a>.</p>
@@ -86,13 +91,13 @@ if (is_user_logged_in()) : ?>
 												<div class="form-column">
 													<p class="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">
 														<label for="reg_first_name">First Name<span class="required">*</span></label>
-														<input type="text" class="woocommerce-Input woocommerce-Input--text input-text" name="reg_first_name" id="reg_firstname" autocomplete="reg_firstname" value="">
+														<input type="text" class="woocommerce-Input woocommerce-Input--text input-text" name="reg_first_name" id="reg_firstname" autocomplete="first-name" value="">
 													</p>
 												</div>
 												<div class="form-column">
 													<p class="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">
 														<label for="reg_last_name">Last Name&nbsp;<span class="required">*</span></label>
-														<input type="text" class="woocommerce-Input woocommerce-Input--text input-text" name="reg_last_name" id="reg_lastname" autocomplete="lastname" value="">
+														<input type="text" class="woocommerce-Input woocommerce-Input--text input-text" name="reg_last_name" id="reg_lastname" autocomplete="family-name" value="">
 													</p>
 												</div>
 											</div>
@@ -106,7 +111,7 @@ if (is_user_logged_in()) : ?>
 												<div class="form-column">
 													<p class="form-row form-group">
 														<label for="business-name">Phone<span class="required">*</span></label>
-														<input type="text" class="input-text form-control verified" name="sc_reg_phone" id="sc_reg_phone" value="">
+														<input type="text" class="input-text form-control verified" name="sc_reg_phone" id="sc_reg_phone" value="" autocomplete="phone-number">
 													</p>
 												</div>
 											</div>
@@ -114,13 +119,13 @@ if (is_user_logged_in()) : ?>
 												<div class="form-column">
 													<p class="form-row form-group">
 														<label for="business-name">Business Name <span class="required">*</span></label>
-														<input type="text" class="input-text form-control" name="business_name" id="business_name" value="" required="required">
+														<input type="text" class="input-text form-control" name="business_name" id="business_name" value="" required="required" autocomplete="company">
 													</p>
 												</div>
 												<div class="form-column">
 													<p class="form-row form-group">
 														<label for="business-name">Business Pincode<span class="required">*</span></label>
-														<input type="text" class="input-text form-control" name="business_pincode" id="business_pincode" value="" required="required">
+														<input type="text" class="input-text form-control" name="business_pincode" id="business_pincode" value="" required="required" autocomplete="pincode">
 													</p>
 												</div>
 											</div>
@@ -129,8 +134,16 @@ if (is_user_logged_in()) : ?>
 													<p class="form-row form-group business-list">
 														<label for="business-type">Business Type</label>
 														<ul class="business-list">
-															<li><label for="Vendor" class="radio-inline"><input type="radio" name="reg_businesstype" id="Vendor" value="Vendor">Vendor </label></li>
-															<li><label for="Distributor" class="radio-inline"><input type="radio" name="reg_businesstype" id="Distributor" value="Distributor">Distributor</label></li>
+															<li>
+																<label for="Vendor" class="radio-inline">
+																	<input type="radio" name="reg_businesstype" id="Vendor" value="Vendor">Company 
+																</label>
+															</li>
+															<li>
+																<label for="Distributor" class="radio-inline">
+																	<input type="radio" name="reg_businesstype" id="Distributor" value="Distributor">Distributor
+																</label>
+															</li>
 														</ul>
 													</p>
 												</div>
@@ -139,19 +152,16 @@ if (is_user_logged_in()) : ?>
 												<div class="form-column">
 													<p class="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">
 														<label for="reg_password">Password&nbsp;<span class="required">*</span></label>
-														<span class="password-input">
-															<input type="password" class="woocommerce-Input woocommerce-Input--text input-text" name="reg_password" id="reg_password" autocomplete="new-password"><span class="show-password-input"></span>
-														</span>
+														<input type="password" class="woocommerce-Input woocommerce-Input--text input-text" name="reg_password" id="reg_password" autocomplete="new-password">
 													</p>
 												</div>
 												<div class="form-column">
 													<p class="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">
 														<label for="reg_cpassword">Confirm Password&nbsp;<span class="required">*</span></label>
-														<span class="password-input">
-															<input type="password" class="woocommerce-Input woocommerce-Input--text input-text" name="reg_cpassword" id="reg_cpassword" autocomplete="new-password"><span class="show-password-input"></span>
-														</span>
+														<input type="password" class="woocommerce-Input woocommerce-Input--text input-text" name="reg_cpassword" id="reg_cpassword" autocomplete="confirm-password">
 													</p>
 												</div>
+												<div style="margin-top: 7px;" id="CheckPasswordMatch"></div>
 											</div>
 											<span class="vn_form-err reg_firstname_err"></span>
 											<div class="woocommerce-privacy-policy-text">

@@ -13,7 +13,7 @@ if ($stage == 'GET OTP') {
         $user = get_user_by('login', $phone);
 
         if ($user) {
-            $response['status'] = 'error';
+            $response['status'] = 'Error';
             $response['message'] = 'Phone number already exists';
         } 
         else {
@@ -26,7 +26,7 @@ if ($stage == 'GET OTP') {
         }
     } 
     else {
-        $response['status'] = 'error';
+        $response['status'] = 'Error';
         $response['message'] = 'Phone number is required';
     }
 } 
@@ -48,13 +48,13 @@ else if ($stage == 'VERIFY OTP') {
             $response['data'] = $_POST;
             $response['logID'] = $logID;
             $response['status'] = 'Error';
-            $response['message'] = 'Please Enter the Correct OTPs';
+            $response['message'] = 'Please Enter the Correct OTP';
         }
     } 
     else {
         $response['data'] = $_POST;
         $response['logID'] = $logID;
-        $response['status'] = 'error';
+        $response['status'] = 'Error';
         $response['message'] = 'Please Enter the Correct OTP';
     }
 } 
@@ -81,7 +81,7 @@ else if ($stage == 'Second') {
                         if($reg_password == $reg_cpassword) {
 
                             $user_id = wp_create_user($reg_username, $reg_password, $reg_email);
-                            if (!is_wp_error($user_id)) {
+                            if (!is_wp_Error($user_id)) {
                                 $user = new WP_User($user_id);
 
                                 //User Role
@@ -94,20 +94,35 @@ else if ($stage == 'Second') {
                                 $user->set_role($role);
 
                                 //User Meta
+                                $location = locationDetails($pincode);
                                 $user_meta = array(
                                     'first_name' => $reg_firstname,
+                                    'billing_first_name' => $reg_firstname,
                                     'last_name' => $reg_lastname,
+                                    'billing_last_name' => $reg_lastname,
                                     'phone' => $reg_phone,
+                                    'shipping_phone' => $reg_phone,
                                     'business_name' => $business_name,
+                                    'billing_company' => $business_name,
+                                    'dokan_company_name' => $business_name,
+                                    'dokan_store_url' => strtolower(str_replace(' ', '_', $business_name)),
+                                    'dokan_store_name' => $business_name,
                                     'business_pincode' => $pincode,
                                     'business_type' => $business_type,
                                     'billing_phone' => $reg_phone,
+                                    'dokan_store_phone' => $reg_phone,
                                     'billing_email' => $reg_email,
                                     'billing_first_name' => $reg_firstname,
                                     'billing_last_name' => $reg_lastname,
                                     'billing_company' => $business_name,
                                     'billing_postcode' => $pincode,
-                                    'billing_country' => 'IN'
+                                    'dokan_store_address[zip]' => $pincode,
+                                    'billing_city' => $location['city'],
+                                    'dokan_store_address[city]' => $location['city'],
+                                    'billing_state' => $location['state_code'],
+                                    'dokan_store_address[state]' => $location['state_code'],
+                                    'billing_country' => 'IN',
+                                    'dokan_store_address[country]' => 'IN'
                                 );
                                 foreach ($user_meta as $key => $value) {
                                     update_user_meta($user_id, $key, $value);
