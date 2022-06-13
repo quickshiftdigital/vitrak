@@ -18,7 +18,7 @@ function blankslate_enqueue()
     wp_enqueue_style('blankslate-style', get_stylesheet_uri());
     wp_enqueue_script('jquery');
     wp_enqueue_style('font-awesome', 'https://use.fontawesome.com/releases/v5.0.13/css/all.css');
-    wp_enqueue_style('style-main', get_template_directory_uri() . '/assets/css/style.css');
+    wp_enqueue_style('style-main', get_template_directory_uri() . '/assets/css/style-vitrak.css');
 }
 
 add_action('wp_footer', 'blankslate_footer_scripts');
@@ -74,23 +74,93 @@ if (function_exists('acf_add_options_page')) {
 add_action( 'template_redirect', 'redirect_traffic' );
 
 function redirect_traffic() {
-    if ( !is_user_logged_in() && is_page('my-account')) {
+    if ( !is_user_logged_in() && is_page('my-account') && !strpos( $_SERVER["REQUEST_URI"], "/customer-logout/") ) {
         wp_redirect( get_home_url() . '/vendor/register/' ); 
         exit;
     }
 
-    if( is_user_logged_in() && !is_page('register-next') && checkRole('seller') && !get_field('gst', 'user_' . get_current_user_id())) {
+    if( is_user_logged_in() && !is_page('register-next') && checkRole('seller') && !get_field('gst', 'user_' . get_current_user_id()) && !strpos( $_SERVER["REQUEST_URI"], "customer-logout") ) {
         wp_redirect( get_home_url() . '/vendor/register-next/' ); 
         exit;
     }
 
-    if( is_user_logged_in() && !is_page('register-next') && checkRole('distributor') && !get_field('gst', 'user_' . get_current_user_id())) {
+    if( is_user_logged_in() && !is_page('register-next') && checkRole('distributor') && !get_field('gst', 'user_' . get_current_user_id()) && !strpos( $_SERVER["REQUEST_URI"], "customer-logout") ) {
         wp_redirect( get_home_url() . '/vendor/register-next/' ); 
         exit;
     }
 
-    if(is_user_logged_in() && is_page('my-account') && checkRole('seller')) {
+    if(is_user_logged_in() && is_page('my-account') && checkRole('seller') && get_field('dokan_enable_selling', 'user_' . get_current_user_id()) && !strpos( $_SERVER["REQUEST_URI"], "customer-logout") ) {
         wp_redirect( get_home_url() . '/vendor/dashboard/' ); 
         exit;
     }
+
+    if(is_user_logged_in() && is_page('cart') && checkRole('seller') && !strpos( $_SERVER["REQUEST_URI"], "customer-logout") ) {
+        wp_redirect( get_home_url() . '/checkout/' ); 
+        exit;
+    }
+
+    if(is_user_logged_in() && is_page('my-account') && get_field('account_verification', 'user_' . get_current_user_id()) && checkRole('distributor') && !strpos( $_SERVER["REQUEST_URI"], "customer-logout") ) {
+        wp_redirect( get_home_url() . '/stores/' ); 
+        exit;
+    }
+    
+    // if(is_user_logged_in() && is_page('dashboard') && checkRole('seller') && !sellingStatus() && !strpos( $_SERVER["REQUEST_URI"], "customer-logout") ) {
+    //     wp_redirect( get_home_url() . '/checkout/' ); 
+    //     exit;
+    // }
+}
+
+//Clean the WP admim bar
+function clear_node_title( $wp_admin_bar ) {
+
+    $all_toolbar_nodes = $wp_admin_bar->get_nodes();
+    $clear_titles = array(
+        'elementor_inspector',
+        'comments',
+        'wpforms-menu'
+    );
+ 
+    foreach ( $all_toolbar_nodes as $node ) {
+        if ( in_array($node->id, $clear_titles) ) {
+            $args = $node;
+            $args->title = '';
+            $wp_admin_bar->add_node( $args );
+        }
+    }
+}
+add_action( 'admin_bar_menu', 'clear_node_title', 999 );
+
+add_filter( 'woocommerce_page_title', 'new_woocommerce_page_title');
+function new_woocommerce_page_title( $page_title ) {
+  if( $page_title == 'Checkout' ) {
+    return "Confirm Package";  
+  }  
+}
+
+add_action( 'woocommerce_email', 'magik_remove_all_woocommerce_emails' );
+
+function magik_remove_all_woocommerce_emails( $email_class ) 
+{
+		/* remove sending emails during store events */
+		remove_action( 'woocommerce_low_stock_notification', array( $email_class, 'low_stock' ) );
+		remove_action( 'woocommerce_no_stock_notification', array( $email_class, 'no_stock' ) );
+		remove_action( 'woocommerce_product_on_backorder_notification', array( $email_class, 'backorder' ) );
+		
+		/* remove New order emails */
+		remove_action( 'woocommerce_order_status_pending_to_processing_notification', array( $email_class->emails['WC_Email_New_Order'], 'trigger' ) );
+		remove_action( 'woocommerce_order_status_pending_to_completed_notification', array( $email_class->emails['WC_Email_New_Order'], 'trigger' ) );
+		remove_action( 'woocommerce_order_status_pending_to_on-hold_notification', array( $email_class->emails['WC_Email_New_Order'], 'trigger' ) );
+		remove_action( 'woocommerce_order_status_failed_to_processing_notification', array( $email_class->emails['WC_Email_New_Order'], 'trigger' ) );
+		remove_action( 'woocommerce_order_status_failed_to_completed_notification', array( $email_class->emails['WC_Email_New_Order'], 'trigger' ) );
+		remove_action( 'woocommerce_order_status_failed_to_on-hold_notification', array( $email_class->emails['WC_Email_New_Order'], 'trigger' ) );
+		
+		/* remove Processing order emails */
+		remove_action( 'woocommerce_order_status_pending_to_processing_notification', array( $email_class->emails['WC_Email_Customer_Processing_Order'], 'trigger' ) );
+		remove_action( 'woocommerce_order_status_pending_to_on-hold_notification', array( $email_class->emails['WC_Email_Customer_Processing_Order'], 'trigger' ) );
+		
+		/* remove Completed order emails */
+		remove_action( 'woocommerce_order_status_completed_notification', array( $email_class->emails['WC_Email_Customer_Completed_Order'], 'trigger' ) );
+			
+		/* remove Note emails */
+		remove_action( 'woocommerce_new_customer_note_notification', array( $email_class->emails['WC_Email_Customer_Note'], 'trigger' ) );
 }

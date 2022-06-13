@@ -101,7 +101,7 @@ body #dokan-seller-listing-wrap.grid-view .store-footer{
 }
 body #dokan-seller-listing-wrap.grid-view .store-content{
     z-index: auto;
-    background-color: rgba(0,0,0,0.1);
+    /* background-color: rgba(0,0,0,0.1); */
 }
 body #dokan-store-listing-filter-wrap label{
     vertical-align: middle;

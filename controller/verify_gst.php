@@ -13,7 +13,7 @@
         $postdata = http_build_query(
             array(
                 'gstNo' => $data['gst'],
-                'key_secret' => 'rUlXRRRlelOApcRECdNh8SY4mbt1'
+                'key_secret' => 'ht1oLyTKZTgRnhAlnF3Hv4V0bAf1'
             )
         );
             

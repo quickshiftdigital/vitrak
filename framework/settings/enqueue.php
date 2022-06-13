@@ -144,13 +144,6 @@ if (!class_exists('Ecotech_Assets')) {
                 'media'   => 'all',
                 'has_rtl' => false,
             );
-            $styles['vitrak-style'] = array(
-                'src'     => get_theme_file_uri('/assets/css/style-vitrak.css'),
-                'deps'    => array(),
-                'version' => ECOTECH,
-                'media'   => 'all',
-                'has_rtl' => false,
-            );
             if (class_exists('WeDevs_Dokan')) {
                 $styles['ecotech-dokan'] = array(
                     'src'     => get_theme_file_uri('/assets/css/vendors/dokan' . self::$suffix . '.css'),

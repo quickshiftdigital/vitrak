@@ -29,11 +29,13 @@
                                                     <p class="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">
                                                         <label for="reg_firstname">GST Number<span class="required">*</span></label>
                                                         <div class="reg_gst">
-                                                            <input type="text" class="woocommerce-Input woocommerce-Input--text input-text" name="reg_gst" id="reg_gst" autocomplete="reg_firstname" value="">
+                                                            <input type="text" class="woocommerce-Input woocommerce-Input--text input-text" name="reg_gst" id="reg_gst" autocomplete="gst-number" value="">
                                                         </div>
                                                     </p>
-                                                    <div class="side_btn text-right" id="verify_gst"><button>Verify</button></div>
-                                                    <span class="vn_form-err vn_gst-err"></span>
+                                                    <div class="side_btn text-right" id="verify_gst">
+                                                        <button>Verify</button>
+                                                    </div>
+                                                    <span class="vn_form-err vn_gst-err"></span>                                        
                                                 </div>
                                             </div>
                                             <h4>Business Details</h4>
@@ -41,7 +43,7 @@
                                                 <div class="form-column">
                                                     <p class="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">
                                                         <label for="reg_address_1">Address Line 1<span class="required">*</span></label>
-                                                        <input type="text" class="woocommerce-Input woocommerce-Input--text input-text" name="reg_address_1" id="reg_address_1" autocomplete="reg_address_1" value="">
+                                                        <input type="text" class="woocommerce-Input woocommerce-Input--text input-text" name="reg_address_1" id="reg_address_1" autocomplete="address-1" value="">
                                                     </p>
                                                 </div>
                                             </div>
@@ -49,7 +51,7 @@
                                                 <div class="form-column">
                                                     <p class="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">
                                                         <label for="reg_address_2">Address Line 2</label>
-                                                        <input type="text" class="woocommerce-Input woocommerce-Input--text input-text" name="reg_address_2" id="reg_address_2" autocomplete="reg_address_2" value="">
+                                                        <input type="text" class="woocommerce-Input woocommerce-Input--text input-text" name="reg_address_2" id="reg_address_2" autocomplete="address-2" value="">
                                                     </p>
                                                 </div>
                                             </div>
@@ -57,8 +59,7 @@
                                                 <div class="form-column">
                                                     <p class="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">
                                                         <label for="reg_lastname">City<span class="required">*</span></label>
-                                                        <input type="text" class="woocommerce-Input woocommerce-Input--text input-text" name="reg_city" id="reg_city" autocomplete="lastname" value="">
-                                                        <span class="vn_form-err reg_lastname_err"></span>
+                                                        <input type="text" class="woocommerce-Input woocommerce-Input--text input-text" name="reg_city" id="reg_city" autocomplete="address-city" value="<?php echo get_user_meta(get_current_user_id(), 'billing_city', true); ?>">
                                                     </p>
                                                 </div>
                                                 <div class="form-column">
@@ -68,13 +69,12 @@
                                                             $states = file_get_contents('https://gist.githubusercontent.com/shubhamjain/35ed77154f577295707a/raw/7bc2a915cff003fb1f8ff49c6890576eee4f2f10/IndianStates.json');
                                                             $states = json_decode($states, true);
                                                         ?>
-                                                        <select name="reg_state" id="reg_state">
+                                                        <select name="reg_state" id="reg_state" autocomplete="address-state">
                                                             <option value="">Choose State</option>
                                                             <?php foreach ($states as $key => $value): ?>
-                                                                <option value="<?php echo $key; ?>"><?php echo $value; ?></option>
+                                                                <option value="<?php echo $key; ?>" <?php if(get_user_meta(get_current_user_id(), 'billing_state', true) == $key){echo 'selected';} ?>><?php echo $value; ?></option>
                                                             <?php endforeach; ?>
                                                         </select>
-                                                        <span class="vn_form-err reg_lastname_err"></span>
                                                     </p>
                                                 </div>
                                             </div>
@@ -82,8 +82,7 @@
                                                 <div class="form-column">
                                                     <p class="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">
                                                         <label for="reg_lastname">Pincode<span class="required">*</span></label>
-                                                        <input type="text" class="woocommerce-Input woocommerce-Input--text input-text" name="reg_pincode" id="reg_pincode" autocomplete="pincode" value="<?php the_field('pincode', 'user_' . get_current_user_id()); ?>">
-                                                        <span class="vn_form-err reg_lastname_err"></span>
+                                                        <input type="text" class="woocommerce-Input woocommerce-Input--text input-text" name="reg_pincode" id="reg_pincode" autocomplete="address-pincode" value="<?php the_field('pincode', 'user_' . get_current_user_id()); ?>">
                                                     </p>
                                                 </div>
                                                 <div class="form-column">
@@ -92,7 +91,6 @@
                                                         <select name="reg_country" id="reg_country">
                                                             <option value="IN">India</option>
                                                         </select>
-                                                        <span class="vn_form-err reg_lastname_err"></span>
                                                     </p>
                                                 </div>                                                
                                             </div>
@@ -270,12 +268,12 @@
                                                     <div class="form-column">
                                                     <p class="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">
                                                         <label for="reg_lastname">Designation<span class="required">*</span></label>
-                                                        <input type="text" class="woocommerce-Input woocommerce-Input--text input-text" name="reg_designation" id="reg_designation" autocomplete="pincode" value="<?php the_field('pincode', 'user_' . get_current_user_id()); ?>">
-                                                        <span class="vn_form-err reg_lastname_err"></span>
+                                                        <input type="text" class="woocommerce-Input woocommerce-Input--text input-text" name="reg_designation" id="reg_designation" autocomplete="reg_designation" value="">
                                                     </p>
                                                     </div>
                                                 </div>
                                             <?php endif; ?>
+                                            <span class="vn_form-err"></span>
                                             <div class="woocommerce-privacy-policy-text">
                                                 <br>
                                                 <p>Your personal data will be used to support your experience throughout this website, to manage access to your account, and for other purposes described in our <a href="<?php echo home_url(); ?>/privacy-policy/" class="woocommerce-privacy-policy-link" target="_blank">privacy policy</a>.</p>
