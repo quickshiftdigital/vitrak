@@ -17141,7 +17141,7 @@ CUSTOM
 /*********************** Home Page ********/
 .hm_banner {
     height: 460px;
-    background: url(http://localhost/vitrak/wp-content/uploads/2022/06/hp-banner.jpg);
+    background: url(http://localhost/vitrak/wp-content/uploads/2022/06/pharmacy-post-banner-background.jpg);
     background-size: cover;
     background-position: center center;
     background-repeat: no-repeat;
@@ -17263,4 +17263,13 @@ h4.store-title {
     margin-bottom: 8px;
     line-height: 1.4;
     color: rgba(16,59,62,.64);
+}
+.order_details {
+    width: 500px;
+    background-color: #fff;
+    /* border: 2px solid #000; */
+    padding: 20px;
+}
+p.order-again {
+    display: none;
 }

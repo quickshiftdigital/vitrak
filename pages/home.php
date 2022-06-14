@@ -6,8 +6,8 @@
             <div class="hm_banner">
                 <div class="mask">
                     <div class="hm_banner_box">
-                        <div class="hm_banner-logo center"> <img width="200px" height="140px" alt="Workhops.ae Logo" data-src="http://localhost/vitrak/wp-content/uploads/2022/05/Logo-Horizontal.png" class=" ls-is-cached lazyloaded" src="http://localhost/vitrak/wp-content/uploads/2022/05/Logo-Horizontal.png" loading="lazy">
-                            <noscript><img src="http://localhost/vitrak/wp-content/uploads/2022/05/Logo-Horizontal.png" width="140px" height="140px" alt="Workhops.ae Logo"></noscript>
+                        <div class="hm_banner-logo center"> <img width="200px" height="140px" alt="Workhops.ae Logo" data-src="<?php echo esc_url( get_home_url() . '/wp-content/uploads/2022/05/Logo-Horizontal.png') ?>" class=" ls-is-cached lazyloaded" src="http://localhost/vitrak/wp-content/uploads/2022/05/Logo-Horizontal.png" loading="lazy">
+                            <noscript><img src="<?php echo esc_url( get_home_url() . '/wp-content/uploads/2022/05/Logo-Horizontal.png') ?>" width="140px" height="140px" alt="Workhops.ae Logo"></noscript>
                         </div>
                         <div class="hm_banner-c2a center">
                             <h1 class="white font_2 capitalize bold">We are connecting Seller to distributors across the country</h1> </div>
@@ -37,61 +37,61 @@
 		<ul>
 			<li class="hm_service-item">
 				<a href="#" title="Air Conditioning">
-					<img width="60px" height="60px" alt="Air Conditioning" data-src="http://localhost/vitrak/wp-content/uploads/2022/06/open-book-3.png" class=" lazyloaded" src="http://localhost/vitrak/wp-content/uploads/2022/06/open-book-3.png" loading="lazy"><noscript><img src="http://localhost/vitrak/wp-content/uploads/2022/06/open-book-3.png" width="60px" height="60px" alt="Air Conditioning"></noscript>
+					<img width="60px" height="60px" alt="Air Conditioning" data-src="<?php echo esc_url( get_home_url() . '/wp-content/uploads/2022/06/open-book-3.png'); ?>" class=" lazyloaded" src="<?php echo esc_url( get_home_url() . '/wp-content/uploads/2022/06/open-book-3.png'); ?>" loading="lazy"><noscript><img src="<?php echo esc_url( get_home_url() . '/wp-content/uploads/2022/06/open-book-3.png'); ?>" width="60px" height="60px" alt="Air Conditioning"></noscript>
 					<span>Books</span>
 				</a>
 			</li>
 			<li class="hm_service-item">
 				<a href="#" title="Battery">
-					<img width="60px" height="60px" alt="Battery" data-src="http://localhost/vitrak/wp-content/uploads/2022/06/cosmetics-1.png" class=" lazyloaded" src="http://localhost/vitrak/wp-content/uploads/2022/06/cosmetics-1.png" loading="lazy"><noscript><img src="http://localhost/vitrak/wp-content/uploads/2022/06/cosmetics-1.png" width="60px" height="60px" alt="Battery"></noscript>
+					<img width="60px" height="60px" alt="Battery" data-src="<?php echo esc_url( get_home_url() . '/wp-content/uploads/2022/06/cosmetics-1.png') ?>" class=" lazyloaded" src="<?php echo esc_url( get_home_url() . '/wp-content/uploads/2022/06/cosmetics-1.png') ?>" loading="lazy"><noscript><img src="<?php echo esc_url( get_home_url() . '/wp-content/uploads/2022/06/cosmetics-1.png') ?>" width="60px" height="60px" alt="Battery"></noscript>
 					<span>Beauty</span>
 				</a>
 			</li>
 			<li class="hm_service-item">
 				<a href="#" title="Body Shop">
-					<img width="60px" height="60px" alt="Body Shop" data-src="http://localhost/vitrak/wp-content/uploads/2022/06/grocery.png" class=" lazyloaded" src="http://localhost/vitrak/wp-content/uploads/2022/06/grocery.png" loading="lazy"><noscript><img src="http://localhost/vitrak/wp-content/uploads/2022/06/grocery.png" width="60px" height="60px" alt="Body Shop"></noscript>
+					<img width="60px" height="60px" alt="Body Shop" data-src="<?php echo esc_url( get_home_url() . '/wp-content/uploads/2022/06/grocery.png') ?>" class=" lazyloaded" src="<?php echo esc_url( get_home_url() . '/wp-content/uploads/2022/06/grocery.png') ?>" loading="lazy"><noscript><img src="<?php echo esc_url( get_home_url() . '/wp-content/uploads/2022/06/grocery.png') ?>" width="60px" height="60px" alt="Body Shop"></noscript>
 					<span>Grocery</span>
 				</a>
 			</li>
 			<li class="hm_service-item">
 				<a href="#" title="Detailing">
-					<img width="60px" height="60px" alt="Detailing" data-src="http://localhost/vitrak/wp-content/uploads/2022/06/responsive.png" class=" lazyloaded" src="http://localhost/vitrak/wp-content/uploads/2022/06/responsive.png" loading="lazy"><noscript><img src="http://localhost/vitrak/wp-content/uploads/2022/06/responsive.png" width="60px" height="60px" alt="Detailing"></noscript>
+					<img width="60px" height="60px" alt="Detailing" data-src="<?php echo esc_url( get_home_url() . '/wp-content/uploads/2022/06/responsive.png') ?>" class=" lazyloaded" src="<?php echo esc_url( get_home_url() . '/wp-content/uploads/2022/06/responsive.png') ?>" loading="lazy"><noscript><img src="<?php echo esc_url( get_home_url() . '/wp-content/uploads/2022/06/responsive.png') ?>" width="60px" height="60px" alt="Detailing"></noscript>
 					<span>Elctronics</span>
 				</a>
 			</li>
 			<li class="hm_service-item">
 				<a href="#" title="Electrical">
-					<img width="60px" height="60px" alt="Electrical" data-src="http://localhost/vitrak/wp-content/uploads/2022/06/kitchen-1.png" class=" lazyloaded" src="http://localhost/vitrak/wp-content/uploads/2022/06/kitchen-1.png" loading="lazy"><noscript><img src="http://localhost/vitrak/wp-content/uploads/2022/06/kitchen-1.png" width="60px" height="60px" alt="Electrical"></noscript>
+					<img width="60px" height="60px" alt="Electrical" data-src="<?php echo esc_url( get_home_url() . '/wp-content/uploads/2022/06/kitchen-1.png') ?>" class=" lazyloaded" src="<?php echo esc_url( get_home_url() . '/wp-content/uploads/2022/06/kitchen-1.png') ?>" loading="lazy"><noscript><img src="<?php echo esc_url( get_home_url() . '/wp-content/uploads/2022/06/kitchen-1.png') ?>" width="60px" height="60px" alt="Electrical"></noscript>
 					<span>Home & Kitchen</span>
 				</a>
 			</li>
 			<li class="hm_service-item">
 				<a href="#" title="Full Service">
-					<img width="60px" height="60px" alt="Full Service" data-src="http://localhost/vitrak/wp-content/uploads/2022/06/software-1.png" class=" lazyloaded" src="http://localhost/vitrak/wp-content/uploads/2022/06/software-1.png" loading="lazy"><noscript><img src="http://localhost/vitrak/wp-content/uploads/2022/06/software-1.png" width="60px" height="60px" alt="Full Service"></noscript>
+					<img width="60px" height="60px" alt="Full Service" data-src="<?php echo esc_url( get_home_url() . '/wp-content/uploads/2022/06/software-1.png') ?>" class=" lazyloaded" src="<?php echo esc_url( get_home_url() . '/wp-content/uploads/2022/06/software-1.png') ?>" loading="lazy"><noscript><img src="<?php echo esc_url( get_home_url() . '/wp-content/uploads/2022/06/software-1.png') ?>" width="60px" height="60px" alt="Full Service"></noscript>
 					<span>Software</span>
 				</a>
 			</li>
 			<li class="hm_service-item">
 				<a href="#" title="Oil Change">
-					<img width="60px" height="60px" alt="Oil Change" data-src="http://localhost/vitrak/wp-content/uploads/2022/06/watch-1.png" class=" lazyloaded" src="http://localhost/vitrak/wp-content/uploads/2022/06/watch-1.png" loading="lazy"><noscript><img src="http://localhost/vitrak/wp-content/uploads/2022/06/watch-1.png" width="60px" height="60px" alt="Oil Change"></noscript>
+					<img width="60px" height="60px" alt="Oil Change" data-src="<?php echo esc_url( get_home_url() . '/wp-content/uploads/2022/06/watch-1.png') ?>" class=" lazyloaded" src="<?php echo esc_url( get_home_url() . '/wp-content/uploads/2022/06/watch-1.png') ?>" loading="lazy"><noscript><img src="<?php echo esc_url( get_home_url() . '/wp-content/uploads/2022/06/watch-1.png') ?>" width="60px" height="60px" alt="Oil Change"></noscript>
 					<span>Watches</span>
 				</a>
 			</li>
 			<li class="hm_service-item">
 				<a href="#" title="Restoration">
-					<img width="60px" height="60px" alt="Restoration" data-src="http://localhost/vitrak/wp-content/uploads/2022/06/necklace-1.png" class=" lazyloaded" src="http://localhost/vitrak/wp-content/uploads/2022/06/necklace-1.png" loading="lazy"><noscript><img src="http://localhost/vitrak/wp-content/uploads/2022/06/necklace-1.png" width="60px" height="60px" alt="Restoration"></noscript>
+					<img width="60px" height="60px" alt="Restoration" data-src="<?php echo esc_url( get_home_url() . '/wp-content/uploads/2022/06/necklace-1.png') ?>" class=" lazyloaded" src="<?php echo esc_url( get_home_url() . '/wp-content/uploads/2022/06/necklace-1.png') ?>" loading="lazy"><noscript><img src="<?php echo esc_url( get_home_url() . '/wp-content/uploads/2022/06/necklace-1.png') ?>" width="60px" height="60px" alt="Restoration"></noscript>
 					<span>Jewellery</span>
 				</a>
 			</li>
 			<li class="hm_service-item">
 				<a href="#" title="Spare Parts">
-					<img width="60px" height="60px" alt="Spare Parts" data-src="http://localhost/vitrak/wp-content/uploads/2022/06/spare-parts-1.png" class=" lazyloaded" src="http://localhost/vitrak/wp-content/uploads/2022/06/spare-parts-1.png" loading="lazy"><noscript><img src="http://localhost/vitrak/wp-content/uploads/2022/06/spare-parts-1.png" width="60px" height="60px" alt="Spare Parts"></noscript>
+					<img width="60px" height="60px" alt="Spare Parts" data-src="<?php echo esc_url( get_home_url() . '/wp-content/uploads/2022/06/spare-parts-1.png') ?>" class=" lazyloaded" src="<?php echo esc_url( get_home_url() . '/wp-content/uploads/2022/06/spare-parts-1.png') ?>" loading="lazy"><noscript><img src="<?php echo esc_url( get_home_url() . '/wp-content/uploads/2022/06/spare-parts-1.png') ?>" width="60px" height="60px" alt="Spare Parts"></noscript>
 					<span>Spare Parts</span>
 				</a>
 			</li>
 			<li class="hm_service-item">
 				<a href="#" title="Tyres">
-					<img width="60px" height="60px" alt="Tyres" data-src="http://localhost/vitrak/wp-content/uploads/2022/06/furnitures-1.png" class=" lazyloaded" src="http://localhost/vitrak/wp-content/uploads/2022/06/furnitures-1.png" loading="lazy"><noscript><img src="http://localhost/vitrak/wp-content/uploads/2022/06/furnitures-1.png" width="60px" height="60px" alt="Tyres"></noscript>
+					<img width="60px" height="60px" alt="Tyres" data-src="<?php echo esc_url( get_home_url() . '/wp-content/uploads/2022/06/furnitures-1.png') ?>" class=" lazyloaded" src="<?php echo esc_url( get_home_url() . '/wp-content/uploads/2022/06/furnitures-1.png') ?>" loading="lazy"><noscript><img src="<?php echo esc_url( get_home_url() . '/wp-content/uploads/2022/06/furnitures-1.png') ?>" width="60px" height="60px" alt="Tyres"></noscript>
 					<span>Furniture</span>
 				</a>
 			</li>

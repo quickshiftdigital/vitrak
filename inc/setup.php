@@ -104,10 +104,10 @@ function redirect_traffic() {
         exit;
     }
     
-    // if(is_user_logged_in() && is_page('dashboard') && checkRole('seller') && !sellingStatus() && !strpos( $_SERVER["REQUEST_URI"], "customer-logout") ) {
-    //     wp_redirect( get_home_url() . '/checkout/' ); 
-    //     exit;
-    // }
+    if(is_user_logged_in() && is_page('dashboard') && checkRole('seller') && !sellingStatus() && !strpos( $_SERVER["REQUEST_URI"], "customer-logout") ) {
+        wp_redirect( get_home_url() . '/checkout/' ); 
+        exit;
+    }
 }
 
 //Clean the WP admim bar
@@ -135,32 +135,4 @@ function new_woocommerce_page_title( $page_title ) {
   if( $page_title == 'Checkout' ) {
     return "Confirm Package";  
   }  
-}
-
-add_action( 'woocommerce_email', 'magik_remove_all_woocommerce_emails' );
-
-function magik_remove_all_woocommerce_emails( $email_class ) 
-{
-		/* remove sending emails during store events */
-		remove_action( 'woocommerce_low_stock_notification', array( $email_class, 'low_stock' ) );
-		remove_action( 'woocommerce_no_stock_notification', array( $email_class, 'no_stock' ) );
-		remove_action( 'woocommerce_product_on_backorder_notification', array( $email_class, 'backorder' ) );
-		
-		/* remove New order emails */
-		remove_action( 'woocommerce_order_status_pending_to_processing_notification', array( $email_class->emails['WC_Email_New_Order'], 'trigger' ) );
-		remove_action( 'woocommerce_order_status_pending_to_completed_notification', array( $email_class->emails['WC_Email_New_Order'], 'trigger' ) );
-		remove_action( 'woocommerce_order_status_pending_to_on-hold_notification', array( $email_class->emails['WC_Email_New_Order'], 'trigger' ) );
-		remove_action( 'woocommerce_order_status_failed_to_processing_notification', array( $email_class->emails['WC_Email_New_Order'], 'trigger' ) );
-		remove_action( 'woocommerce_order_status_failed_to_completed_notification', array( $email_class->emails['WC_Email_New_Order'], 'trigger' ) );
-		remove_action( 'woocommerce_order_status_failed_to_on-hold_notification', array( $email_class->emails['WC_Email_New_Order'], 'trigger' ) );
-		
-		/* remove Processing order emails */
-		remove_action( 'woocommerce_order_status_pending_to_processing_notification', array( $email_class->emails['WC_Email_Customer_Processing_Order'], 'trigger' ) );
-		remove_action( 'woocommerce_order_status_pending_to_on-hold_notification', array( $email_class->emails['WC_Email_Customer_Processing_Order'], 'trigger' ) );
-		
-		/* remove Completed order emails */
-		remove_action( 'woocommerce_order_status_completed_notification', array( $email_class->emails['WC_Email_Customer_Completed_Order'], 'trigger' ) );
-			
-		/* remove Note emails */
-		remove_action( 'woocommerce_new_customer_note_notification', array( $email_class->emails['WC_Email_Customer_Note'], 'trigger' ) );
 }

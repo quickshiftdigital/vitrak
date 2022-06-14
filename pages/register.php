@@ -5,7 +5,7 @@ if (is_user_logged_in()) : ?>
 	<p>You're already logged in and have no need to create a user profile.</p>
 <?php else : ?>
 	<div id="content" class="container site-content sidebar-full">
-		<div class="head-banner" style="background-image: url(http://localhost/vitrak/wp-content/uploads/2020/10/Head-banner.jpg);">
+		<div class="head-banner" style="background-image: url(<?php echo home_url(); ?>/wp-content/uploads/2020/10/Head-banner.jpg);">
 			<div class="container">
 				<div class="inner">
 					<h1 class="page-title entry-title">
@@ -43,7 +43,7 @@ if (is_user_logged_in()) : ?>
 											<button type="submit" class="woocommerce-button button woocommerce-form-login__submit" id="master_login-btn" name="login" value="Log in">Log in</button>
 										</p>
 										<p class="woocommerce-LostPassword lost_password">
-											<a href="http://localhost/vitrak/my-account/lost-password/">Lost your password?</a>
+											<a href="<?php echo home_url(); ?>/my-account/lost-password/">Lost your password?</a>
 										</p>
 									</form>
 								</div>
@@ -97,7 +97,7 @@ if (is_user_logged_in()) : ?>
 												<div class="form-column">
 													<p class="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">
 														<label for="reg_last_name">Last Name&nbsp;<span class="required">*</span></label>
-														<input type="text" class="woocommerce-Input woocommerce-Input--text input-text" name="reg_last_name" id="reg_lastname" autocomplete="last-name" value="">
+														<input type="text" class="woocommerce-Input woocommerce-Input--text input-text" name="reg_last_name" id="reg_lastname" autocomplete="family-name" value="">
 													</p>
 												</div>
 											</div>
@@ -119,13 +119,13 @@ if (is_user_logged_in()) : ?>
 												<div class="form-column">
 													<p class="form-row form-group">
 														<label for="business-name">Business Name <span class="required">*</span></label>
-														<input type="text" class="input-text form-control" name="business_name" id="business_name" value="" required="required" autocomplete="business-name">
+														<input type="text" class="input-text form-control" name="business_name" id="business_name" value="" required="required" autocomplete="company">
 													</p>
 												</div>
 												<div class="form-column">
 													<p class="form-row form-group">
 														<label for="business-name">Business Pincode<span class="required">*</span></label>
-														<input type="text" class="input-text form-control" name="business_pincode" id="business_pincode" value="" required="required" autocomplete="pincode-pincode">
+														<input type="text" class="input-text form-control" name="business_pincode" id="business_pincode" value="" required="required" autocomplete="pincode">
 													</p>
 												</div>
 											</div>
@@ -166,7 +166,7 @@ if (is_user_logged_in()) : ?>
 											<span class="vn_form-err reg_firstname_err"></span>
 											<div class="woocommerce-privacy-policy-text">
 												<br>
-												<p>Your personal data will be used to support your experience throughout this website, to manage access to your account, and for other purposes described in our <a href="http://localhost/vitrak/privacy-policy/" class="woocommerce-privacy-policy-link" target="_blank">privacy policy</a>.</p>
+												<p>Your personal data will be used to support your experience throughout this website, to manage access to your account, and for other purposes described in our <a href="<?php echo home_url(); ?>/privacy-policy/" class="woocommerce-privacy-policy-link" target="_blank">privacy policy</a>.</p>
 											</div>
 											<p class="woocommerce-form-row form-row">
 												<input type="hidden" name="stage" value="Second">
