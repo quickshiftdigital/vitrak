@@ -268,7 +268,10 @@
                                                     <div class="form-column">
                                                     <p class="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">
                                                         <label for="reg_lastname">Designation<span class="required">*</span></label>
+<<<<<<< HEAD
                                                        <input type="text" class="woocommerce-Input woocommerce-Input--text input-text" name="reg_designation" id="reg_designation" autocomplete="reg_designation" value="">
+=======
+>>>>>>> 83fec75ca79da2b93c075c956dec416b5500b9a7
                                                         <input type="text" class="woocommerce-Input woocommerce-Input--text input-text" name="reg_designation" id="reg_designation" autocomplete="pincode" value="">
                                                     </p>
                                                     </div>
