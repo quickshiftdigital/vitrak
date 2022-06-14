@@ -89,11 +89,7 @@ function redirect_traffic() {
         exit;
     }
 
-<<<<<<< HEAD
-    if(is_user_logged_in() && is_page('my-account') && checkRole('seller') && get_field('dokan_enable_selling', 'user_' . get_current_user_id()) && !strpos( $_SERVER["REQUEST_URI"], "customer-logout") ) {
-=======
     if(is_user_logged_in() && is_page('my-account') && checkRole('seller') && !strpos( $_SERVER["REQUEST_URI"], "customer-logout") ) {
->>>>>>> 83fec75ca79da2b93c075c956dec416b5500b9a7
         wp_redirect( get_home_url() . '/vendor/dashboard/' ); 
         exit;
     }
@@ -103,10 +99,6 @@ function redirect_traffic() {
         exit;
     }
 
-<<<<<<< HEAD
-    if(is_user_logged_in() && is_page('my-account') && get_field('account_verification', 'user_' . get_current_user_id()) && checkRole('distributor') && !strpos( $_SERVER["REQUEST_URI"], "customer-logout") ) {
-        wp_redirect( get_home_url() . '/stores/' ); 
-=======
     if(is_user_logged_in() && is_page('stores') && checkRole('distributor') && !strpos( $_SERVER["REQUEST_URI"], "customer-logout") ) {
         wp_redirect( get_home_url() . '/account-verification/' ); 
         exit;
@@ -114,7 +106,6 @@ function redirect_traffic() {
 
     if(is_user_logged_in() && is_page('my-account') && get_field('account_verification', 'user_' . get_current_user_id()) && checkRole('distributor') && !strpos( $_SERVER["REQUEST_URI"], "customer-logout") ) {
         wp_redirect( get_home_url() . '/account-verification/' ); 
->>>>>>> 83fec75ca79da2b93c075c956dec416b5500b9a7
         exit;
     }
     
@@ -149,8 +140,4 @@ function new_woocommerce_page_title( $page_title ) {
   if( $page_title == 'Checkout' ) {
     return "Confirm Package";  
   }  
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> 83fec75ca79da2b93c075c956dec416b5500b9a7
