@@ -103,7 +103,7 @@
                                                             <select name="reg_shop_type" id="reg_shop_type">
                                                                 <option value="">Choose Shop Type</option>
                                                                 <option value="Shop">Shop</option>
-                                                                <option value="Warehouse">Warehouse</option>
+                                                                <option value="Warehouse">Warehouse/GoDown</option>
                                                             </select>
                                                         </p>
                                                     </div>
@@ -117,6 +117,7 @@
                                                                 <option value="10-35">10-35</option>
                                                                 <option value="35-100">35-100</option>
                                                                 <option value="Above 100">Above 100</option>
+                                                                <option value="NA">NA</option>
                                                             </select>
                                                         </p>
                                                     </div>
@@ -132,6 +133,7 @@
                                                                 <option value="10-35">10-35</option>
                                                                 <option value="35-100">35-100</option>
                                                                 <option value="Above 100">Above 100</option>
+                                                                <option value="NA">NA</option>
                                                             </select>
                                                         </p>
                                                     </div>
@@ -145,39 +147,53 @@
                                                                 <option value="10-35">10-35</option>
                                                                 <option value="35-100">35-100</option>
                                                                 <option value="Above 100">Above 100</option>
+                                                                <option value="NA">NA</option>
                                                             </select>
                                                         </p>
                                                     </div>
                                                 </div>
                                                 <div class="form-row">
-                                                <div class="form-column">
+                                                    <div class="form-column">
                                                         <p class="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">
                                                             <label for="reg_turnover">Annual Turnover<span class="required">*</span></label>
                                                             <select name="reg_turnover" id="reg_turnover">
                                                                 <option value="">Choose Turnover</option>
-                                                                <option value="0-2Lac">0-2Lac</option>
-                                                                <option value="2-5Lac">2-5Lac</option>
-                                                                <option value="5-10Lac">5-10Lac</option>
                                                                 <option value="10-25Lac">10-25Lac</option>
                                                                 <option value="25-1Cr">25-1Cr</option>
                                                                 <option value="1-5Cr">1-5Cr</option>
                                                                 <option value="5-30Cr">5-30Cr</option>
                                                                 <option value="30Cr+">30Cr+</option>
+                                                                <option value="NA">NA</option>
                                                             </select>
                                                         </p>
                                                     </div>
                                                     <div class="form-column">
                                                         <p class="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">
-                                                            <label for="reg_business_years">Funding Possibilities<span class="required">*</span></label>
+                                                            <label for="reg_business_years">Business Funding</label>
                                                             <select name="reg_funding_posibility" id="reg_funding_posibility">
-                                                                <option value="">Choose Funding Possibilities</option>
-                                                                <option value="Yes">Yes</option>
-                                                                <option value="No">No</option>
+                                                                <option value="">Choose Business Funding</option>
+                                                                <option value="Self Funded">Self Funded</option>
+                                                                <option value="Debt Funded">Debt Funded</option>
+                                                                <option value="NA">NA</option>
                                                             </select>
                                                         </p>
                                                     </div>
                                                 </div>
+                                                <div class="form-row funding_amount">
+                                                    <div class="form-column">
+                                                        <p class="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">
+                                                            <label for="reg_business_years">How Much Funding<span class="required">*</span></label>
+                                                            <input type="number" class="woocommerce-Input woocommerce-Input--text input-text" name="funding_number" id="funding_number" autocomplete="funding_number">
+                                                        </p>
+                                                    </div>
+                                                </div>
                                                 <div class="form-row">
+                                                    <div class="form-column">
+                                                        <p class="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">
+                                                            <label for="storage_space">How Much Storage Space &nbsp;<span>(in Sqft)</span></label>
+                                                            <input type="number" class="woocommerce-Input woocommerce-Input--text input-text" name="how_much_storage_space" id="how_much_storage_space" autocomplete="how_much_storage_space">
+                                                        </p>
+                                                    </div>
                                                     <div class="form-column">
                                                         <p class="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">
                                                             <label for="reg_deliver_boys">No. of Shops/Outlets Covered.<span class="required">*</span></label>
@@ -188,6 +204,7 @@
                                                                 <option value="10-35">10-35</option>
                                                                 <option value="35-100">35-100</option>
                                                                 <option value="Above 100">Above 100</option>
+                                                                <option value="NA">NA</option>
                                                             </select>
                                                         </p>
                                                     </div>
@@ -213,14 +230,12 @@
                                                             <label for="reg_turnover">Annual Turnover<span class="required">*</span></label>
                                                             <select name="reg_turnover" id="reg_turnover">
                                                                 <option value="">Choose Turnover</option>
-                                                                <option value="0-2Lac">0-2Lac</option>
-                                                                <option value="2-5Lac">2-5Lac</option>
-                                                                <option value="5-10Lac">5-10Lac</option>
                                                                 <option value="10-25Lac">10-25Lac</option>
                                                                 <option value="25-1Cr">25-1Cr</option>
                                                                 <option value="1-5Cr">1-5Cr</option>
                                                                 <option value="5-30Cr">5-30Cr</option>
                                                                 <option value="30Cr+">30Cr+</option>
+                                                                <option value="NA">NA</option>
                                                             </select>
                                                         </p>
                                                     </div>
@@ -231,7 +246,6 @@
                                                             <label for="reg_category">Category<span class="required">*</span></label>
                                                             <select name="reg_category" id="reg_category">
                                                                 <option value="">Choose Business Category</option>
-                                                                <option value="Consumer Goods">Consumer Goods</option>
                                                                 <option value="FMCG">FMCG</option>
                                                                 <option value="Food & Beverage">Food & Beverage</option>
                                                             </select>
@@ -242,7 +256,6 @@
                                                             <label for="reg_sub_category">Sub Category<span class="required">*</span></label>
                                                             <select name="reg_sub_category" id="reg_sub_category">
                                                                 <option value="">Choose Business Category</option>
-                                                                <option value="Consumer Goods">Consumer Goods</option>
                                                                 <option value="FMCG">FMCG</option>
                                                                 <option value="Food & Beverage">Food & Beverage</option>
                                                             </select>
@@ -260,6 +273,7 @@
                                                                 <option value="5-10">5-10</option>
                                                                 <option value="10-15">10-15</option>
                                                                 <option value="15+">15+</option>
+                                                                <option value="NA">NA</option>
                                                             </select>
                                                         </p>
                                                     </div>

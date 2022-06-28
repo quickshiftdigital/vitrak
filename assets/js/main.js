@@ -4,7 +4,7 @@ function get_ajaxUrl() {
         url = 'http://localhost/vitrak/';
     }
     else {
-        url = 'https://vitrakonline.com';
+        url = 'https://vitrak.online';
     }
 
     return url;
@@ -12,6 +12,7 @@ function get_ajaxUrl() {
 
 const ajax_url = get_ajaxUrl();
 var role_type = "";
+
 function regForm() {
     //GET OTP
     jQuery('#get_otp').click(function (e) {
@@ -111,8 +112,8 @@ function regForm() {
             url: get_ajaxUrl() + '/wp-content/themes/vitrak/controller/register-next-controller.php',
             dataType: "json",
             success: function (response) {
+                console.log(response);
                 if (response.state == 'Success') {
-                    console.log(response);
                     if (response.business_type == 'seller') {
                         window.location.href = get_ajaxUrl() + '/checkout/';
                     }
@@ -206,9 +207,37 @@ function regForm() {
         });
     }
 
+    jQuery('#phone_number-verification').keypress(function (e) {
+        if (e.which == 13) {
+            e.preventDefault();
+            otp_stage = jQuery('.otp_stage').val();
+
+            if (otp_stage == 'GET OTP') {
+                jQuery('#get_otp').click();
+            }
+            else if (otp_stage == 'VERIFY OTP') {
+                jQuery('#verify_otp').click();
+            }
+        }
+    });
+
+    jQuery('#vicode_registeration_form').submit(function (e) {
+        e.preventDefault();
+        jQuery('#register_form').click();
+    });
+
     jQuery('#phone_number-verification, #distributor_form, #vicode_registeration_form').submit(function (e) {
         e.preventDefault();
         jQuery('.vn_form-err').slideUp(); //Errors slideUp
+    });
+
+    jQuery('#reg_funding_posibility').change(function () {
+        if (jQuery(this).val() !== '' && jQuery(this).val() !== 'NA') {
+            jQuery('.funding_amount').slideDown();
+        }
+        else {
+            jQuery('.funding_amount').slideUp();
+        }
     });
 }
 
@@ -272,9 +301,111 @@ function masterLogin() {
     });
 }
 
+
+function mapSearchInput() {
+    function initMap() {
+        var map = new google.maps.Map(document.getElementById('map'), {
+            center: { lat: -33.8688, lng: 151.2195 },
+            zoom: 13
+        });
+        var input = document.getElementById('reg_location');
+        map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
+
+        var autocomplete = new google.maps.places.Autocomplete(input);
+        autocomplete.bindTo('bounds', map);
+
+        var infowindow = new google.maps.InfoWindow();
+        var marker = new google.maps.Marker({
+            map: map,
+            anchorPoint: new google.maps.Point(0, -29)
+        });
+
+        autocomplete.addListener('place_changed', function () {
+            infowindow.close();
+            marker.setVisible(false);
+            var place = autocomplete.getPlace();
+
+            // Location details
+            for (var i = 0; i < place.address_components.length; i++) {
+                if (place.address_components[i].types[0] == 'postal_code') {
+                    jQuery('#business_pincode').val(place.address_components[i].long_name).attr('value', place.address_components[i].long_name);
+                }
+            }
+
+            if (window.location.href.includes('vendor/register')) {
+                jQuery('#reg_lat').val(place.geometry.location.lat()).attr('value', place.geometry.location.lat());
+                jQuery('#reg_lng').val(place.geometry.location.lng()).attr('value', place.geometry.location.lng());
+            }
+            else {
+                jQuery('.location_search-lat').val(place.geometry.location.lat()).attr('value', place.geometry.location.lat());
+                jQuery('.location_search-lng').val(place.geometry.location.lng()).attr('value', place.geometry.location.lng());
+                jQuery('.location_search-address').val('' + place.formatted_address).attr('value', place.formatted_address);
+            }
+        });
+    }
+
+    if (window.location.href.includes('vendor/register') || jQuery('body').hasClass('home')) {
+        initMap();
+    }
+}
+
+
+function homeSearchMaster() {
+    jQuery('.location_search-input-wrap input').keypress(function (event) {
+        var keycode = (event.keyCode ? event.keyCode : event.which);
+        if (keycode == '13') {
+            event.preventDefault();
+            setTimeout(() => {
+                jQuery('.hm_banner-search_box button').click();
+            }, 150);
+        }
+    });
+
+    jQuery('.hm_banner-search_box button').click(function (a_obj) {
+        a_obj.preventDefault();
+        createRedirect();
+    });
+
+    jQuery('.hm_banner-search_box form').submit(function (a_obj) {
+        a_obj.preventDefault();
+        createRedirect();
+    });
+
+    function createRedirect() {
+        location = jQuery('.location_search-address').attr('value');
+        console.log(location);
+        lat = jQuery('.location_search-lat').val();
+        lng = jQuery('.location_search-lng').val();
+
+        url = get_ajaxUrl() + 'vendor/stores/?fwp_location=' + lat + ',' + lng + ',' + location;
+        url = encodeURI(url);
+
+        console.log(url);
+        // window.open(
+        //     url,
+        //     '_blank' // <- This is what makes it open in a new window.
+        // );
+    }
+}
+
+
+function distributorAgreement() {
+    jQuery('.sign_agreement a').click(function (e) {
+        e.preventDefault();
+        jQuery('.iframe-contract').show();
+    });
+
+    jQuery('.iContract-mask').click(function () {
+        jQuery('.iframe-contract').hide();
+    });
+}
+
 jQuery(document).ready(function () {
     regForm();
     masterLogin();
     unnecessaryTimers();
     billingfieldsfix();
+    mapSearchInput();
+    homeSearchMaster();
+    distributorAgreement();
 });

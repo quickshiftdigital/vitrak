@@ -6914,7 +6914,7 @@ BLOG
 	background-position: center center;
 	background-repeat: no-repeat;
 	background-size: cover;
-	margin-bottom: 80px;
+	/* margin-bottom: 80px; */
 }
 .head-banner .inner {
 	display: flex;
@@ -17136,4 +17136,20 @@ CUSTOM
 .widget-area .widget_rss ul ul,
 .widget-area .widget_recent_comments ul ul {
 	margin: 8px 0 -8px !important;
+}
+.dokan-dashboard-wrap strong {
+    display: flex;
+}
+li.return-request {
+    display: none;
+}
+li.subscription {
+    display: none;
+}
+div.wpforms-container-full .wpforms-form input.wpforms-field-medium{
+    max-width: 100%;
+}
+.subscriber-submit input {
+    width: 100% !important;
+    margin-top: -27px !important;
 }

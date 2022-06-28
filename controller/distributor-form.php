@@ -19,7 +19,7 @@
     if(!empty($distributor_pcode) && $distributor_pcode == 'true') {
         if(!empty($GST) && !empty($business_address) && !empty($distributor_city) && !empty($distributor_state) && !empty($distributor_country) && !empty($distributor_shop) && !empty($distributor_salesman) && !empty($distributor_delivery) && !empty($distributor_vehicle) && !empty($distributor_turnover) && !empty($distributor_funding) && !empty($distributor_shops)) {
                 if(!username_exists($phone)) {                    
-                    $user_id = wp_create_user( $phone);
+                    $user_id = wp_create_user($phone);
                     $user = new WP_User( $user_id );
                     update_user_meta( $user_id, 'gst', $GST );
                     update_user_meta( $user_id, 'business_address', $business_address );

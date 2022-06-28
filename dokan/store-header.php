@@ -159,7 +159,10 @@ if (!is_user_logged_in(get_current_user())) {
                                 </li>
                             <?php endif ?>
 
-                            <?php do_action('dokan_store_header_info_fields', $store_user->get_id()); ?>
+                            <?php //do_action('dokan_store_header_info_fields', $store_user->get_id()); ?>
+                            <li class="sign_agreement">
+                                <a data-id="<?php the_ID(); ?>">Sign Agreement</a>
+                            </li>
                         </ul>
 
                         <?php if ($social_fields) { ?>
@@ -190,8 +193,22 @@ if (!is_user_logged_in(get_current_user())) {
                         <li><a href="<?php echo esc_url($tab['url']); ?>"><?php echo esc_html($tab['title']); ?></a></li>
                     <?php endif; ?>
                 <?php } ?>
-                <?php do_action('dokan_after_store_tabs', $store_user->get_id()); ?>
+                <?php //do_action('dokan_after_store_tabs', $store_user->get_id()); ?>
             </ul>
         </div>
     <?php } ?>
+</div>
+
+<div class="iframe-contract">
+    <div class="iContract-box">
+        <iframe src="<?php echo home_url() . '/wp-content/uploads/2022/06/Web-Site-Development-_Simple_.pdf'; ?>" frameborder="0"></iframe>
+        <div class="contract-agree">
+            <input type="checkbox" name="contract_agree" id="contract_agree" value="1">
+            <label for="contract_agree">I agree to the terms and conditions</label>
+        </div>
+        <div class="contract-submit">
+            <button type="submit">Submit</button>
+        </div>
+    </div>
+    <div class="iContract-mask"></div>
 </div>

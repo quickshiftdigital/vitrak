@@ -95,3 +95,9 @@ function unhook_those_pesky_emails( $email_class ) {
 		// Note emails
 		remove_action( 'woocommerce_new_customer_note_notification', array( $email_class->emails['WC_Email_Customer_Note'], 'trigger' ) );
 }
+
+
+if( current_user_can('distributor') ) {   
+    remove_action( 'woocommerce_after_shop_loop_item', 'woocommerce_template_loop_add_to_cart');
+    remove_action('woocommerce_single_product_summary', 'woocommerce_template_single_add_to_cart', 20);
+} 

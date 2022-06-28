@@ -72,6 +72,8 @@ else if ($stage == 'Second') {
     $business_name = esc_html($_POST['business_name']);
     $pincode = esc_html($_POST['business_pincode']);
     $business_type = esc_html($_POST['reg_businesstype']);
+    $latitude = esc_html($_POST['reg_lat']);
+    $longitude = esc_html($_POST['reg_lng']);
 
     if (!empty($reg_phone) && !empty($reg_email) && !empty($reg_firstname) && !empty($reg_lastname) && !empty($reg_password) && !empty($business_name)  && !empty($pincode) && !empty($business_type)) {
         if (is_email($reg_email)) {
@@ -122,7 +124,9 @@ else if ($stage == 'Second') {
                                     'billing_state' => $location['state_code'],
                                     'dokan_store_address[state]' => $location['state_code'],
                                     'billing_country' => 'IN',
-                                    'dokan_store_address[country]' => 'IN'
+                                    'dokan_store_address[country]' => 'IN',
+                                    'business_latitude' => $latitude,
+                                    'business_longitude' => $longitude
                                 );
                                 foreach ($user_meta as $key => $value) {
                                     update_user_meta($user_id, $key, $value);

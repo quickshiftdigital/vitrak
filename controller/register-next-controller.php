@@ -2,7 +2,6 @@
 
     // define('WP_USE_THEMES', false);  
     require_once('../../../../wp-load.php');
-    the_post();
     
     $user_role = sanitize_text_field($_POST['user_role']);
     $response = array();
@@ -42,6 +41,7 @@
                     'annual_turnover' => $annual_turnover,
                     'category' => $category,
                     'sub_category' => $sub_category,
+                    'store-name' => $store->name,
                     'no_of_years_in_business' => $no_of_years_in_business
                     // 'name' => $name,
                     // 'email' => $email,
@@ -50,33 +50,31 @@
                 foreach ($user_meta as $key => $value) {
                     update_user_meta($user_id, $key, $value);
                 }
-
+                function wpdocs_set_html_mail_content_type() {
+                    return 'text/html';
+                }
+                add_filter( 'wp_mail_content_type', 'wpdocs_set_html_mail_content_type' );
                 //Send Email
                 //@umesh1995 Please add the send email code. Basic Email that says account under verification.
-                // $to = $email;
-                // $subject = 'Welcome to Vitrak';
-                // $message = '<div style="max-width: 560px; padding: 20px; background: #ffffff; border-radius: 5px; margin: 40px auto; font-family: Open Sans,Helvetica,Arial; font-size: 15px; color: #666;">
-                //             <div style="color: #444444; font-weight: normal;">
-                //             <div style="text-align: center; font-weight: 600; font-size: 26px; padding: 10px 0; border-bottom: solid 3px #eeeeee;"><a href="' . home_url() . '"></div>
-                //             <div style="clear: both;"> </div>
-                //             </div>
-                //             <div style="padding: 0 30px 30px 30px; border-bottom: 3px solid #eeeeee;">
-                //             <div style="padding: 30px 0; font-size: 24px; text-align: center; line-height: 40px;">Thank you for your interest in Vitrak online. We are currently reviewing your Store Information.<span style="display: block;"> Somebody from our team will contact you shortly.</span></div>
-                //             <div style="padding: 15px; background: #eee; border-radius: 3px; text-align: center;">Need help? <a style="color: #3ba1da; text-decoration: none;" href="mailto:support@vitrakonline.com">Contact Us</a> today.</div>
-                //             </div>
-                //             <div style="color: #999; padding: 20px 30px;">
-                //             <div>Thank You!</div>
-                //             <div>The <a style="color: #3ba1da; text-decoration: none;" href="' . home_url() . '">Vitrak Shop</a> Team</div>
-                //             </div>
-                //             </div>';
-                // $headers['Content-Type'] = 'text/html; charset=UTF-8';
-                // $headers['Bcc'] = 'info@vitrak.in, juzer@quickshiftdigital.com';
-                // $mail = wp_mail($to, $subject, $message, $headers);
-
-                // if ($mail) {
-                //     $response['email_state'] = 'Error';
-                //     $response['email_message'] = 'Error in sending email';
-                // }
+                $to = $email;
+                $headers[] = 'Cc: info@vitrak.in';
+                $subject = 'Welcome to Vitrak';
+                $message = '<a href="' . home_url() . '">
+                            We noticed you haven’t completed your registration yet. To get instant and unlimited access to the database<br>
+                            Need help? <a style="color: #3ba1da; text-decoration: none;" href="mailto:info@vitrak.in">Contact Us</a> today.<br>
+                            <br><br>
+                            Regards
+                            Team Vitrak
+                            The <a style="color: #3ba1da; text-decoration: none;" href="' . home_url() . '">Vitrak Shop</a> Team';
+                $headers['Content-Type'] = 'text/html; charset=UTF-8';
+                $headers['MIME-Version'] = "1.0";
+                $headers['Bcc'] = 'info@vitrak.in, juzer@quickshiftdigital.com';
+                $mail = wp_mail($to, $subject, $message, $headers);
+                if ($mail) {
+                    $response['email_state'] = 'Error';
+                    $response['email_message'] = 'Error in sending email';
+                }
+                remove_filter( 'wp_mail_content_type', 'wpdocs_set_html_mail_content_type' );
 
                 
                 //Response
@@ -109,9 +107,11 @@
         $reg_turnover = sanitize_text_field($_POST['reg_turnover']);
         $reg_funding_posibility = sanitize_text_field($_POST['reg_funding_posibility']);
         $reg_shops = sanitize_text_field($_POST['reg_shops']);
+        $funding_number = sanitize_text_field($_POST['funding_number']);
+        $how_much_storage_space = sanitize_text_field($_POST[' how_much_storage_space']);
         $user_id = sanitize_text_field($_POST['user_id']);
 
-        if (!empty($gst) && !empty($billing_address_1) && !empty($billing_address_2) && !empty($billing_city) && !empty($billing_state) && !empty($billing_postcode)  && !empty($billing_country) && !empty($reg_shop_type) && !empty($reg_salesmen) && !empty($reg_deliver_boys)  && !empty($reg_vehicle_no)  && !empty($reg_turnover) && !empty($reg_funding_posibility) && !empty($reg_shops)) {
+        if (!empty($gst) && !empty($billing_address_1) && !empty($billing_city) && !empty($billing_state) && !empty($billing_postcode)  && !empty($billing_country) && !empty($reg_shop_type) && !empty($reg_salesmen) && !empty($reg_deliver_boys)  && !empty($reg_vehicle_no)  && !empty($reg_turnover) && !empty($reg_funding_posibility) && !empty($reg_shops)) {
             if (($user_id)) {
                 $user = get_user_by('id', $user_id);
                 //User Meta
@@ -134,39 +134,39 @@
                     'annual_turnover' => $reg_turnover,
                     'funding_possibilities' => $reg_funding_posibility,
                     'no_of_shopsoutlets_covered' => $reg_shops,
+                    'how_much_funding' => $funding_number,
+                    'how_much_storage_space' =>$how_much_storage_space,
                 );
                 foreach ($user_meta as $key => $value) {
                     update_user_meta($user_id, $key, $value);
                 }
 
-                //Send Email
-                //@umesh1995 Please add the send email code. Basic Email that says account under verification.
-                // $to = $email;
-                // $subject = 'Welcome to Vitrak';
-                // $message = '<div style="max-width: 560px; padding: 20px; background: #ffffff; border-radius: 5px; margin: 40px auto; font-family: Open Sans,Helvetica,Arial; font-size: 15px; color: #666;">
-                //             <div style="color: #444444; font-weight: normal;">
-                //             <div style="text-align: center; font-weight: 600; font-size: 26px; padding: 10px 0; border-bottom: solid 3px #eeeeee;"><a href="' . home_url() . '"></div>
-                //             <div style="clear: both;"> </div>
-                //             </div>
-                //             <div style="padding: 0 30px 30px 30px; border-bottom: 3px solid #eeeeee;">
-                //             <div style="padding: 30px 0; font-size: 24px; text-align: center; line-height: 40px;">Thank you for your interest in Vitrak online. We are currently reviewing your Store Information.<span style="display: block;"> Somebody from our team will contact you shortly.</span></div>
-                //             <div style="padding: 15px; background: #eee; border-radius: 3px; text-align: center;">Need help? <a style="color: #3ba1da; text-decoration: none;" href="mailto:support@vitrakonline.com">Contact Us</a> today.</div>
-                //             </div>
-                //             <div style="color: #999; padding: 20px 30px;">
-                //             <div>Thank You!</div>
-                //             <div>The <a style="color: #3ba1da; text-decoration: none;" href="' . home_url() . '">Vitrak Shop</a> Team</div>
-                //             </div>
-                //             </div>';
-                // $headers['Content-Type'] = 'text/html; charset=UTF-8';
-                // $headers['Bcc'] = 'info@vitrak.in, juzer@quickshiftdigital.com';
-                // $mail = wp_mail($to, $subject, $message, $headers);
-
-                // if ($mail) {
-                //     $response['email_state'] = 'Error';
-                //     $response['email_message'] = 'Error in sending email';
-                // }
-
-                
+                // Send Email
+                // @umesh1995 Please add the send email code. Basic Email that says account under verification.
+                function wpdocs_set_html_mail_content_type() {
+                    return 'text/html';
+                }
+                add_filter( 'wp_mail_content_type', 'wpdocs_set_html_mail_content_type' );
+                $to = $email;
+                $subject = 'Welcome to Vitrak';
+                $headers[] = 'Cc: info@vitrak.in';
+                $message = '<a href="' . home_url() . '"><br><br>
+                            <p>We noticed you haven’t completed your registration yet. To get free and unlimited access to the database, click here: .<span style="display: block;"> You are one click away from expanding your business!</span></div><br><br>
+                            <p style="padding: 15px; background: #eee; border-radius: 3px; text-align: center;">Need help? <a style="color: #3ba1da; text-decoration: none;" href="mailto:info@vitrak.in">Contact Us</a> today.</p><br><br>
+                            </p><br><br>
+                            <p>Thank You!</p><br>
+                            <p>The <a style="color: #3ba1da; text-decoration: none;" href="' . home_url() . '">Vitrak Shop</a> Team</p>
+                            ';
+                            $headers['Content-Type'] = 'text/html; charset=UTF-8';
+                            $headers['MIME-Version'] = "1.0";
+                            $headers['Bcc'] = 'info@vitrak.in, juzer@quickshiftdigital.com';
+                            $mail = wp_mail($to, $subject, $message, $headers);
+                    if ($mail) {
+                        $response['email_state'] = 'Error';
+                        $response['email_message'] = 'Error in sending email';
+                    }
+                    remove_filter( 'wp_mail_content_type', 'wpdocs_set_html_mail_content_type' );
+            
                 //Response
                 $response['state'] = 'Success';
                 $response['message'] = 'Distributor registered successfully';

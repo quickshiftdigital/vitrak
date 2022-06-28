@@ -42,14 +42,19 @@ if (!empty($header_message)) $header_top .= ' has-center';
                         <?php if(is_user_logged_in()): ?>
                             <?php 
                                 if(checkRole('distributor') && get_field('gst', 'user_' . get_current_user_id())) {
-                                    if (function_exists('ecotech_header_mini_cart')) ecotech_header_mini_cart('popup');
+                                    if (function_exists('ecotech_header_mini_cart') && get_field('account_verification', 'user_' . get_current_user_id()) && checkRole('distributor')) {
+                                        ecotech_header_mini_cart('popup');                                
+                                    }
                                 }
                                 echo '<div class="block-username">' . get_field('business_name', 'user_' . get_current_user_id()) . '</div>';
                             ?>
                             <?php ecotech_header_user(); ?>
                         <?php else: ?>
-                            <div classs="block-username lgReg_button">
-                                <a href="<?php echo home_url('/my-account/'); ?>">Login / Register</a>
+                            <div class="block-userlink ecotech-dropdown">
+                                <a class="woo-user-link" href="<?php echo home_url('/register'); ?>">
+                                    <span class="icon main-icon-user-2"></span>
+                                    <span class="text power-show"><span class="highlight">Sign in</span><span> or </span>Register</span>
+                                </a>
                             </div>
                         <?php endif; ?>
                     </div>
