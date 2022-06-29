@@ -472,7 +472,12 @@ html body .header.style-09 .inner-control a span.power-show {
 html body .header.style-09 .inner-control .block-userlink > a > * {
 	vertical-align: middle;
 }
-
+span.highlight {
+    color: #000;
+}
+span.text.power-show:hover {
+    color: #000;
+}
 /*--------------------- Registration Form ---------------------*/
 
 .form-row {
@@ -721,7 +726,9 @@ span.resend_otp-link:after {
 ul.business-list li {
 	list-style-type: none;
 }
-
+button.dokan-store-support-btn {
+    display: none;
+}
 /*---------------- Checkout Page --------------*/
 
 body.woocommerce-checkout {
@@ -1056,7 +1063,22 @@ label.woocommerce-form__label.woocommerce-form__label-for-checkbox.checkbox a {
 .footer {
 	background-color: white;
 }
-
+a.backtotop {
+    position: fixed;
+    display: none !important;
+}
+section#whatsapp {
+    position: fixed;
+    bottom: 60px;
+    right: 30px;
+}
+.subscriber-submit input {
+    width: 100% !important;
+    margin-top: -27px !important;
+}
+div.wpforms-container-full .wpforms-form input.wpforms-field-medium{
+    max-width: 100%;
+}
 /************ Home *************/
 
 .hm_banner {
