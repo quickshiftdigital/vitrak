@@ -17144,6 +17144,7 @@ CUSTOM
 li.return-request {
     display: none;
 }
+<<<<<<< HEAD
 
 div.wpforms-container-full .wpforms-form input.wpforms-field-medium{
     max-width: 100%;
@@ -17202,3 +17203,12 @@ a.woo-user-link span {
 li.delivery-time-dashboard {
     display: none;
 }
+=======
+li.subscription {
+    display: none;
+}
+
+
+
+
+>>>>>>> 63a504891237c2d0140b7368782ed14e3627e7df

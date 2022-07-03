@@ -43,9 +43,13 @@
                     'category' => $category,
                     'sub_category' => $sub_category,
                     'store-name' => $store->name,
+<<<<<<< HEAD
                     'no_of_years_in_business' => $no_of_years_in_business,
                     'limited_liability_partnership_llp' => $limited_liability_partnership_llp,
                     'user_nicename' => $store_url
+=======
+                    'no_of_years_in_business' => $no_of_years_in_business
+>>>>>>> 63a504891237c2d0140b7368782ed14e3627e7df
                     // 'name' => $name,
                     // 'email' => $email,
                     //'designation' => $designation,
@@ -53,6 +57,7 @@
                 foreach ($user_meta as $key => $value) {
                     update_user_meta($user_id, $key, $value);
                 }
+<<<<<<< HEAD
                 wp_update_user(
                     array(
                         'ID'            => $user_id,
@@ -60,6 +65,8 @@
                     )
                 );
 
+=======
+>>>>>>> 63a504891237c2d0140b7368782ed14e3627e7df
                 function wpdocs_set_html_mail_content_type() {
                     return 'text/html';
                 }
@@ -69,6 +76,7 @@
                 $to = $email;
                 $headers[] = 'Cc: info@vitrak.in';
                 $subject = 'Welcome to Vitrak';
+<<<<<<< HEAD
                 $message = 'Dear .$user->user_firstname.<br><br>
 							We noticed you haven’t completed your registration yet<br>
 							To get instant and unlimited access to the database, click here: <a href="' . home_url() . '/register/">Register Now</a> today.<br>
@@ -76,6 +84,15 @@
 							Regards<br>
 							Team Vitrak<br>
 							Extend your Reach<br>';
+=======
+                $message = '<a href="' . home_url() . '">
+                            We noticed you haven’t completed your registration yet. To get instant and unlimited access to the database<br>
+                            Need help? <a style="color: #3ba1da; text-decoration: none;" href="mailto:info@vitrak.in">Contact Us</a> today.<br>
+                            <br><br>
+                            Regards
+                            Team Vitrak
+                            The <a style="color: #3ba1da; text-decoration: none;" href="' . home_url() . '">Vitrak Shop</a> Team';
+>>>>>>> 63a504891237c2d0140b7368782ed14e3627e7df
                 $headers['Content-Type'] = 'text/html; charset=UTF-8';
                 $headers['MIME-Version'] = "1.0";
                 $headers['Bcc'] = 'info@vitrak.in, juzer@quickshiftdigital.com';
@@ -160,6 +177,7 @@
                 $to = $email;
                 $subject = 'Welcome to Vitrak';
                 $headers[] = 'Cc: info@vitrak.in';
+<<<<<<< HEAD
                 $message = 'Dear <br><br>
 							We noticed you haven’t completed your registration yet.<br>
 							To get free and unlimited access to the database, click here: <a href="' . home_url() . '/register/">Register Now</a> today.<br>
@@ -168,6 +186,15 @@
 							Regards<br>
 							Team Vitrak<br>
 							Extend your Reach<br>';
+=======
+                $message = '<a href="' . home_url() . '"><br><br>
+                            <p>We noticed you haven’t completed your registration yet. To get free and unlimited access to the database, click here: .<span style="display: block;"> You are one click away from expanding your business!</span></div><br><br>
+                            <p style="padding: 15px; background: #eee; border-radius: 3px; text-align: center;">Need help? <a style="color: #3ba1da; text-decoration: none;" href="mailto:info@vitrak.in">Contact Us</a> today.</p><br><br>
+                            </p><br><br>
+                            <p>Thank You!</p><br>
+                            <p>The <a style="color: #3ba1da; text-decoration: none;" href="' . home_url() . '">Vitrak Shop</a> Team</p>
+                            ';
+>>>>>>> 63a504891237c2d0140b7368782ed14e3627e7df
                             $headers['Content-Type'] = 'text/html; charset=UTF-8';
                             $headers['MIME-Version'] = "1.0";
                             $headers['Bcc'] = 'info@vitrak.in, juzer@quickshiftdigital.com';

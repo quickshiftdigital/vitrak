@@ -259,8 +259,13 @@
                                                             <label for="reg_category">Category<span class="required">*</span></label>
                                                             <select name="reg_category" id="reg_category">
                                                                 <option value="">Choose Business Category</option>
+<<<<<<< HEAD
                                                                 <option value="Food">Food</option>
                                                                 <option value="Non Food">Non Food</option>
+=======
+                                                                <option value="FMCG">FMCG</option>
+                                                                <option value="Food & Beverage">Food & Beverage</option>
+>>>>>>> 63a504891237c2d0140b7368782ed14e3627e7df
                                                             </select>
                                                         </p>
                                                     </div>
