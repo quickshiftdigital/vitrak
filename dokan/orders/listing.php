@@ -175,9 +175,8 @@ if ( $user_orders ) {
 
                                 foreach ( $actions as $action ) {
                                     $icon = ( isset( $action['icon'] ) ) ? $action['icon'] : '';
-                                    printf( '<a class="dokan-btn dokan-btn-default dokan-btn-sm tips" href="%s" data-toggle="tooltip" data-placement="top" title="%s">%s</a> ', esc_url( $action['url'] ), esc_attr( $action['name'] ), $icon );
+                                    printf( '<a class="dokan-btn dokan-btn-default dokan-btn-sm tips" href="%s" data-toggle="tooltip" data-placement="top" title="%s">%s</a>', esc_url( $action['url'] ), esc_attr( $action['name'] ), $icon );
                                 }
-
                                 do_action( 'woocommerce_admin_order_actions_end', $order );
                                 ?>
                             </td>

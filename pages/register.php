@@ -4,18 +4,9 @@
 if (is_user_logged_in()) : ?>
 	<p>You're already logged in and have no need to create a user profile.</p>
 <?php else : ?>
-	<div id="content" class="container site-content sidebar-full">
-		<div class="head-banner" style="background-image: url(<?php echo home_url(); ?>/wp-content/uploads/2020/10/Head-banner.jpg);">
-			<div class="container">
-				<div class="inner">
-					<h1 class="page-title entry-title">
-						<span>Registration</span>
-					</h1>
-
-				</div>
-			</div>
-		</div>
-		<div id="primary" class="content-area">
+	<div id="content" class="container  sidebar-full">
+		
+		<div id="primary" class="content-area woocommerce-account">
 			<main id="main" class="site-main">
 				<article id="post-13" class="post-13 page type-page status-publish hentry">
 					<div class="entry-content">
@@ -122,14 +113,6 @@ if (is_user_logged_in()) : ?>
 														<input type="text" class="input-text form-control" name="business_name" id="business_name" value="" required="required" autocomplete="company">
 													</p>
 												</div>
-												<div class="form-column">
-													<p class="form-row form-group">
-														<label for="business-name">Business Pincode<span class="required">*</span></label>
-														<input type="text" class="input-text form-control" name="business_pincode" id="business_pincode" value="" required="required" autocomplete="pincode">
-													</p>
-												</div>
-											</div>
-											<div class="form-row">
 												<div class="form-column form-radio">
 													<p class="form-row form-group business-list">
 														<label for="business-type">Business Type</label>
@@ -145,6 +128,21 @@ if (is_user_logged_in()) : ?>
 																</label>
 															</li>
 														</ul>
+													</p>
+												</div>
+											</div>
+											<div class="form-row">
+												<div class="form-column">
+													<p class="form-row form-group">
+														<label for="business-name">Business Address<span class="required">*</span></label>
+														<input id="reg_location" name="reg_location" class="controls input-text form-control" type="text" placeholder="Enter a location">
+														<div id="map" class="hidden"></div>
+													</p>
+												</div>
+												<div class="form-column">
+													<p class="form-row form-group">
+														<label for="business-name">Business Pincode<span class="required">*</span></label>
+														<input type="text" class="input-text form-control" name="business_pincode" id="business_pincode" value="" required="required" autocomplete="pincode">
 													</p>
 												</div>
 											</div>
@@ -172,6 +170,8 @@ if (is_user_logged_in()) : ?>
 												<input type="hidden" name="stage" value="Second">
 												<input type="hidden" id="woocommerce-register-nonce" name="woocommerce-register-nonce" value="c0f477cf55">
 												<input type="hidden" name="_wp_http_referer" value="/vitrak/my-account/">
+												<input type="hidden" name="reg_lat" id="reg_lat">
+												<input type="hidden" name="reg_lng" id="reg_lng">
 												<button type="submit" class="woocommerce-Button woocommerce-button button woocommerce-form-register__submit" id="register_form" name="register_form" value="Register_form">Register</button>
 											</p>
 										</form>
@@ -186,7 +186,12 @@ if (is_user_logged_in()) : ?>
 			</main>
 			<!-- #main -->
 		</div>
-		<!-- #primary -->
+	</div>
+	<div class="register-banner" style="background-image: url(<?php echo home_url(); ?>/wp-content/uploads/2022/06/registration-banner.jpg);height:300px;background-size: cover;">
+		<div class="container">
+			<div class="inner">
+			</div>
+		</div>
 	</div>
 <?php endif; ?>
 <?php get_footer(); ?>

@@ -7,7 +7,7 @@
  * @package dokan
  */
 ?>
-<div class="dokan-panel dokan-panel-default">
+<!--<div class="dokan-panel dokan-panel-default">
     <div class="dokan-panel-heading"><strong><?php esc_html_e( 'Balance', 'dokan-lite' ); ?></strong></div>
     <div class="dokan-panel-body general-details">
         <div class="dokan-clearfix dokan-panel-inner-container">
@@ -49,7 +49,6 @@
 </div>
 
 <?php do_action( 'dokan_withdraw_content_after_balance_section' ); ?>
-
 <div class="dokan-panel dokan-panel-default">
     <div class="dokan-panel-heading"><strong><?php esc_html_e( 'Payment Details', 'dokan-lite' ); ?></strong></div>
     <div class="dokan-panel-body general-details">
@@ -72,13 +71,13 @@
         <?php do_action( 'dokan_withdraw_content_after_last_payment_section' ); ?>
 
     </div>
-</div>
+</div> -->
 
 <?php do_action( 'dokan_withdraw_content_after_payment_details_section' ); ?>
 
 
 <div class="dokan-panel dokan-panel-default" id="dokan-withdraw-payment-method-list" data-security="<?php echo esc_attr( wp_create_nonce( 'dokan_withdraw_make_default' ) ); ?>" >
-    <div class="dokan-panel-heading"><strong><?php esc_html_e( 'Payment Methods', 'dokan-lite' ); ?></strong></div>
+    <div class="dokan-panel-heading"><strong><?php esc_html_e( 'Payment Methods', 'dokan-lite' ); ?></strong> <i class="fas fa-eye tips" aria-hidden="true" data-title="<?php esc_html_e( 'Kindly enter your bank details in order to process the payment from Vitrak portal. Weekly payouts will be followed.', 'dokan-lite' ); ?>"></i></div>
     <div class="dokan-panel-body general-details">
         <?php
         foreach ( $active_methods as $method ) :

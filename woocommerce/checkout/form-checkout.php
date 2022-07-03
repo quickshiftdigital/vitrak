@@ -24,8 +24,8 @@
 									$current_user = wp_get_current_user();
 								?>
 								<div class="hidden">
-									<input type="hidden" class="billing_first_name" value="<?php echo get_user_meta(get_current_user_id(), 'billing_first_name', true); ?>">
-									<input type="hidden" class="billing_last_name" value="<?php echo get_user_meta(get_current_user_id(), 'billing_last_name', true); ?>">
+									<input type="hidden" class="billing_first_name" value="<?php echo get_user_meta(get_current_user_id(), 'first_name', true); ?>">
+									<input type="hidden" class="billing_last_name" value="<?php echo get_user_meta(get_current_user_id(), 'last_name', true); ?>">
 									<input type="hidden" class="billing_address_1" value="India">
 									<input type="hidden" class="billing_city" value="<?php echo get_user_meta(get_current_user_id(), 'billing_city', true); ?>">
 									<input type="hidden" class="billing_state" value="<?php echo get_user_meta(get_current_user_id(), 'billing_state', true); ?>">
@@ -217,19 +217,26 @@
 				</div>
 
 				<div class="col-2">
-					<?php do_action( 'woocommerce_checkout_before_order_review_heading' ); ?>
-					
-					<h3 id="order_review_heading"><?php esc_html_e( 'Your order', 'woocommerce' ); ?></h3>
-					
-					<?php do_action( 'woocommerce_checkout_before_order_review' ); ?>
-				
-					<div id="order_review" class="woocommerce-checkout-review-order">
-						<?php do_action( 'woocommerce_checkout_order_review' ); ?>
+				<div class="checkout-box">
+					<div class="ck_box clearfix">
+						<div class="left outbox">
+							<div class="ck-profile-box">
+								<?php do_action( 'woocommerce_checkout_before_order_review_heading' ); ?>
+								
+								<h3 id="order_review_heading" class="center"><?php esc_html_e( 'Your order Details', 'woocommerce' ); ?></h3>
+								
+								<?php do_action( 'woocommerce_checkout_before_order_review' ); ?>
+							
+								<div id="order_review" class="woocommerce-checkout-review-order">
+									<?php do_action( 'woocommerce_checkout_order_review' ); ?>
+								</div>
+							
+								<?php do_action( 'woocommerce_checkout_after_order_review' ); ?>
+								
+							</div>
+						</div>
 					</div>
-				
-					<?php do_action( 'woocommerce_checkout_after_order_review' ); ?>
 				</div>
-			</div>
 
 			<?php do_action( 'woocommerce_checkout_after_customer_details' ); ?>
 

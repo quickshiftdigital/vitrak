@@ -40,7 +40,6 @@ if ('layout3' === $profile_layout) {
 if (!is_user_logged_in(get_current_user())) {
     header('location: ' . get_home_url() . '/vendor/register');
 }
-
 ?>
 <div class="dokan-profile-frame-wrapper">
     <div class="profile-frame<?php echo esc_attr($no_banner_class); ?>">
@@ -159,7 +158,14 @@ if (!is_user_logged_in(get_current_user())) {
                                 </li>
                             <?php endif ?>
 
-                            <?php do_action('dokan_store_header_info_fields', $store_user->get_id()); ?>
+                            <?php //do_action('dokan_store_header_info_fields', $store_user->get_id()); ?>
+                            <?php if(checkRole('distributor') || checkRole('administrator')): ?>
+                                <?php if(!checkDistributorship($store_user->get_id())): ?>
+                                    <li class="sign_agreement">
+                                        <a data-id="<?php the_ID(); ?>">Request Distributorship</a>
+                                    </li>
+                                <?php endif; ?>
+                            <?php endif; ?>
                         </ul>
 
                         <?php if ($social_fields) { ?>
@@ -190,8 +196,77 @@ if (!is_user_logged_in(get_current_user())) {
                         <li><a href="<?php echo esc_url($tab['url']); ?>"><?php echo esc_html($tab['title']); ?></a></li>
                     <?php endif; ?>
                 <?php } ?>
-                <?php do_action('dokan_after_store_tabs', $store_user->get_id()); ?>
+                <?php //do_action('dokan_after_store_tabs', $store_user->get_id()); ?>
             </ul>
         </div>
     <?php } ?>
+
+    <?php if(checkRole('distributor') || checkRole('administrator')): ?>
+        <?php if(!checkDistributorship($store_user->get_id())): ?>
+            <div class="rqdis-box">
+                <div class="rqdis-content">
+                    <p>
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae magnam ratione hic aperiam ducimus sunt blanditiis odio beatae. Earum beatae in dicta asperiores nulla reprehenderit eveniet voluptatem odio velit mollitia?
+                    </p>
+                </div>
+                <div class="rgdis-request">
+                    <div class="rqdis-box-clicker">
+                        <a data-id="<?php the_ID(); ?>">Request Distributorship</a>
+                    </div>
+                </div>
+            </div>
+        <?php else: ?>
+            <?php $agreements = checkDistributorship($store_user->get_id()); ?>
+            <?php if($agreements['status'] == 'Pending'): ?>
+                <div class="rqdis-box status-pending">
+                    <div class="rqdis-content">
+                        <p>
+                            Your request for distributorship with <?php echo $agreements['vendor_name']; ?> is currently under review. Someone from the vitrak team will get in touch with you soon.
+                        </p>
+                    </div>
+                </div>
+            <?php elseif($agreements['status'] == 'Rejected'): ?>
+                <div class="rqdis-box status-rejected">
+                    <div class="rqdis-content">
+                        <p>
+                            Your request for distributorship with <?php echo $agreements['vendor_name']; ?> has been rejected. Please contact our team for more information.
+                        </p>
+                    </div>
+                    <div class="rgdis-request">
+                        <div class="rqdis-box-clicker">
+                            <a href="<?php echo home_url('/contact-us/'); ?>">Contact Us</a>
+                        </div>
+                    </div>
+                </div>
+            <?php elseif($agreements['status'] == 'Approved'): ?>
+                <div class="rqdis-box status-approved">
+                    <div class="rqdis-content">
+                        <p>
+                            Your distributorship for <?php echo $agreements['vendor_name']; ?> has been approved. You can now start purchasing products listed below.
+                        </p>
+                    </div>
+                </div>
+            <?php endif; ?>
+        <?php endif; ?>
+    <?php endif; ?>
 </div>
+
+<?php if(!checkDistributorship($store_user->get_id())): ?>
+    <div class="iframe-contract<?php if(isset($_GET['agreement']) && $_GET['agreement'] == true) {echo ' show';} ?>">
+        <div class="iContract-box">
+            <div class="agreement-box">
+                <div class="agreement">
+                    <?php echo do_shortcode('[distributor_agreement]'); ?>
+                </div>
+                <div class="contract-agree">
+                    <input type="checkbox" name="contract_agree" id="contract_agree" value="1">
+                    <label for="contract_agree">I have the entire agreement and agree to all the terms and conditions of the agreement</label>
+                </div>
+                <div class="contract-submit">
+                    <button type="submit" disabled data-company-id="<?php echo $store_user->get_id(); ?>" data-distributor-id="<?php echo get_current_user_id(); ?>">Submit</button>
+                </div>
+            </div>
+        </div>
+        <div class="iContract-mask"></div>
+    </div>
+<?php endif; ?>

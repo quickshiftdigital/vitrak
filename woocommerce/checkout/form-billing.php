@@ -18,31 +18,67 @@
 
 defined( 'ABSPATH' ) || exit;
 ?>
-<div class="woocommerce-billing-fields">
-	<?php if ( wc_ship_to_billing_address_only() && WC()->cart->needs_shipping() ) : ?>
+<?php if(checkRole('seller')): ?>
+	<div class="woocommerce-billing-fields">
+		<?php if ( wc_ship_to_billing_address_only() && WC()->cart->needs_shipping() ) : ?>
 
-		<h3><?php esc_html_e( 'Billing &amp; Shipping', 'woocommerce' ); ?></h3>
+			<h3><?php esc_html_e( 'Billing &amp; Shipping', 'woocommerce' ); ?></h3>
 
-	<?php else : ?>
+		<?php else : ?>
 
-		<h3><?php esc_html_e( 'Billing details', 'woocommerce' ); ?></h3>
+			<h3><?php esc_html_e( 'Billing details', 'woocommerce' ); ?></h3>
 
-	<?php endif; ?>
+		<?php endif; ?>
 
-	<?php do_action( 'woocommerce_before_checkout_billing_form', $checkout ); ?>
+		<?php do_action( 'woocommerce_before_checkout_billing_form', $checkout ); ?>
 
-	<div class="woocommerce-billing-fields__field-wrapper">
-		<?php
-		$fields = $checkout->get_checkout_fields( 'billing' );
+		<div class="woocommerce-billing-fields__field-wrapper">
+			<?php
+			$fields = $checkout->get_checkout_fields( 'billing' );
 
-		foreach ( $fields as $key => $field ) {
-			woocommerce_form_field( $key, $field, $checkout->get_value( $key ) );
-		}
-		?>
+			foreach ( $fields as $key => $field ) {
+				woocommerce_form_field( $key, $field, $checkout->get_value( $key ) );
+			}
+			?>
+		</div>
+
+		<?php do_action( 'woocommerce_after_checkout_billing_form', $checkout ); ?>
 	</div>
-
-	<?php do_action( 'woocommerce_after_checkout_billing_form', $checkout ); ?>
+<?php endif; ?>
+<?php if(checkRole('administrator')):?>
+<div class="checkout-box billling-dtls">
+	<div class="ck_box clearfix">
+		<div class="left outbox">
+			<div class="ck-profile-box">
+					<div class="woocommerce-billing-fields admin-billing">
+						<?php if ( wc_ship_to_billing_address_only() && WC()->cart->needs_shipping() ) : ?>
+				
+							<h3><?php esc_html_e( 'Billing &amp; Shipping', 'woocommerce' ); ?></h3>
+				
+						<?php else : ?>
+				
+							<h3 class="center "><?php esc_html_e( 'Billing details', 'woocommerce' ); ?></h3>
+				
+						<?php endif; ?>
+				
+						<?php do_action( 'woocommerce_before_checkout_billing_form', $checkout ); ?>
+				
+						<div class="woocommerce-billing-fields__field-wrapper">
+							<?php
+							$fields = $checkout->get_checkout_fields( 'billing' );
+				
+							foreach ( $fields as $key => $field ) {
+								woocommerce_form_field( $key, $field, $checkout->get_value( $key ) );
+							}
+							?>
+						</div>
+						<?php do_action( 'woocommerce_after_checkout_billing_form', $checkout ); ?>
+					</div>
+			</div>
+		</div>
+	 </div>
 </div>
+<?php endif; ?>
 
 <?php if ( ! is_user_logged_in() && $checkout->is_registration_enabled() ) : ?>
 	<div class="woocommerce-account-fields">

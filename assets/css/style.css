@@ -3322,6 +3322,7 @@ textarea:focus {
 textarea {
 	display: block;
 	height: 175px;
+	 padding: 15px;
 }
 /* select */
 select {
@@ -6914,7 +6915,7 @@ BLOG
 	background-position: center center;
 	background-repeat: no-repeat;
 	background-size: cover;
-	margin-bottom: 80px;
+	/* margin-bottom: 80px; */
 }
 .head-banner .inner {
 	display: flex;
@@ -12731,7 +12732,7 @@ INNER PAGE
 	border-radius: 0 11px;
 	vertical-align: middle;
 	margin-top: 20px;
-	margin-bottom: -20px;
+	margin-bottom: 0;
 }
 div.wpcf7 .ajax-loader {
 	margin: 0 0 -20px;
@@ -17136,4 +17137,68 @@ CUSTOM
 .widget-area .widget_rss ul ul,
 .widget-area .widget_recent_comments ul ul {
 	margin: 8px 0 -8px !important;
+}
+.dokan-dashboard-wrap strong {
+    display: flex;
+}
+li.return-request {
+    display: none;
+}
+
+div.wpforms-container-full .wpforms-form input.wpforms-field-medium{
+    max-width: 100%;
+}
+.subscriber-submit input {
+    width: 100% !important;
+    margin-top: -27px !important;
+}
+section#whatsapp {
+    position: fixed;
+    bottom: 60px;
+    right: 30px;
+}
+a.backtotop {
+    position: fixed;
+    display: none !important;
+}
+button.dokan-store-support-btn {
+    display: none;
+}
+@media (min-width: 768px)
+.col-sm-6 {
+    width: 50%;
+    padding: 0px 4px;
+}
+.elementor-button.elementor-size-md {
+    border-radius: 0px 15px 0px 15px;
+}
+.col-sm-6 {
+    padding: 1px 8px;
+}
+.dokan-dashboard .dokan-dashboard-content article.dashboard-content-area .dashboard-widget.big-counter li {
+    width: 25%;
+    display: inline-block;
+    margin: 0 auto;
+}
+.dokan-dashboard-wrap strong {
+    display: contents;
+}
+.product-description p {
+    font-size: 13px;
+    line-height: 7px;
+}
+ul.desc-list li {
+    list-style-type: circle !important;
+}
+.dokan-save-attribute {
+    border-radius: 0px 15px 0 15px !important;
+}
+li.support {
+    display: none;
+}
+a.woo-user-link span {
+    color: #000 !important;
+}
+li.delivery-time-dashboard {
+    display: none;
 }

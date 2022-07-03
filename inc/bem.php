@@ -40,6 +40,25 @@ function sellingStatus() {
     return $response;
 }
 
+
+function checkDistributorship($company_id) {
+    $response = false;
+
+    if((checkRole('distributor') || checkRole('administrator')) && is_user_logged_in()) {
+        $agreements = get_field('agreements', 'user_' . get_current_user_id());
+        if(!empty($agreements)) {
+            foreach ($agreements as $key => $agreement) {
+                if($agreement['vendor'] == $company_id) {
+                    $response = $agreement;
+                    break;
+                }
+            }
+        }
+    }
+
+    return $response;
+}
+
 function locationDetails($pincode) {
     $response = "";
     $url = "https://gist.githubusercontent.com/juzer09/2dfeac0677b55d0517b161a15cfc9c31/raw/fde8dd6cce9a5276744ec56375ffe2ada21f68c8/indian-cities-pincodes-list.json";
@@ -95,3 +114,10 @@ function unhook_those_pesky_emails( $email_class ) {
 		// Note emails
 		remove_action( 'woocommerce_new_customer_note_notification', array( $email_class->emails['WC_Email_Customer_Note'], 'trigger' ) );
 }
+
+
+if( current_user_can('distributor') ) {   
+    remove_action( 'woocommerce_after_shop_loop_item', 'woocommerce_template_loop_add_to_cart');
+    remove_action('woocommerce_single_product_summary', 'woocommerce_template_single_add_to_cart', 20);
+} 
+

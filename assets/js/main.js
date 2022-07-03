@@ -4,7 +4,7 @@ function get_ajaxUrl() {
         url = 'http://localhost/vitrak/';
     }
     else {
-        url = 'https://vitrakonline.com';
+        url = 'https://vitrak.online';
     }
 
     return url;
@@ -12,6 +12,7 @@ function get_ajaxUrl() {
 
 const ajax_url = get_ajaxUrl();
 var role_type = "";
+
 function regForm() {
     //GET OTP
     jQuery('#get_otp').click(function (e) {
@@ -111,8 +112,8 @@ function regForm() {
             url: get_ajaxUrl() + '/wp-content/themes/vitrak/controller/register-next-controller.php',
             dataType: "json",
             success: function (response) {
+                console.log(response);
                 if (response.state == 'Success') {
-                    console.log(response);
                     if (response.business_type == 'seller') {
                         window.location.href = get_ajaxUrl() + '/checkout/';
                     }
@@ -206,9 +207,125 @@ function regForm() {
         });
     }
 
+    jQuery('#phone_number-verification').keypress(function (e) {
+        if (e.which == 13) {
+            e.preventDefault();
+            otp_stage = jQuery('.otp_stage').val();
+
+            if (otp_stage == 'GET OTP') {
+                jQuery('#get_otp').click();
+            }
+            else if (otp_stage == 'VERIFY OTP') {
+                jQuery('#verify_otp').click();
+            }
+        }
+    });
+
+    var Dokan_Vendor_Registration = {
+
+        init: function () {
+            var form = jQuery('form#update_register_form');
+
+            // bind events
+
+            jQuery('#seller-url', form).on('keydown', this.constrainSlug);
+            jQuery('#seller-url', form).on('keyup', this.renderUrl);
+            jQuery('#seller-url', form).on('focusout', this.checkSlugAvailability);
+
+            // this.validationLocalized();
+            // this.validate(this);
+        },
+
+        generateSlugFromCompany: function () {
+            var value = getSlug(jQuery(this).val());
+
+            jQuery('#seller-url').val(value);
+            jQuery('#url-alart').text(value);
+            jQuery('#seller-url').focus();
+        },
+
+        constrainSlug: function (e) {
+            var text = jQuery(this).val();
+
+            // Allow: backspace, delete, tab, escape, enter and .
+            if (jQuery.inArray(e.keyCode, [46, 8, 9, 27, 13, 91, 109, 110, 173, 189, 190]) !== -1 ||
+                // Allow: Ctrl+A
+                (e.keyCode == 65 && e.ctrlKey === true) ||
+                // Allow: home, end, left, right
+                (e.keyCode >= 35 && e.keyCode <= 39)) {
+                // let it happen, don't do anything
+                return;
+            }
+
+            if ((e.shiftKey || (e.keyCode < 65 || e.keyCode > 90) && (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
+                e.preventDefault();
+            }
+        },
+
+        checkSlugAvailability: function () {
+            var self = jQuery(this),
+                data = {
+                    action: 'shop_url',
+                    url_slug: self.val(),
+                    _nonce: dokan.nonce,
+                };
+
+            if (self.val() === '') {
+                return;
+            }
+
+            var row = self.closest('.form-row');
+            row.block({ message: null, overlayCSS: { background: '#fff url(' + dokan.ajax_loader + ') no-repeat center', opacity: 0.6 } });
+
+            jQuery.post(dokan.ajaxurl, data, function (resp) {
+
+                if (resp.success === true) {
+                    jQuery('#url-alart').removeClass('text-danger').addClass('text-success');
+                    jQuery('#url-alart-mgs').removeClass('text-danger').addClass('text-success').text(dokan.seller.available);
+                } else {
+                    jQuery('#url-alart').removeClass('text-success').addClass('text-danger');
+                    jQuery('#url-alart-mgs').removeClass('text-success').addClass('text-danger').text(dokan.seller.notAvailable);
+                }
+
+                row.unblock();
+
+            });
+        },
+
+        generateSlugFromCompany: function () {
+            var value = getSlug(jQuery(this).val());
+
+            jQuery('#seller-url').val(value);
+            jQuery('#url-alart').text(value);
+            jQuery('#seller-url').focus();
+        }
+
+    };
+
+    Dokan_Vendor_Registration.init();
+
+    jQuery('#seller-url').change(function () {
+        val = jQuery(this).val();
+        jQuery('form#update_register_form .form-row .form-column small strong').html(val);
+    });
+
+    jQuery('#vicode_registeration_form').submit(function (e) {
+        e.preventDefault();
+        jQuery('#register_form').click();
+    });
+
     jQuery('#phone_number-verification, #distributor_form, #vicode_registeration_form').submit(function (e) {
         e.preventDefault();
         jQuery('.vn_form-err').slideUp(); //Errors slideUp
+    });
+
+    jQuery('#reg_funding_posibility').change(function () {
+        if (jQuery(this).val() !== '' && jQuery(this).val() !== 'NA') {
+            jQuery('.funding_amount').slideDown();
+        }
+        else {
+            jQuery('.funding_amount').slideUp();
+        }
     });
 }
 
@@ -272,9 +389,148 @@ function masterLogin() {
     });
 }
 
+
+function mapSearchInput() {
+    function initMap() {
+        var map = new google.maps.Map(document.getElementById('map'), {
+            center: { lat: -33.8688, lng: 151.2195 },
+            zoom: 13
+        });
+        var input = document.getElementById('reg_location');
+        map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
+
+        var autocomplete = new google.maps.places.Autocomplete(input);
+        autocomplete.bindTo('bounds', map);
+
+        var infowindow = new google.maps.InfoWindow();
+        var marker = new google.maps.Marker({
+            map: map,
+            anchorPoint: new google.maps.Point(0, -29)
+        });
+
+        autocomplete.addListener('place_changed', function () {
+            infowindow.close();
+            marker.setVisible(false);
+            var place = autocomplete.getPlace();
+
+            // Location details
+            for (var i = 0; i < place.address_components.length; i++) {
+                if (place.address_components[i].types[0] == 'postal_code') {
+                    jQuery('#business_pincode').val(place.address_components[i].long_name).attr('value', place.address_components[i].long_name);
+                }
+            }
+
+            if (window.location.href.includes('vendor/register')) {
+                jQuery('#reg_lat').val(place.geometry.location.lat()).attr('value', place.geometry.location.lat());
+                jQuery('#reg_lng').val(place.geometry.location.lng()).attr('value', place.geometry.location.lng());
+            }
+            else {
+                jQuery('.location_search-lat').val(place.geometry.location.lat()).attr('value', place.geometry.location.lat());
+                jQuery('.location_search-lng').val(place.geometry.location.lng()).attr('value', place.geometry.location.lng());
+                jQuery('.location_search-address').val('' + place.formatted_address).attr('value', place.formatted_address);
+            }
+        });
+    }
+
+    if (window.location.href.includes('vendor/register') || jQuery('body').hasClass('home')) {
+        initMap();
+    }
+}
+
+
+function homeSearchMaster() {
+    jQuery('.location_search-input-wrap input').keypress(function (event) {
+        var keycode = (event.keyCode ? event.keyCode : event.which);
+        if (keycode == '13') {
+            event.preventDefault();
+            setTimeout(() => {
+                jQuery('.hm_banner-search_box button').click();
+            }, 150);
+        }
+    });
+
+    jQuery('.hm_banner-search_box button').click(function (a_obj) {
+        a_obj.preventDefault();
+        createRedirect();
+    });
+
+    jQuery('.hm_banner-search_box form').submit(function (a_obj) {
+        a_obj.preventDefault();
+        createRedirect();
+    });
+
+    function createRedirect() {
+        location = jQuery('.location_search-address').attr('value');
+        console.log(location);
+        lat = jQuery('.location_search-lat').val();
+        lng = jQuery('.location_search-lng').val();
+
+        url = get_ajaxUrl() + 'vendor/stores/?fwp_location=' + lat + ',' + lng + ',' + location;
+        url = encodeURI(url);
+
+        console.log(url);
+        // window.open(
+        //     url,
+        //     '_blank' // <- This is what makes it open in a new window.
+        // );
+    }
+}
+
+
+function distributorAgreement() {
+    jQuery('.sign_agreement a, .rgdis-request a').click(function (e) {
+        jQuery('.iframe-contract').addClass('show');
+    });
+
+    jQuery('.contract-submit button').click(function (e) {
+        e.preventDefault();
+        if (jQuery('#contract_agree').is(':checked')) {
+            distributor_id = jQuery(this).attr('data-distributor-id');
+            vendor_id = jQuery(this).attr('data-company-id');
+
+            jQuery.ajax({
+                method: "POST",
+                data: {
+                    distributor_id: distributor_id,
+                    vendor_id: vendor_id
+                },
+                url: get_ajaxUrl() + '/wp-content/themes/vitrak/controller/sign-agreement-controller.php',
+                success: function (response) {
+                    response = JSON.parse(response);
+                    if (response.status == 'Success') {
+                        window.location.reload();
+                    }
+                    else {
+                        console.log(response);
+                    }
+                },
+                error: function (response) {
+                    console.log(response);
+                }
+            });
+        }
+    });
+
+    jQuery('#contract_agree').change(function () {
+        if (jQuery(this).is(':checked')) {
+            jQuery('.contract-submit button').removeAttr('disabled');
+        }
+        else {
+            jQuery('.contract-submit button').attr('disabled', 'disabled');
+        }
+    })
+
+    jQuery('.iContract-mask').click(function () {
+        jQuery('.iframe-contract').removeClass('show');
+    });
+}
+
 jQuery(document).ready(function () {
     regForm();
     masterLogin();
     unnecessaryTimers();
     billingfieldsfix();
+    mapSearchInput();
+    homeSearchMaster();
+    distributorAgreement();
 });
