@@ -44,10 +44,10 @@
             <?php dokan_post_input_box( $post_id, '_purchase_note', array( 'placeholder' => __( 'Customer will get this info in their order email', 'dokan-lite' ) ), 'textarea' ); ?>
         </div>
 
-        <div class="dokan-form-group">
+        <!--<div class="dokan-form-group">
             <?php $_enable_reviews = ( $post->comment_status == 'open' ) ? 'yes' : 'no'; ?>
             <?php dokan_post_input_box( $post_id, '_enable_reviews', array('value' => $_enable_reviews, 'label' => __( 'Enable product reviews', 'dokan-lite' ) ), 'checkbox' ); ?>
-        </div>
+        </div>-->
 
     </div>
 </div><!-- .dokan-other-options -->

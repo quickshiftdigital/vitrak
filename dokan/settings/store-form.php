@@ -113,7 +113,7 @@
             <?php do_action( 'dokan_settings_after_banner', $current_user, $profile_info ); ?>
 
         <div class="dokan-form-group">
-            <label class="dokan-w3 dokan-control-label" for="dokan_gravatar"><?php esc_html_e( 'Profile Picture', 'dokan-lite' ); ?></label>
+            <label class="dokan-w3 dokan-control-label" for="dokan_gravatar"><?php esc_html_e( 'Logo', 'dokan-lite' ); ?></label>
 
             <div class="dokan-w5 dokan-gravatar">
                 <div class="dokan-left gravatar-wrap<?php echo $gravatar_id ? '' : ' dokan-hide'; ?>">
@@ -129,7 +129,7 @@
         </div>
 
         <div class="dokan-form-group">
-            <label class="dokan-w3 dokan-control-label" for="dokan_store_name"><?php esc_html_e( 'Store Name', 'dokan-lite' ); ?></label>
+            <label class="dokan-w3 dokan-control-label" for="dokan_store_name"><?php esc_html_e( 'Store Name', 'dokan-lite' ); ?> <i class="fas fa-eye tips" aria-hidden="true" data-title="<?php esc_html_e( 'This name will be visible to the Distributors on the website', 'dokan-lite' ); ?>"></i></label>
 
             <div class="dokan-w5 dokan-text-left">
                 <input id="dokan_store_name" required value="<?php echo esc_attr( $storename ); ?>" name="dokan_store_name" placeholder="<?php esc_attr_e( 'store name', 'dokan-lite' ); ?>" class="dokan-form-control" type="text">
@@ -225,7 +225,7 @@
         if ( $tnc_enable == 'on' ) {
             ?>
             <div class="dokan-form-group">
-                <label class="dokan-w3 dokan-control-label"><?php esc_html_e( 'Terms and Conditions', 'dokan-lite' ); ?></label>
+                <label class="dokan-w3 dokan-control-label"><?php esc_html_e( 'Terms and Conditions', 'dokan-lite' ); ?> <i class="fas fa-eye tips" aria-hidden="true" data-title="<?php esc_html_e( 'Paste your company’s terms & conditions that will state the rates, margins, return policy, damage policy and other policies that will be referred to and followed in case of future discrepancies. Terms & Conditions must be clear and legitimate as it will determine terms of trade between you and the distributor', 'dokan-lite' ); ?>"></i></label>
                 <div class="dokan-w5 dokan-text-left dokan_tock_check">
                     <div class="checkbox">
                         <label>
@@ -255,17 +255,17 @@
         <?php if ( $show_store_open_close == 'on' ) { ?>
         <div class="dokan-form-group store-open-close-time">
             <label class="dokan-w3 dokan-control-label" for="dokan-store-close">
-                <?php esc_html_e( 'Store Opening Closing Time', 'dokan-lite' ); ?>
+                <?php //esc_html_e( 'Store Opening Closing Time', 'dokan-lite' ); ?>
             </label>
 
-            <div class="dokan-w5 dokan-text-left dokan_tock_check">
+            <!--<div class="dokan-w5 dokan-text-left dokan_tock_check">
                 <div class="checkbox">
                     <label for="dokan-store-time-enable" class="control-label">
                         <input type="checkbox" name="dokan_store_time_enabled" id="dokan-store-time-enable" value="yes" <?php echo $dokan_store_time_enabled == 'yes' ? 'checked' : ''; ?>>
                         <?php esc_html_e( 'Show store opening closing time widget in store page', 'dokan-lite' ); ?>
                     </label>
                 </div>
-            </div>
+            </div>-->
         </div>
 
         <div class="dokan-form-group store-open-close">

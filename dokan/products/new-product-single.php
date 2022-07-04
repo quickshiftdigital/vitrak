@@ -179,10 +179,12 @@ do_action( 'dokan_dashboard_wrap_before', $post, $post_id );
                                             <input type="hidden" id="product_type" name="product_type" value="simple">
                                     <?php elseif ( is_array( $product_types ) ): ?>
                                         <div class="dokan-form-group">
-                                            <label for="product_type" class="form-label"><?php esc_html_e( 'Product Type', 'dokan-lite' ); ?> <i class="fas fa-question-circle tips" aria-hidden="true" data-title="<?php esc_html_e( 'Choose Variable if your product has multiple attributes - like sizes, colors, quality etc', 'dokan-lite' ); ?>"></i></label>
+                                            <label for="product_type" class="form-label"><?php esc_html_e( 'Product Type', 'dokan-lite' ); ?> &nbsp;<i class="fas fa-eye tips" aria-hidden="true" data-title="<?php esc_html_e( 'Simple - This product comes only in 1 size/weight Variable - This product comes in several sizes/weights', 'dokan-lite' ); ?>"></i></label>
                                             <select name="product_type" class="dokan-form-control" id="product_type">
                                                 <?php foreach ( $product_types as $key => $value ) { ?>
-                                                    <option value="<?php echo esc_attr( $key ) ?>" <?php selected( $product_type, $key ) ?>><?php echo esc_html( $value ) ?></option>
+                                                    <?php if($key !== 'external' && $key !== 'grouped'): ?>
+                                                        <option value="<?php echo esc_attr( $key ) ?>" <?php selected( $product_type, $key ) ?>><?php echo esc_html( $value ) ?></option>
+                                                    <?php endif; ?>
                                                 <?php } ?>
                                             </select>
                                         </div>
@@ -195,7 +197,7 @@ do_action( 'dokan_dashboard_wrap_before', $post, $post_id );
                                         <div class="dokan-form-group dokan-clearfix dokan-price-container">
 
                                             <div class="content-half-part regular-price">
-                                                <label for="_regular_price" class="form-label"><?php esc_html_e( 'Price', 'dokan-lite' ); ?>
+                                                <label for="_regular_price" class="form-label"><?php esc_html_e( 'Price', 'dokan-lite' ); ?> <i class="fas fa-eye tips" aria-hidden="true" data-title="<?php esc_html_e( 'Price at which you are selling to the distributor', 'dokan-lite' ); ?>"></i>
                                                     <span
                                                         class="vendor-earning simple-product"
                                                         data-commission="<?php echo esc_attr( dokan()->commission->get_earning_by_product( $post_id ) ); ?>"
@@ -215,8 +217,8 @@ do_action( 'dokan_dashboard_wrap_before', $post, $post_id );
 
                                             <div class="content-half-part sale-price">
                                                 <label for="_sale_price" class="form-label">
-                                                    <?php esc_html_e( 'Discounted Price', 'dokan-lite' ); ?>
-                                                    <a href="#" class="sale_schedule <?php echo ($show_schedule ) ? 'dokan-hide' : ''; ?>"><?php esc_html_e( 'Schedule', 'dokan-lite' ); ?></a>
+                                                    <?php esc_html_e( 'Discounted Price', 'dokan-lite' ); ?> <i class="fas fa-eye tips" aria-hidden="true" data-title="<?php esc_html_e( 'Price minus the discount (if you want to offer any)', 'dokan-lite' ); ?>"></i>
+                                                    <!--<a href="#" class="sale_schedule <?php echo ($show_schedule ) ? 'dokan-hide' : ''; ?>"><?php esc_html_e( 'Schedule', 'dokan-lite' ); ?></a>-->
                                                     <a href="#" class="cancel_sale_schedule <?php echo ( ! $show_schedule ) ? 'dokan-hide' : ''; ?>"><?php esc_html_e( 'Cancel', 'dokan-lite' ); ?></a>
                                                 </label>
 
@@ -398,24 +400,28 @@ do_action( 'dokan_dashboard_wrap_before', $post, $post_id );
                                                             <a href="#" class="add-product-images"><i class="fas fa-plus" aria-hidden="true"></i></a>
                                                         </li>
                                                     </ul>
-
                                                     <input type="hidden" id="product_image_gallery" name="product_image_gallery" value="<?php echo esc_attr( $product_images ); ?>">
-                                                </div>
+                                                </div><br>
+												<h6>Guidelines for uploading products:</h6>
+												<ul class="product-desc">
+													<li>Image should be in 800*800 dimensions</li>
+													<li>Front of pack needs to be clearly visible</li>
+													<li>White background</li>
+												</ul>
+												
                                             </div>
                                         </div> <!-- .product-gallery -->
-
                                     <?php do_action( 'dokan_product_gallery_image_count' );?>
-
                                 </div><!-- .content-half-part -->
                             </div><!-- .dokan-form-top-area -->
 
                             <div class="dokan-product-short-description">
-                                <label for="post_excerpt" class="form-label"><?php esc_html_e( 'Short Description', 'dokan-lite' ); ?></label>
+                                <label for="post_excerpt" class="form-label"><?php esc_html_e( 'Short Description', 'dokan-lite' ); ?>&nbsp;<i class="fas fa-eye tips" aria-hidden="true" data-title="<?php esc_html_e( 'This will be shown below the title of the product. A short description about the product.', 'dokan-lite' ); ?>"></i></label>
                                 <?php wp_editor( $post_excerpt , 'post_excerpt', apply_filters( 'dokan_product_short_description', array( 'editor_height' => 50, 'quicktags' => false, 'media_buttons' => false, 'teeny' => true, 'editor_class' => 'post_excerpt' ) ) ); ?>
                             </div>
 
                             <div class="dokan-product-description">
-                                <label for="post_content" class="form-label"><?php esc_html_e( 'Description', 'dokan-lite' ); ?></label>
+                                <label for="post_content" class="form-label"><?php esc_html_e( 'Description', 'dokan-lite' ); ?>&nbsp;<i class="fas fa-eye tips" aria-hidden="true" data-title="<?php esc_html_e( 'This is additional information about the product that will be visible when you scroll down the page. This information can include ingredients, benefits of the product, how to use, etc.', 'dokan-lite' ); ?>"></i></label>
                                 <?php wp_editor( $post_content , 'post_content', apply_filters( 'dokan_product_description', array( 'editor_height' => 50, 'quicktags' => false, 'media_buttons' => false, 'teeny' => true, 'editor_class' => 'post_content' ) ) ); ?>
                             </div>
 

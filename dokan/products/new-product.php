@@ -141,6 +141,13 @@ use WeDevs\Dokan\Walkers\TaxonomyDropdown;
                                                     </li>
                                                 </ul>
                                                 <input type="hidden" id="product_image_gallery" name="product_image_gallery" value="">
+												<br><br>
+												<h6>Guidelines for uploading products:</h6>
+												<ul class="product-desc">
+													<li>Image should be in 800*800 dimensions</li>
+													<li>Front of pack needs to be clearly visible</li>
+													<li>White background</li>
+												</ul>
                                             </div>
                                         </div>
                                     </div> <!-- .product-gallery -->
@@ -155,7 +162,7 @@ use WeDevs\Dokan\Walkers\TaxonomyDropdown;
                                     <div class="dokan-form-group">
                                         <div class="dokan-form-group dokan-clearfix dokan-price-container">
                                             <div class="content-half-part">
-                                                <label for="_regular_price" class="dokan-form-label"><?php esc_html_e( 'Price', 'dokan-lite' ); ?></label>
+                                                <label for="_regular_price" class="dokan-form-label"><?php esc_html_e( 'Price', 'dokan-lite' ); ?><i class="fas fa-eye tips" aria-hidden="true" data-title="Price at which you are selling to the distributor" data-original-title="" title=""></i></label>
                                                 <div class="dokan-input-group">
                                                     <span class="dokan-input-group-addon"><?php echo esc_attr__( get_woocommerce_currency_symbol() ); ?></span>
                                                     <input type="text" class="dokan-form-control wc_input_price dokan-product-regular-price" name="_regular_price" placeholder="0.00" id="_regular_price" value="<?php echo esc_attr( dokan_posted_input( '_regular_price' ) ) ?>">
@@ -164,7 +171,7 @@ use WeDevs\Dokan\Walkers\TaxonomyDropdown;
 
                                             <div class="content-half-part sale-price">
                                                 <label for="_sale_price" class="form-label">
-                                                    <?php esc_html_e( 'Discounted Price', 'dokan-lite' ); ?>
+                                                    <?php esc_html_e( 'Discounted Price', 'dokan-lite' ); ?><i class="fas fa-eye tips" aria-hidden="true" data-title="Price minus the discount (if you want to offer any)" data-original-title="" title=""></i>
                                                     <a href="#" class="sale_schedule"><?php esc_html_e( 'Schedule', 'dokan-lite' ); ?></a>
                                                     <a href="#" class="cancel_sale_schedule dokan-hide"><?php esc_html_e( 'Cancel', 'dokan-lite' ); ?></a>
                                                 </label>
@@ -272,7 +279,7 @@ use WeDevs\Dokan\Walkers\TaxonomyDropdown;
                             </div>
 
                             <div class="dokan-form-group">
-                                <label for="post_content" class="control-label"><?php esc_html_e( 'Description', 'dokan-lite' ) ?> <i class="fas fa-question-circle tips" data-title="<?php esc_attr_e( 'Add your product description', 'dokan-lite' ) ?>" aria-hidden="true"></i></label>
+                                <label for="post_content" class="control-label"><?php esc_html_e( 'Description', 'dokan-lite' ) ?> <i class="fas fa-eye tips" aria-hidden="true" data-title="This is additional information about the product that will be visible when you scroll down the page. This information can include ingredients, benefits of the product, how to use, etc." data-original-title="" title=""></i></label>
                                 <?php wp_editor( htmlspecialchars_decode( $post_content, ENT_QUOTES ), 'post_content', array('editor_height' => 50, 'quicktags' => false, 'media_buttons' => false, 'teeny' => true, 'editor_class' => 'post_content') ); ?>
                             </div>
 

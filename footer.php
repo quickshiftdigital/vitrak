@@ -24,16 +24,16 @@
     <a href="#" class="action-to-top backtotop"></a>
 <?php endif; ?>
 <?php
-/* FOOTER */
-do_action( 'ovic_footer_content' );
-/* NEWSLETTER */
-ecotech_popup_newsletter();
+    /* FOOTER */
+    do_action( 'ovic_footer_content' );
+    /* NEWSLETTER */
+    ecotech_popup_newsletter();
 ?>
 </div><!-- #page -->
 <div id="ecotech-modal-popup" class="modal fade"></div>
 <?php
-/* WP FOOTER */
-wp_footer();
+    /* WP FOOTER */
+    wp_footer();
 ?>
 </body>
 </html>
