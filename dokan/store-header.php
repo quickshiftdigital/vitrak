@@ -159,6 +159,10 @@ if (!is_user_logged_in(get_current_user())) {
                             <?php endif ?>
 
                             <?php //do_action('dokan_store_header_info_fields', $store_user->get_id()); ?>
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> 02d31d227c2fc0320448bc5fcb569f3f8ad6b716
                             <?php if(checkRole('distributor') || checkRole('administrator')): ?>
                                 <?php if(!checkDistributorship($store_user->get_id())): ?>
                                     <li class="sign_agreement">
@@ -166,6 +170,14 @@ if (!is_user_logged_in(get_current_user())) {
                                     </li>
                                 <?php endif; ?>
                             <?php endif; ?>
+<<<<<<< HEAD
+=======
+=======
+                            <li class="sign_agreement">
+                                <a data-id="<?php the_ID(); ?>">Sign Agreement</a>
+                            </li>
+>>>>>>> 63a504891237c2d0140b7368782ed14e3627e7df
+>>>>>>> 02d31d227c2fc0320448bc5fcb569f3f8ad6b716
                         </ul>
 
                         <?php if ($social_fields) { ?>

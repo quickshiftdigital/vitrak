@@ -89,12 +89,25 @@ do_action( 'woocommerce_before_add_to_cart_form' ); ?>
 			<?php do_action( 'woocommerce_after_variations_form' ); ?>
 		</form>
 	<?php elseif($agreements['status'] == 'Pending'): ?>
+<<<<<<< HEAD
 		<div class="sign_agreement">
 			Your request for distributorship with <?php echo $agreements['vendor_name']; ?> is currently under review. Someone from the vitrak team will get in touch with you soon.
 		</div>
 	<?php elseif($agreements['status'] == 'Rejected'): ?>
 		<div class="sign_agreement">
 			Your request for distributorship with <?php echo $agreements['vendor_name']; ?> has been rejected. Please contact our team for more information.
+=======
+		<div class="sign_agreement status-pending">
+			<p>
+				Your request for distributorship with <?php echo $agreements['vendor_name']; ?> is currently under review. Someone from the vitrak team will get in touch with you soon.
+			</p>
+		</div>
+	<?php elseif($agreements['status'] == 'Rejected'): ?>
+		<div class="sign_agreement status-rejected">
+			<p>
+				Your request for distributorship with <?php echo $agreements['vendor_name']; ?> has been rejected. Please contact our team for more information.
+			</p>
+>>>>>>> 02d31d227c2fc0320448bc5fcb569f3f8ad6b716
 		</div>
 	<?php endif; ?>
 <?php else: ?>

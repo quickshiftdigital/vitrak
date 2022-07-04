@@ -59,13 +59,21 @@ if ( $product->is_in_stock() ) : ?>
 				<?php do_action( 'woocommerce_after_add_to_cart_button' ); ?>
 			</form>
 		<?php elseif($agreements['status'] == 'Pending'): ?>
+<<<<<<< HEAD
 			<div class="sign_agreement">
+=======
+			<div class="sign_agreement status-pending">
+>>>>>>> 02d31d227c2fc0320448bc5fcb569f3f8ad6b716
 				<p>
 					Your request for distributorship with <?php echo $agreements['vendor_name']; ?> is currently under review. Someone from the vitrak team will get in touch with you soon.
 				</p>
 			</div>
 		<?php elseif($agreements['status'] == 'Rejected'): ?>
+<<<<<<< HEAD
 			<div class="sign_agreement">
+=======
+			<div class="sign_agreement status-rejected">
+>>>>>>> 02d31d227c2fc0320448bc5fcb569f3f8ad6b716
 				<p>
 					Your request for distributorship with <?php echo $agreements['vendor_name']; ?> has been rejected. Please contact our team for more information.
 				</p>

@@ -259,9 +259,19 @@
                                                             <label for="reg_category">Category<span class="required">*</span></label>
                                                             <select name="reg_category" id="reg_category">
                                                                 <option value="">Choose Business Category</option>
+<<<<<<< HEAD
                                                                 <option value="Food">Food</option>
                                                                 <option value="Non Food">Non Food</option>
 																<option value="Other">Other</option>
+=======
+<<<<<<< HEAD
+                                                                <option value="Food">Food</option>
+                                                                <option value="Non Food">Non Food</option>
+=======
+                                                                <option value="FMCG">FMCG</option>
+                                                                <option value="Food & Beverage">Food & Beverage</option>
+>>>>>>> 63a504891237c2d0140b7368782ed14e3627e7df
+>>>>>>> 02d31d227c2fc0320448bc5fcb569f3f8ad6b716
                                                             </select>
                                                         </p>
                                                     </div>
@@ -269,6 +279,7 @@
                                                         <p class="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">
                                                             <label for="reg_sub_category">Sub Category<span class="required">*</span></label>
                                                             <select name="reg_sub_category" id="reg_sub_category">
+<<<<<<< HEAD
                                                                 <option value="">Choose Business Sub Category</option>
                                                                 <option value="Paper Products">Paper Products</option>
                                                                 <option value="Foods snacks">Foods snacks</option>
@@ -284,6 +295,12 @@
 																<option value="Skin Care">Skin Care</option>																
 																<option value="OTC">OTC</option>
 																</select>
+=======
+                                                                <option value="">Choose Business Category</option>
+                                                                <option value="FMCG">FMCG</option>
+                                                                <option value="Food & Beverage">Food & Beverage</option>
+                                                            </select>
+>>>>>>> 02d31d227c2fc0320448bc5fcb569f3f8ad6b716
                                                         </p>
                                                     </div>
                                                 </div>
